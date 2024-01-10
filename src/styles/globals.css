@@ -117,3 +117,15 @@
   padding-left: var(--container-padding);
   padding-right: var(--container-padding);
 }
+
+.p-container {
+  padding: var(--container-padding);
+}
+
+.pt-container {
+  padding-top: var(--container-padding);
+}
+
+.max-w-md {
+  max-width: 28rem;
+}

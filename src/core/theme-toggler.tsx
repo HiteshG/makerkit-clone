@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun, Check, Monitor } from "lucide-react"
+import { Moon, Sun, Monitor, CheckCircle2 } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/core/ui/button";
@@ -38,21 +38,21 @@ export function ModeDropdown() {
     <>
       <DropdownMenuItem onClick={() => setTheme("light")}>
         <div className="h-4 w-4 me-2">
-          {theme === "light" && <Check className="h-4 w-4" />}
+          {theme === "light" && <CheckCircle2 className="h-4 w-4" />}
         </div>
         <Sun className="h-4 w-4 rotate-0 scale-100 transition-all me-2" />
         Light
       </DropdownMenuItem>
       <DropdownMenuItem onClick={() => setTheme("dark")}>
         <div className="h-4 w-4 me-2">
-          {theme === "dark" && <Check className="h-4 w-4" />}
+          {theme === "dark" && <CheckCircle2 className="h-4 w-4" />}
         </div>
         <Moon className="h-4 w-4 rotate-0 scale-100 transition-all me-2" />
         Dark
       </DropdownMenuItem>
       <DropdownMenuItem onClick={() => setTheme("system")}>
         <div className="h-4 w-4 me-2">
-          {theme === "system" && <Check className="h-4 w-4" />}
+          {theme === "system" && <CheckCircle2 className="h-4 w-4" />}
         </div>
         <Monitor className="h-4 w-4 rotate-0 scale-100 transition-all me-2" />
         System

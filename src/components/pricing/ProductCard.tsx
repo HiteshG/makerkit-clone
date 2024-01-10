@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Sparkles } from "lucide-react";
+import { CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from '../../core/ui/button';
 import Link from "next/link";
 import { cn } from '@/lib/utils';
@@ -51,7 +51,7 @@ const ProductCard = ({
         <ul className="flex flex-col space-y-2">
           {product?.features?.map((plan: string, index: number) => <li key={`${product?.name}_plan_${index}`} className="flex items-center space-x-3 font-medium">
             <div>
-              <Check className="w-5 h-5" />
+              <CheckCircle2 className="w-5 h-5" />
             </div>
             <span className="text-sm text-gray-600 dark:text-gray-300">
               {plan}

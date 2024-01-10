@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { Button } from '../../core/ui/button';
 import ProductCard from './ProductCard';
 import configuration from '../../../configuration';
@@ -20,7 +20,7 @@ const Pricing = () => {
 							<span className="flex w-full h-full items-center transition-transform duration-500 ease-out">
 								<span className="flex w-full flex-1 items-center justify-center">
 									<span className="flex space-x-1.5 items-center">
-										{period === "Monthly" && <Check className="w-5 h-5" />}
+										{period === "Monthly" && <CheckCircle2 className="w-5 h-5" />}
 										<span>Monthly</span>
 									</span>
 								</span>
@@ -34,7 +34,7 @@ const Pricing = () => {
 							<span className="flex w-full h-full items-center transition-transform duration-500 ease-out">
 								<span className="flex w-full flex-1 items-center justify-center">
 									<span className="flex space-x-1.5 items-center">
-										{period === "Yearly" && <Check className="w-5 h-5" />}
+										{period === "Yearly" && <CheckCircle2 className="w-5 h-5" />}
 										<span>Yearly</span>
 									</span>
 								</span>
@@ -43,9 +43,7 @@ const Pricing = () => {
 					</div>
 				</div>
 				<div className="flex flex-col items-start space-y-6 lg:space-y-0 justify-center lg:flex-row lg:space-x-4">
-					{configuration.stripe.products.map((product: any, index: number) => <ProductCard key={`productCard_${index}`} product={product} period={period} />)
-
-					}
+					{configuration.stripe.products.map((product: any, index: number) => <ProductCard key={`productCard_${index}`} product={product} period={period} />)}
 				</div>
 			</div>
     </div>

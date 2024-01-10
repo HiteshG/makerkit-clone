@@ -1,4 +1,3 @@
-import { LayoutStyle } from "@/core/layout-style";
 import { GoogleAuthProvider } from "firebase/auth";
 
 enum Themes {
@@ -71,9 +70,7 @@ const configuration = {
       billingPortal: `/api/stripe/portal`,
     },
   },
-  navigation: {
-    // style: LayoutStyle.Sidebar,
-  },
+  navigation: {},
   appCheckSiteKey: process.env.NEXT_PUBLIC_APPCHECK_KEY,
   sentry: {
     dsn: process.env.SENTRY_DSN,

@@ -4,13 +4,6 @@ import {
   NavigationMenu,
   NavigationMenuItem,
 } from '@/core/ui/NavigationMenu';
-import { 
-  NavigationMenu as Navigation,
-  NavigationMenuItem as NavigationItem,
-  NavigationMenuList as NavigationList,
-  NavigationMenuTrigger,
-  NavigationMenuContent,
-} from './ui/navigation-menu';
 import { ModeToggle } from './theme-toggler';
 import { Button } from '@/core/ui/button';
 import { ChevronDown, Menu, Settings, LayoutGrid, LogOut, Brush } from "lucide-react";
@@ -20,10 +13,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/core/ui/dropdown-menu";
 import { ModeDropdown } from './theme-toggler';
-import { signOut } from 'firebase/auth';
 import { useAuth } from 'reactfire';
+import { useSignOut } from '@/lib/auth/hooks/useSignOut';
 
 const links = {
   SignIn: {
@@ -54,6 +50,12 @@ const links = {
 
 export const Navbar = () => {
   const auth = useAuth();
+  const [user, setUser] = React.useState(auth.currentUser);
+  console.log(auth.currentUser);
+
+  React.useEffect(() => {
+    setUser(auth.currentUser);
+  }, [auth]);
 
   return (
     <div className="w-full">
@@ -84,37 +86,39 @@ export const Navbar = () => {
             <div>
               <ModeToggle />
             </div>
-            <div className="hidden space-x-2 lg:flex">
-              <Button className="rounded-full" variant="ghost">
-                <Link href={"/auth/sign-in"} className="flex w-full h-full items-center transition-transform duration-500 ease-out">
-                  <span className="flex w-full flex-1 items-center justify-center">
-                    <span>Sign In</span>
-                  </span>
-                </Link>
-              </Button>
-              <Button className="rounded-full">
-                <Link href={"/auth/sign-up"} className="flex w-full h-full items-center transition-transform duration-500 ease-out">
-                  <span className="flex w-full flex-1 items-center justify-center">
-                    <span>Sign Up</span>
-                    <ChevronDown className="h-4 w-4 -rotate-90 scale-100 transition-all ms-2" />
-                  </span>
-                </Link>
-              </Button>
-            </div>
-            {auth.currentUser && <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="flex cursor-pointer focus:outline-none group items-center">
-                  <span className="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full mx-auto">
-                    <span className="flex h-full w-full items-center justify-center rounded-full bg-primary font-semibold uppercase text-primary-foreground">
-                      {auth.currentUser.isAnonymous ? "A" : auth.currentUser.email && auth.currentUser.email[0]}
+            {!user
+            ? <div className="hidden space-x-2 lg:flex">
+                <Button className="rounded-full" variant="ghost">
+                  <Link href={"/auth/sign-in"} className="flex w-full h-full items-center transition-transform duration-500 ease-out">
+                    <span className="flex w-full flex-1 items-center justify-center">
+                      <span>Sign In</span>
                     </span>
-                  </span>
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="mt-5 me-6">
-                <NavbarDropdown />
-              </DropdownMenuContent>
-            </DropdownMenu>}
+                  </Link>
+                </Button>
+                <Button className="rounded-full">
+                  <Link href={"/auth/sign-up"} className="flex w-full h-full items-center transition-transform duration-500 ease-out">
+                    <span className="flex w-full flex-1 items-center justify-center">
+                      <span>Sign Up</span>
+                      <ChevronDown className="h-4 w-4 -rotate-90 scale-100 transition-all ms-2" />
+                    </span>
+                  </Link>
+                </Button>
+              </div>
+              :
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex cursor-pointer focus:outline-none group items-center">
+                    <span className="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-full mx-auto">
+                      <span className="flex h-full w-full items-center justify-center rounded-full bg-primary font-semibold uppercase text-primary-foreground">
+                        {user.isAnonymous ? "A" : user.email && user.email[0]}
+                      </span>
+                    </span>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="center" className="mt-5 me-6">
+                  <NavbarDropdown />
+                </DropdownMenuContent>
+              </DropdownMenu>}
             <div className="flex lg:hidden">
               <div className="ml-4 flex items-center lg:hidden">
                 <DropdownMenu>
@@ -152,11 +156,11 @@ export const Navbar = () => {
 
 export const NavbarDropdown = () => {
   const auth = useAuth();
+  const [signOutReq] = useSignOut();
 
-  const onSignOutRequested = React.useCallback(() => {
-    return signOut(auth);
-  }, [auth]);
-
+  const onSignOutRequested = () => {
+    signOutReq();
+  }
   if (!auth.currentUser) return (<div></div>);
 
   return (
@@ -186,16 +190,18 @@ export const NavbarDropdown = () => {
           <span>Settings</span>
         </Link>
       </DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem className="py-1">
-        <div className="flex h-full w-full justify-between items-center space-x-2">
-          <div className="flex items-center space-x-2.5">
-            <Brush className="w-4 h-4" />
-            <span>Theme</span>
+      <DropdownMenuSeparator className="hidden lg:flex" />
+      <DropdownMenuSub>
+        <DropdownMenuSubTrigger className="w-full hidden lg:flex">
+          <div className="flex h-full w-full items-center space-x-2">
+              <Brush className="w-4 h-4" />
+              <span>Theme</span>
           </div>
-          <ChevronDown className="w-4 -rotate-90" />
-        </div>
-      </DropdownMenuItem>
+        </DropdownMenuSubTrigger>
+        <DropdownMenuSubContent className="hidden lg:block">
+          <ModeDropdown />
+        </DropdownMenuSubContent>
+      </DropdownMenuSub>
       <DropdownMenuSeparator />
       <DropdownMenuItem className="py-1">
         <button className="flex h-full w-full items-center space-x-2" onClick={onSignOutRequested}>

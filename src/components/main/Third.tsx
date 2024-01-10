@@ -40,6 +40,7 @@ const Third = () => {
           </div>
           <div className="flex w-full lg:w-6/12">
             <Image
+              className="rounded-2xl"
               src={"/assets/images/sign-in.webp"}
               alt="Sign In"
               loading="lazy"

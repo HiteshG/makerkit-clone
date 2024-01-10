@@ -20,6 +20,7 @@ const buttonVariants = cva(
           "bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
         ghost: "hover:bg-accent/50 hover:text-accent-foreground",
         link: "text-slate-900 underline-offset-4 hover:underline dark:text-slate-50",
+        primary: "bg-primary/5 text-primary hover:bg-primary/10",
       },
       size: {
         default: "text-sm h-10 [&>*]:py-2 [&>*]:px-4",

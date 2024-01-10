@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '@/core/navbar';
+import { Navbar } from '@/core/navbar';
 import Footer from '@/core/footer';
 import Pricing from '@/components/pricing/Pricing';
 
