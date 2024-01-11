@@ -1,8 +1,10 @@
 import React from 'react';
+import { GetServerSidePropsContext } from "next";
 import Layout from '@/core/layout';
 import ChartCard from '@/components/dashboard/ChartCard';
 import { ArrowUp, ArrowDown, Equal } from 'lucide-react';
 import TableCard from '@/components/dashboard/TableCard';
+import { withAppProps } from '@/lib/props/with-app-props';
 
 const index = () => {
   const data = [
@@ -144,6 +146,12 @@ const index = () => {
       </div>
     </Layout>
   );
+}
+
+export function getServerSideProps(
+  ctx: GetServerSidePropsContext
+) {
+  return withAppProps(ctx);
 }
 
 export default index;

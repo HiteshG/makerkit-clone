@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
       disableTransitionOnChange
     >
       <FirebaseAuthProvider>
-        <FirebaseFirestoreProvider>
+        <FirebaseFirestoreProvider useEmulator>
           <LoadingIndicator />
           <main className={inter.className}>
             <Component {...pageProps} />

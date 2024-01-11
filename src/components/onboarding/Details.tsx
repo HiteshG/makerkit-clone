@@ -1,19 +1,35 @@
 import { FormEvent, useCallback, useEffect } from 'react';
 import { Input } from '@/core/ui/input';
 import { Button } from '@/core/ui/button';
+import { useCreateOrganization } from '@/lib/organizations/hooks/use-create-organization';
+import { Spinner } from '@/core/ui/spinner';
 
 const Details = (
   props: React.PropsWithChildren<{
     next: () => void;
   }>
 ) => {
+  const [createOrganization, createOrganizationState] = useCreateOrganization();
+
+  useEffect(() => {
+    if (createOrganizationState.success) {
+      props.next();
+    }
+  }, [props, createOrganizationState]);
+
   const onSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
 
-      return props.next();
+      const data = new FormData(event.currentTarget);
+      const name = data.get('name') as string;
+
+      return createOrganization({
+        name: name,
+        owner: ""
+      });
     },
-    [props]
+    [createOrganization]
   );
 
   return (
@@ -28,6 +44,7 @@ const Details = (
           <label className="w-full text-sm font-medium text-gray-500 dark:text-gray-400 [&>*]:mt-[0.35rem]">
             Organization name
             <Input
+              name="name"
               type="text"
               placeholder="Ex. Acme Inc."
               required
@@ -38,7 +55,8 @@ const Details = (
       <Button>
         <span className="flex w-full h-full items-center transition-transform duration-500 ease-out">
           <span className="flex w-full flex-1 items-center justify-center">
-            Continue
+            {createOrganizationState.loading && <Spinner className="h-4 w-4 animate-spin text-primary dark:text-primary/30 mx-2 fill-white dark:fill-white" />}
+            <span>Continue</span>
           </span>
         </span>
       </Button>

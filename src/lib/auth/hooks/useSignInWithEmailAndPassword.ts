@@ -3,7 +3,7 @@ import { useAuth } from "reactfire";
 import { FirebaseError } from "firebase/app";
 import { UserCredential, signInWithEmailAndPassword } from "firebase/auth";
 
-import { useRequestState } from "./useRequestState";
+import { useRequestState } from "../../useRequestState";
 
 export function useSignInWithEmailAndPassword() {
   const auth = useAuth();

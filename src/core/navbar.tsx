@@ -1,4 +1,5 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Link from "next/link";
 import {
   NavigationMenu,
@@ -50,10 +51,10 @@ const links = {
 
 export const Navbar = () => {
   const auth = useAuth();
-  const [user, setUser] = React.useState(auth.currentUser);
+  const [user, setUser] = useState(auth.currentUser);
   console.log(auth.currentUser);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setUser(auth.currentUser);
   }, [auth]);
 
@@ -155,13 +156,20 @@ export const Navbar = () => {
 }
 
 export const NavbarDropdown = () => {
+  const router = useRouter();
+
   const auth = useAuth();
-  const [signOutReq] = useSignOut();
+  const [signOutReq, state] = useSignOut();
+
+  useEffect(() => {
+    if (state.success) {
+      router.replace("/auth/sign-in");
+    }
+  }, [state, router]);
 
   const onSignOutRequested = () => {
     signOutReq();
   }
-  if (!auth.currentUser) return (<div></div>);
 
   return (
     <>
@@ -172,7 +180,7 @@ export const NavbarDropdown = () => {
           </div>
           <div>
             <span className="block truncate">
-              {auth.currentUser.isAnonymous ? "Anonymous" : auth.currentUser.email}
+              {auth?.currentUser?.isAnonymous ? "Anonymous" : auth?.currentUser?.email}
             </span>
           </div>
         </div>

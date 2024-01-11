@@ -44,8 +44,6 @@ const LoadingIndicator = () => {
     }
   }, [router.events]);
 
-  console.log(progress);
-
   return (
     <div style={{position: "fixed", top: "0px", left: "0px", height: "4px", background: "transparent", zIndex: 2147483647, width: "100%"}}>
       <div className="bg-primary" style={{height: "100%", width: `${progress}%`, opacity: progress > 0 && progress < 100 ? 1 : 0}}>

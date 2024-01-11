@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from 'reactfire';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -113,6 +114,7 @@ export const CurrentDropdown = ({
 
 export const AppSidebar = () => {
   const [collapsed, setCollapsed] = React.useState<boolean>(false);
+  const auth = useAuth();
 
   return (
     <Sidebar collapsed={collapsed}>
@@ -148,10 +150,10 @@ export const AppSidebar = () => {
                   </span>
                   {!collapsed && <div className="flex flex-col text-left w-full truncate">
                     <span className="text-sm truncate">
-                      Legend900619
+                      {auth?.currentUser?.displayName}
                     </span>
                     <span className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                      legend900619@gmail.com
+                      {auth?.currentUser?.email}
                     </span>
                   </div>}
                   {!collapsed && <MoreVertical className="h-8 hidden text-gray-500 group-hover:flex" />}

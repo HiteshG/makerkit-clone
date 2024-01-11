@@ -1,6 +1,6 @@
 import { useFirestore, useFirestoreDocData } from "reactfire";
 import { doc, DocumentReference } from "firebase/firestore";
-import { Organization } from "@/lib/organizations/types/organization";
+import { Organization } from "@/lib/types";
 
 type Response = Organization & { id: string };
 

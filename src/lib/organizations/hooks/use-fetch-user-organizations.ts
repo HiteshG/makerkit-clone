@@ -5,7 +5,7 @@ import {
   where,
   query,
 } from "firebase/firestore";
-import { Organization } from "@/lib/organizations/types/organization";
+import { Organization } from "@/lib/types";
 
 export function useFetchUserOrganizations(userId: string) {
   const firestore = useFirestore();

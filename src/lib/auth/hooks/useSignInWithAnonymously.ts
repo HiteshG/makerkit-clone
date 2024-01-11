@@ -1,8 +1,8 @@
-import { getAuth, signInAnonymously, Auth } from "firebase/auth";
+import { getAuth, signInAnonymously } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 
 import { UserCredential } from "firebase/auth";
-import { useRequestState } from "./useRequestState";
+import { useRequestState } from "../../useRequestState";
 import { useCallback } from "react";
 
 export function useAnonymousSignIn() {

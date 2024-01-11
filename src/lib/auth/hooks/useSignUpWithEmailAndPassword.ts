@@ -2,10 +2,12 @@ import { useCallback } from "react";
 import { useAuth } from "reactfire";
 import { FirebaseError } from "firebase/app";
 import { createUserWithEmailAndPassword, UserCredential } from "firebase/auth";
-import { useRequestState } from "./useRequestState";
+import { useRequestState } from "../../useRequestState";
+import { useCreateUser } from "@/lib/users/hooks/use-create-user";
 
 export function useSignUpWithEmailAndPassword() {
   const auth = useAuth();
+  const createUser = useCreateUser();
 
   const { state, setLoading, setData, setError } = useRequestState<
     UserCredential,
@@ -27,6 +29,13 @@ export function useSignUpWithEmailAndPassword() {
             email,
             password
           );
+
+          await createUser({
+            displayName: credential.user.displayName,
+            email: credential.user.email,
+            photoURL: credential.user.photoURL,
+            phoneNumber: credential.user.phoneNumber,
+          });
 
           setData(credential);
         } catch (error) {

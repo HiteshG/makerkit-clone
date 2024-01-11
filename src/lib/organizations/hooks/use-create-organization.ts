@@ -1,28 +1,37 @@
-import { useCallback, useState } from "react";
-import { useFirestore, useFirestoreCollectionData } from "reactfire";
+import { useCallback } from "react";
+import { useFirestore } from "reactfire";
+import { FirebaseError } from "firebase/app";
 import { collection, addDoc } from "firebase/firestore";
-import { Organization } from "@/lib/organizations/types/organization";
+import { useRequestState } from "../../useRequestState";
+import { Organization } from "@/lib/types";
 
 export function useCreateOrganization() {
   const firestore = useFirestore();
-  const [state, setState] = useState<string>();
+
+  const { state, setLoading, setData, setError } = useRequestState<
+    any,
+    FirebaseError
+  >();
 
   const mutation = useCallback(
     async (organization: Organization) => {
-      setState("loading");
+      setLoading(true);
 
-      const organizationsPath = `/organizations`;
-      const collectionReference = collection(firestore, organizationsPath);
+      const organizationsCollection = "organizations";
+      const collectionReference = collection(
+        firestore,
+        organizationsCollection
+      );
 
       try {
         await addDoc(collectionReference, organization);
 
-        setState("success");
-      } catch (e) {
-        setState("error");
+        setData("success");
+      } catch (error) {
+        setError(error as FirebaseError);
       }
     },
-    [firestore]
+    [firestore, setData, setError, setLoading]
   );
 
   return [mutation, state] as [typeof mutation, typeof state];
