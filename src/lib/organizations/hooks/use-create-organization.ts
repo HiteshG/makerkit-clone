@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useFirestore } from "reactfire";
 import { FirebaseError } from "firebase/app";
 import { collection, addDoc } from "firebase/firestore";
-import { useRequestState } from "../../useRequestState";
+import { useRequestState } from "../../utils";
 import { Organization } from "@/lib/types";
 
 export function useCreateOrganization() {

@@ -8,7 +8,7 @@ import { Spinner } from '@/core/ui/spinner';
 
 const SignUpForm = (
   props: React.PropsWithChildren<{
-    onSignup: () => void;
+    onSignUp: () => void;
   }>
 ) => {
   const [password, setPassword] = useState<string>("");
@@ -20,7 +20,7 @@ const SignUpForm = (
 
   useEffect(() => {
     if (state.success) {
-      props.onSignup();
+      props.onSignUp();
     }
   }, [props, state.success]);
 

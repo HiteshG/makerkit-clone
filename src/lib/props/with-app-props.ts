@@ -1,25 +1,48 @@
 import { GetServerSidePropsContext } from "next";
-import { getAuth } from "firebase/auth";
+import admin from "@/lib/firebaseAdmin";
+import { getCookie } from "cookies-next";
+import configuration from "../../../configuration";
+import { getOrganizationById } from "../organizations/server/get-organization";
 
 export async function withAppProps(context: GetServerSidePropsContext) {
-  const auth = getAuth();
-  const cookies = context.req.headers.cookies;
-  const csrfToken = context.req.headers["x-csrf-token"];
-  console.log(auth);
+  const cookies = getCookie("sessionId", context);
 
-  //   if (!auth.currentUser) {
-  //     return {
-  //       redirect: {
-  //         destination: "/auth/sign-in",
-  //         permanent: false,
-  //       },
-  //     };
-  //   }
+  if (cookies) {
+    try {
+      const auth = admin.auth();
+      const decodedClaims = await auth.verifySessionCookie(cookies, true);
 
-  return {
-    props: {
-      //   cookies,
-      //   csrfToken,
-    },
-  };
+      const user = await auth.getUser(decodedClaims.uid);
+      console.log(user);
+
+      const { organizationId } = context.query;
+
+      let organization: any = null;
+      if (organizationId) {
+        organization = await getOrganizationById(organizationId as string);
+      }
+      console.log(organization);
+
+      return {
+        props: {
+          userData: JSON.stringify(user),
+          organizationData: JSON.stringify(organization),
+        },
+      };
+    } catch (error) {
+      return {
+        redirect: {
+          destination: configuration.paths.signIn,
+          permanent: false,
+        },
+      };
+    }
+  } else {
+    return {
+      redirect: {
+        destination: configuration.paths.signIn,
+        permanent: false,
+      },
+    };
+  }
 }

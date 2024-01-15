@@ -6,10 +6,11 @@ import AvailableProvider from './AvailableProvider';
 
 import { useSignInWithProvider } from '@/lib/auth/hooks/useSignInWithProvider';
 import { useAnonymousSignIn } from '@/lib/auth/hooks/useSignInWithAnonymously';
+// import useSignInWithProvider from '@/core/hooks/use-sign-in-with-provider';
 
 const Provider = (
   props: React.PropsWithChildren<{
-    onSignup: () => void;
+    onSignIn: () => void;
   }>
 ) => {
   const [signInWithProvider, signInWithProviderState] = useSignInWithProvider();
@@ -17,21 +18,21 @@ const Provider = (
 
   useEffect(() => {
     if (signInWithProviderState.success) {
-      props.onSignup();
+      props.onSignIn();
     }
   }, [props, signInWithProviderState.success]);
 
-  const handleGoogleSignUp = () => {
+  const handleGoogleSignIn = () => {
     signInWithProvider(new GoogleAuthProvider());
   }
 
   useEffect(() => {
     if (signInWithAnonymouslyState.success) {
-      props.onSignup();
+      props.onSignIn();
     }
   }, [props, signInWithAnonymouslyState.success]);
 
-  const handleAnonymously = () => {
+  const handleAnonymouslySignIn = () => {
     signInWithAnonymously();
   }
 
@@ -40,13 +41,13 @@ const Provider = (
       <div className="flex-col space-y-2">
         <AvailableProvider
           icon={<Image alt="google.com logo" fetchPriority="high" width="22" height="22" decoding="async" data-nimg="1" src="/assets/images/google.webp" />}
-          onClick={handleGoogleSignUp}
+          onClick={handleGoogleSignIn}
         >
           Sign in with Google
         </AvailableProvider>
         <AvailableProvider
           icon={<AtSign className="h-[22px] w-[22px]" />}
-          onClick={handleAnonymously}
+          onClick={handleAnonymouslySignIn}
         >
           Sign in anonymously
         </AvailableProvider>

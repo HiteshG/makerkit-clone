@@ -52,7 +52,6 @@ const links = {
 export const Navbar = () => {
   const auth = useAuth();
   const [user, setUser] = useState(auth.currentUser);
-  console.log(auth.currentUser);
 
   useEffect(() => {
     setUser(auth.currentUser);

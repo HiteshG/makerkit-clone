@@ -8,12 +8,17 @@ import {
   browserPopupRedirectResolver,
   UserCredential,
 } from "firebase/auth";
-import { useRequestState } from "../../useRequestState";
+import { useRequestState } from "../../utils";
 import { useCreateUser } from "@/lib/users/hooks/use-create-user";
+import { useApiRequest } from "../../utils";
 
 export function useSignInWithProvider() {
   const auth = useAuth();
   const createUser = useCreateUser();
+  const [createSession, apiState] = useApiRequest<any, any>(
+    `/api/session`,
+    "POST"
+  );
 
   const { state, setLoading, setData, setError } = useRequestState<
     UserCredential,
@@ -31,21 +36,18 @@ export function useSignInWithProvider() {
           browserPopupRedirectResolver
         );
 
-        await createUser({
-          displayName: credential.user.displayName,
-          email: credential.user.email,
-          photoURL: credential.user.photoURL,
-          phoneNumber: credential.user.phoneNumber,
-        });
+        const idToken = await credential.user.getIdToken();
+        await createSession({ idToken });
 
-        console.log(credential);
+        await createUser(credential);
 
         setData(credential);
       } catch (error) {
+        console.log(error);
         setError(error as FirebaseError);
       }
     },
-    [auth, setData, setError, setLoading]
+    [auth, setData, setError, setLoading, createSession, createUser]
   );
 
   return [signInWithProvider, state] as [

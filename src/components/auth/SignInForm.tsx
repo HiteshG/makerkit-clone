@@ -9,7 +9,7 @@ import { Spinner } from '@/core/ui/spinner';
 
 const SignInForm = (
   props: React.PropsWithChildren<{
-    onSignup: () => void;
+    onSignIn: () => void;
   }>
 ) => {
   const [signIn, state] = useSignInWithEmailAndPassword();
@@ -18,7 +18,7 @@ const SignInForm = (
 
   useEffect(() => {
     if (state.success) {
-      props.onSignup();
+      props.onSignIn();
     }
   }, [props, state.success]);
 

@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import FirebaseAuthProvider from '@/components/FirebaseAuthProvider';
 import FirebaseFirestoreProvider from '@/components/FirebaseFirestoreProvider';
 import LoadingIndicator from '@/core/ui/loading-indicator';

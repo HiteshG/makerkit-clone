@@ -148,10 +148,12 @@ const index = () => {
   );
 }
 
-export function getServerSideProps(
+
+
+export async function getServerSideProps(
   ctx: GetServerSidePropsContext
 ) {
-  return withAppProps(ctx);
+  return await withAppProps(ctx);
 }
-
+  
 export default index;

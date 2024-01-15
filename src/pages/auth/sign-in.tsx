@@ -1,14 +1,17 @@
 import { useCallback } from "react";
+import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Provider from '@/components/auth/Provider';
 import SignInForm from '@/components/auth/SignInForm';
+import { withAuthProps } from "@/lib/props/with-auth-props";
+import configuration from "../../../configuration";
 
 const SignIn = () => {
   const router = useRouter();
 
-  const onSignup = useCallback(async () => {
-    router.push("/dashboard");
+  const onSignIn = useCallback(async () => {
+    router.replace(configuration.paths.appHome);
   }, [router]);
 
   return (
@@ -18,11 +21,11 @@ const SignIn = () => {
         <div className="font-heading scroll-m-20 text-xl font-semibold tracking-tight">
           Sign in to your account
         </div>
-        <Provider onSignup={onSignup} />
+        <Provider onSignIn={onSignIn} />
         <div>
           <span className="text-xs text-gray-400">or continue with email</span>
         </div>
-        <SignInForm onSignup={onSignup} />
+        <SignInForm onSignIn={onSignIn} />
         <div className="flex justify-center text-xs">
           <p className="flex space-x-1">
             <span>Do not have an account yet?</span>
@@ -34,6 +37,10 @@ const SignIn = () => {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return await withAuthProps(context);
 }
 
 export default SignIn;
