@@ -1,0 +1,404 @@
+CREATE TYPE "public"."subscription_status" AS ENUM (
+    'active',
+    'trialing',
+    'past_due',
+    'canceled',
+    'unpaid',
+    'incomplete',
+    'incomplete_expired',
+    'paused'
+);
+
+ALTER TYPE "public"."subscription_status" OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."accept_invite_to_organization"("invite_code" "text", "invite_user_id" "uuid") RETURNS "json"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public'
+    AS $$
+declare
+  organization bigint;
+  membership bigint;
+  target_role int;
+begin
+  perform assert_service_role();
+
+  if not exists(select 1 from users where id = invite_user_id) then
+    insert into users (id, onboarded)
+      values (invite_user_id, true);
+  end if;
+
+  select "role" from memberships
+  where code = invite_code
+  into target_role;
+
+  if target_role is null then
+    raise exception 'Invite code not found';
+  end if;
+
+  if target_role = 2 then
+    raise exception 'Owner cannot be invited';
+  end if;
+
+  update
+    memberships
+  set
+    user_id = invite_user_id,
+    code = null,
+    invited_email = null
+  where
+    code = invite_code
+  returning
+    id,
+    organization_id into membership,
+    organization;
+  return json_build_object('organization', organization, 'membership', membership);
+end;
+$$;
+
+ALTER FUNCTION "public"."accept_invite_to_organization"("invite_code" "text", "invite_user_id" "uuid") OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."assert_service_role"() RETURNS "void"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  if current_setting('role') != 'authenticated' AND current_setting('role') !=
+   'service_role' then
+    raise exception 'authentication required';
+  end if;
+end;
+$$;
+
+ALTER FUNCTION "public"."assert_service_role"() OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."can_update_user_role"("membership_id" bigint) RETURNS boolean
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  current_user_role int;
+  org_id bigint;
+begin
+  select organization_id from memberships where id = membership_id into org_id;
+
+  select
+    get_role_for_authenticated_user (org_id) into current_user_role;
+
+  return current_user_role > get_role_for_user (membership_id);
+end;
+$$;
+
+ALTER FUNCTION "public"."can_update_user_role"("membership_id" bigint) OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."can_update_user_role"("organization_id" bigint, "membership_id" bigint) RETURNS boolean
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  current_user_role int;
+begin
+  select
+    get_role_for_authenticated_user (organization_id) into current_user_role;
+  return current_user_role > get_role_for_user (membership_id);
+end;
+$$;
+
+ALTER FUNCTION "public"."can_update_user_role"("organization_id" bigint, "membership_id" bigint) OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."create_new_organization"("org_name" "text", "user_id" "uuid", "create_user" boolean DEFAULT true) RETURNS "uuid"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public'
+    AS $$
+declare
+  organization bigint;
+  uid uuid;
+begin
+  perform assert_service_role();
+
+  insert into organizations ("name")
+    values (org_name)
+  returning
+    id, uuid into organization, uid;
+  if create_user then
+    insert into users (id, onboarded)
+      values (user_id, true);
+  end if;
+  insert into memberships (user_id, organization_id, role)
+    values (user_id, organization, 2);
+  return uid;
+end;
+$$;
+
+ALTER FUNCTION "public"."create_new_organization"("org_name" "text", "user_id" "uuid", "create_user" boolean) OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."current_user_is_member_of_organization"("organization_id" bigint) RETURNS boolean
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  return (organization_id in (
+      select
+        get_organizations_for_authenticated_user ()));
+end;
+$$;
+
+ALTER FUNCTION "public"."current_user_is_member_of_organization"("organization_id" bigint) OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."get_organizations_for_authenticated_user"() RETURNS SETOF bigint
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public'
+    AS $$
+begin
+  return query select
+    organization_id
+  from
+    memberships
+  where
+    user_id = auth.uid ()
+    and code is null;
+end;
+$$;
+
+ALTER FUNCTION "public"."get_organizations_for_authenticated_user"() OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."get_role_for_authenticated_user"("org_id" bigint) RETURNS integer
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  current_user_role int;
+begin
+  select
+    role
+  from
+    memberships
+  where
+    user_id = auth.uid ()
+    and memberships.organization_id = org_id into current_user_role;
+  return current_user_role;
+end;
+$$;
+
+ALTER FUNCTION "public"."get_role_for_authenticated_user"("org_id" bigint) OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."get_role_for_user"("membership_id" bigint) RETURNS integer
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  current_user_role int;
+begin
+  select
+    role
+  from
+    memberships
+  where
+    id = membership_id
+  limit 1 into current_user_role;
+  return current_user_role;
+end;
+$$;
+
+ALTER FUNCTION "public"."get_role_for_user"("membership_id" bigint) OWNER TO "postgres";
+
+CREATE OR REPLACE FUNCTION "public"."transfer_organization"("org_id" bigint, "target_user_membership_id" bigint) RETURNS "void"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public'
+    AS $$
+declare
+  current_user_role int;
+  current_user_membership_id int;
+begin
+  perform assert_service_role();
+
+  select id, role from memberships where user_id = auth.uid() into current_user_membership_id, current_user_role;
+
+  if current_user_role != 2 then
+    raise exception 'Only owners can transfer organizations';
+  end if;
+
+  if current_user_membership_id = target_user_membership_id then
+    raise exception 'Cannot transfer organization to yourself';
+  end if;
+
+  update
+    memberships
+  set
+    role = 2
+  where
+    id = target_user_membership_id;
+  update
+    memberships
+  set
+    role = 1
+  where
+    user_id = auth.uid ()
+    and organization_id = org_id;
+end;
+$$;
+
+ALTER FUNCTION "public"."transfer_organization"("org_id" bigint, "target_user_membership_id" bigint) OWNER TO "postgres";
+
+SET default_tablespace = '';
+
+SET default_table_access_method = "heap";
+
+CREATE TABLE IF NOT EXISTS "public"."memberships" (
+    "id" bigint NOT NULL,
+    "user_id" "uuid",
+    "organization_id" bigint NOT NULL,
+    "role" integer NOT NULL,
+    "invited_email" "text",
+    "code" "text",
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+ALTER TABLE "public"."memberships" OWNER TO "postgres";
+
+ALTER TABLE "public"."memberships" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME "public"."memberships_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+CREATE TABLE IF NOT EXISTS "public"."organizations" (
+    "id" bigint NOT NULL,
+    "name" "text" NOT NULL,
+    "logo_url" "text",
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "uuid" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    CONSTRAINT "organizations_name_check" CHECK (("length"("name") < 50))
+);
+
+ALTER TABLE "public"."organizations" OWNER TO "postgres";
+
+ALTER TABLE "public"."organizations" ALTER COLUMN "id" ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME "public"."organizations_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+CREATE TABLE IF NOT EXISTS "public"."organizations_subscriptions" (
+    "organization_id" bigint NOT NULL,
+    "subscription_id" "text",
+    "customer_id" "text" NOT NULL
+);
+
+ALTER TABLE "public"."organizations_subscriptions" OWNER TO "postgres";
+
+CREATE TABLE IF NOT EXISTS "public"."subscriptions" (
+    "id" "text" NOT NULL,
+    "price_id" "text" NOT NULL,
+    "status" "public"."subscription_status" NOT NULL,
+    "cancel_at_period_end" boolean NOT NULL,
+    "currency" "text",
+    "interval" "text",
+    "interval_count" integer,
+    "created_at" timestamp with time zone,
+    "period_starts_at" timestamp with time zone,
+    "period_ends_at" timestamp with time zone,
+    "trial_starts_at" timestamp with time zone,
+    "trial_ends_at" timestamp with time zone
+);
+
+ALTER TABLE "public"."subscriptions" OWNER TO "postgres";
+
+CREATE TABLE IF NOT EXISTS "public"."users" (
+    "id" "uuid" NOT NULL,
+    "photo_url" "text",
+    "display_name" "text",
+    "onboarded" boolean NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "users_display_name_check" CHECK (("length"("display_name") < 100))
+);
+
+ALTER TABLE "public"."users" OWNER TO "postgres";
+
+ALTER TABLE ONLY "public"."memberships"
+    ADD CONSTRAINT "memberships_pkey" PRIMARY KEY ("id");
+
+ALTER TABLE ONLY "public"."memberships"
+    ADD CONSTRAINT "memberships_user_id_organization_id_key" UNIQUE ("user_id", "organization_id");
+
+ALTER TABLE ONLY "public"."organizations"
+    ADD CONSTRAINT "organizations_pkey" PRIMARY KEY ("id");
+
+ALTER TABLE ONLY "public"."organizations_subscriptions"
+    ADD CONSTRAINT "organizations_subscriptions_customer_id_key" UNIQUE ("customer_id");
+
+ALTER TABLE ONLY "public"."organizations_subscriptions"
+    ADD CONSTRAINT "organizations_subscriptions_pkey" PRIMARY KEY ("organization_id");
+
+ALTER TABLE ONLY "public"."organizations_subscriptions"
+    ADD CONSTRAINT "organizations_subscriptions_subscription_id_key" UNIQUE ("subscription_id");
+
+ALTER TABLE ONLY "public"."organizations"
+    ADD CONSTRAINT "organizations_uuid_key" UNIQUE ("uuid");
+
+ALTER TABLE ONLY "public"."subscriptions"
+    ADD CONSTRAINT "subscriptions_pkey" PRIMARY KEY ("id");
+
+ALTER TABLE ONLY "public"."users"
+    ADD CONSTRAINT "users_pkey" PRIMARY KEY ("id");
+
+ALTER TABLE ONLY "public"."memberships"
+    ADD CONSTRAINT "memberships_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE CASCADE;
+
+ALTER TABLE ONLY "public"."memberships"
+    ADD CONSTRAINT "memberships_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE CASCADE;
+
+ALTER TABLE ONLY "public"."organizations_subscriptions"
+    ADD CONSTRAINT "organizations_subscriptions_organization_id_fkey" FOREIGN KEY ("organization_id") REFERENCES "public"."organizations"("id") ON DELETE CASCADE;
+
+ALTER TABLE ONLY "public"."organizations_subscriptions"
+    ADD CONSTRAINT "organizations_subscriptions_subscription_id_fkey" FOREIGN KEY ("subscription_id") REFERENCES "public"."subscriptions"("id") ON DELETE SET NULL;
+
+ALTER TABLE ONLY "public"."users"
+    ADD CONSTRAINT "users_id_fkey" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
+
+CREATE POLICY "Memberships can only be deleted if the user's role who updates
+" ON "public"."memberships" FOR DELETE TO "authenticated" USING ("public"."can_update_user_role"("organization_id", "id"));
+
+CREATE POLICY "Memberships can only be read by members that belong to the
+  or" ON "public"."memberships" FOR SELECT TO "authenticated" USING ("public"."current_user_is_member_of_organization"("organization_id"));
+
+CREATE POLICY "Organizations can be selectable by the members of the
+organizat" ON "public"."organizations" FOR SELECT TO "authenticated" USING (("id" IN ( SELECT "memberships"."organization_id"
+   FROM "public"."memberships"
+  WHERE ("auth"."uid"() = "memberships"."user_id"))));
+
+CREATE POLICY "Organizations can only be updated by the members of the
+  organ" ON "public"."organizations" AS RESTRICTIVE FOR UPDATE TO "authenticated" USING (("id" IN ( SELECT "memberships"."organization_id"
+   FROM "public"."memberships"
+  WHERE ("auth"."uid"() = "memberships"."user_id")))) WITH CHECK (("id" IN ( SELECT "memberships"."organization_id"
+   FROM "public"."memberships"
+  WHERE ("auth"."uid"() = "memberships"."user_id"))));
+
+CREATE POLICY "Subscriptions can only be selectable by members that belong to
+" ON "public"."subscriptions" FOR SELECT USING ((EXISTS ( SELECT 1
+   FROM ("public"."memberships"
+     JOIN "public"."organizations_subscriptions" ON (("organizations_subscriptions"."organization_id" = "memberships"."organization_id")))
+  WHERE (("memberships"."organization_id" = "organizations_subscriptions"."organization_id") AND ("subscriptions"."id" = "organizations_subscriptions"."subscription_id") AND ("memberships"."user_id" = "auth"."uid"())))));
+
+CREATE POLICY "Users can read subscriptions if they belong to the organization" ON "public"."organizations_subscriptions" FOR SELECT TO "authenticated" USING ((EXISTS ( SELECT 1
+   FROM "public"."memberships"
+  WHERE (("memberships"."user_id" = "auth"."uid"()) AND ("memberships"."organization_id" = "memberships"."organization_id")))));
+
+CREATE POLICY "Users can read the public data of users belonging to the same
+ " ON "public"."users" FOR SELECT TO "authenticated" USING ((EXISTS ( SELECT 1
+   FROM "public"."memberships"
+  WHERE ("memberships"."organization_id" IN ( SELECT "public"."get_organizations_for_authenticated_user"() AS "get_organizations_for_authenticated_user")))));
+
+CREATE POLICY "Users can select data to their records" ON "public"."users" FOR SELECT TO "authenticated" USING (("auth"."uid"() = "id"));
+
+CREATE POLICY "Users can update data to only their records" ON "public"."users" FOR UPDATE TO "authenticated" USING (("auth"."uid"() = "id")) WITH CHECK (("auth"."uid"() = "id"));
+
+ALTER TABLE "public"."memberships" ENABLE ROW LEVEL SECURITY;
+
+ALTER TABLE "public"."organizations" ENABLE ROW LEVEL SECURITY;
+
+ALTER TABLE "public"."organizations_subscriptions" ENABLE ROW LEVEL SECURITY;
+
+ALTER TABLE "public"."subscriptions" ENABLE ROW LEVEL SECURITY;
+
+ALTER TABLE "public"."users" ENABLE ROW LEVEL SECURITY;

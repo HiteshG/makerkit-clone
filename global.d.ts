@@ -13,7 +13,7 @@ declare global {
     ? never
     : 0 extends T
     ? never
-    : "" extends T
+    : '' extends T
     ? never
     : null extends T
     ? never
@@ -21,12 +21,42 @@ declare global {
     ? never
     : T;
 
-  type Falsy = false | 0 | "" | null | undefined;
+  type Falsy = false | 0 | '' | null | undefined;
   type Maybe<T> = T | undefined;
 
   type EmptyCallback = () => void;
 
-  type HttpMethod = `GET` | `POST` | `PUT` | `PATCH` | `DELETE` | `HEAD`;
+  type HttpMethod = `GET` | `POST` | `PUT` | 'PATCH' | 'DELETE' | 'HEAD';
+
+  namespace Cypress {
+    interface Chainable {
+      cyGet(name: string): Chainable<JQuery>;
+
+      signIn(
+        redirectPath?: string,
+        credentials?: { email: string; password: string },
+      ): void;
+
+      signUp(
+        redirectPath: string,
+        credentials: { email: string; password: string },
+      ): void;
+
+      completeOnboarding(email: string, password: string): void;
+
+      visitSignUpEmailFromInBucket(email: string): void;
+
+      clearStorage(): void;
+
+      resetDatabase(): void;
+    }
+  }
+}
+
+declare module 'react' {
+  type FCC<Props = Record<string, unknown>> = React.FC<
+    React.PropsWithChildren<Props>
+  >;
 }
 
 export {};

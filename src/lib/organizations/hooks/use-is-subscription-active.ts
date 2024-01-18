@@ -1,16 +1,11 @@
-import type { Stripe } from "stripe";
-import { useCurrentOrganization } from "./use-current-organization";
+import type { Stripe } from 'stripe';
+import useCurrentOrganization from '~/lib/organizations/hooks/use-current-organization';
 
-const ACTIVE_STATUSES: Stripe.Subscription.Status[] = ["active", "trialing"];
+const ACTIVE_STATUSES: Stripe.Subscription.Status[] = ['active', 'trialing'];
 
-/**
- * @name useIsSubscriptionActive
- * @description Returns whether the organization is on any paid
- * subscription, regardless of plan.
- */
 function useIsSubscriptionActive() {
   const organization = useCurrentOrganization();
-  const status = organization?.subscription?.status;
+  const status = organization?.subscription?.data.status;
 
   if (!status) {
     return false;
