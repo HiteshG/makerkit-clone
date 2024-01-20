@@ -27,7 +27,6 @@ import {
   SelectValue,
 } from '~/core/ui/Select';
 
-import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 
 const DarkModeToggle = () => {
