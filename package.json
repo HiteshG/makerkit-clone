@@ -51,6 +51,7 @@
     "date-fns": "^3.2.0",
     "edge-csrf": "^1.0.7",
     "heroicons": "^2.1.1",
+    "i18next": "^23.7.17",
     "nanoid": "^5.0.4",
     "next": "14.0.4",
     "nodemailer": "^6.9.8",
