@@ -181,6 +181,41 @@ export interface Database {
         }
         Relationships: []
       }
+      tasks: {
+        Row: {
+          description: string | null
+          done: boolean
+          due_date: string
+          id: number
+          name: string
+          organization_id: number
+        }
+        Insert: {
+          description?: string | null
+          done?: boolean
+          due_date: string
+          id?: number
+          name?: string
+          organization_id: number
+        }
+        Update: {
+          description?: string | null
+          done?: boolean
+          due_date?: string
+          id?: number
+          name?: string
+          organization_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       users: {
         Row: {
           created_at: string

@@ -65,7 +65,7 @@ const configuration = {
       email: 'settings/profile/email',
       password: 'settings/profile/password',
     },
-    chat: 'chat',
+    tasks: 'tasks',
   },
   sentry: {
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,

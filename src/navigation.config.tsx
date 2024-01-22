@@ -3,7 +3,7 @@ import {
   Squares2X2Icon,
   UserGroupIcon,
   UserIcon,
-  ChatBubbleLeftIcon,
+  CircleStackIcon,
 } from '@heroicons/react/24/outline';
 
 import configuration from '~/configuration';
@@ -41,6 +41,14 @@ const NAVIGATION_CONFIG = (organization: string): NavigationConfig => ({
       path: getPath(organization, ''),
       Icon: ({ className }: { className: string }) => {
         return <Squares2X2Icon className={className} />;
+      },
+      end: true,
+    },
+    {
+      label: 'Tasks',
+      path: getPath(organization, 'tasks'),
+      Icon: ({ className }: { className: string }) => {
+        return <CircleStackIcon className={className} />;
       },
       end: true,
     },
