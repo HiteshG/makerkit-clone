@@ -1,0 +1,70 @@
+{
+  "subscriptionTabSubheading": "Manage your Subscription and Billing",
+  "checkout": "Checkout",
+  "manageBillingDescription": "Visit your Customer Portal to manage your subscription and billing.",
+  "manageBilling": "Go to Customer Portal",
+  "notSubscribedToAnyPlan": "You are not currently subscribed to any plan",
+  "choosePlan": "Select a plan below",
+  "currentPlan": "Your Plan",
+  "subscriptionWillEndOn": "The subscription will end on {{ endDate }}",
+  "unknownErrorAlertHeading": "Sorry, something went wrong",
+  "unknownErrorAlert": "We encountered an unknown error while processing your payment. Please try again or contact support.",
+  "checkOutCanceledAlertHeading": "The checkout was canceled",
+  "checkOutCanceledAlert": "The checkout was canceled. Please contact us if you're experiencing any issues.",
+  "checkOutCompletedAlertHeading": "Checkout successfully completed",
+  "checkOutCompletedAlert": "Yay, your payment went through!",
+  "cancelAtPeriodEndDescription": "Your subscription is scheduled to be canceled on {{ endDate }}.",
+  "renewAtPeriodEndDescription": "Your subscription is scheduled to be renewed on {{ endDate }}",
+  "noPermissionsAlertHeading": "You don't have permissions to change the billing",
+  "noPermissionsAlertBody": "Please contact your organization owner to change the billing settings for your organization.",
+  "checkoutSuccessTitle": "Done! You're all set.",
+  "checkoutSuccessDescription": "Thank you for subscribing, we have successfully processed your subscription! A confirmation email will be sent to {{ customerEmail }}.",
+  "checkoutSuccessBackButton": "Proceed to App",
+  "status": {
+    "free": {
+      "label": "Free Plan",
+      "heading": "You are currently on the Free Plan",
+      "description": "You're on a free plan. You can upgrade to a paid plan at any time."
+    },
+    "active": {
+      "label": "Active",
+      "heading": "Your subscription is active",
+      "description": "Your subscription is active. You can manage your subscription and billing in the Customer Portal."
+    },
+    "trialing": {
+      "label": "Trial",
+      "heading": "You're on a trial",
+      "description": "Your trial will end on {{ trialEndDate }}."
+    },
+    "past_due": {
+      "label": "Past Due",
+      "heading": "Your invoice is past due",
+      "description": "Your invoice is past due. Please update your payment method."
+    },
+    "canceled": {
+      "label": "Canceled",
+      "heading": "Your subscription is canceled",
+      "description": "Your subscription is canceled. It is scheduled to end on {{ endDate }}."
+    },
+    "unpaid": {
+      "label": "Unpaid",
+      "heading": "Your invoice is unpaid",
+      "description": "Your invoice is unpaid. Please update your payment method."
+    },
+    "incomplete": {
+      "label": "Incomplete",
+      "heading": "We're waiting for your payment",
+      "description": "We're waiting for your payment to go through. Please bear with us."
+    },
+    "incomplete_expired": {
+      "label": "Expired",
+      "heading": "Your payment has expired",
+      "description": "Your payment has expired. Please update your payment method."
+    },
+    "paused": {
+      "label": "Paused",
+      "heading": "Your subscription is paused",
+      "description": "Your subscription is paused. You can resume it at any time."
+    }
+  }
+}

@@ -2,11 +2,13 @@
 
 import type { FormEvent } from 'react';
 import { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Heading from '~/core/ui/Heading';
 import Button from '~/core/ui/Button';
 import TextField from '~/core/ui/TextField';
 import SubHeading from '~/core/ui/SubHeading';
+import Trans from '~/core/ui/Trans';
 
 export interface OrganizationInfoStepData {
   organization: string;
@@ -15,6 +17,8 @@ export interface OrganizationInfoStepData {
 const OrganizationInfoStep: React.FCC<{
   onSubmit: (data: OrganizationInfoStepData) => void;
 }> = ({ onSubmit }) => {
+  const { t } = useTranslation('onboarding');
+
   const handleFormSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -36,12 +40,12 @@ const OrganizationInfoStep: React.FCC<{
     >
       <div className={'flex flex-col space-y-2'}>
         <Heading type={1}>
-          Setup Organization
+          <Trans i18nKey={'onboarding:setupOrganization'} />
         </Heading>
 
         <SubHeading>
           <span className={'text-base'}>
-            Welcome! First, let&apos;s setup your organization.
+            <Trans i18nKey={'onboarding:setupOrganizationDescription'} />
           </span>
         </SubHeading>
       </div>
@@ -49,20 +53,20 @@ const OrganizationInfoStep: React.FCC<{
       <div className={'flex flex-1 flex-col space-y-2'}>
         <TextField>
           <TextField.Label>
-            Organization name
+            <Trans i18nKey={'onboarding:organizationNameLabel'} />
 
             <TextField.Input
               data-cy={'organization-name-input'}
               required
               name={'organization'}
-              placeholder={"Your Organization"}
+              placeholder={t('organizationNamePlaceholder')}
             />
           </TextField.Label>
         </TextField>
       </div>
 
       <Button type={'submit'}>
-        Continue
+        <Trans i18nKey={'common:continue'} />
       </Button>
     </form>
   );

@@ -12,6 +12,7 @@ import AppSidebarNavigation from './AppSidebarNavigation';
 import Sidebar, { SidebarContent } from '~/core/ui/Sidebar';
 import { Tooltip, TooltipContent, TooltipTrigger } from '~/core/ui/Tooltip';
 
+import Trans from '~/core/ui/Trans';
 import SidebarContext from '~/lib/contexts/sidebar';
 import ProfileDropdown from '~/components/ProfileDropdown';
 import useUserSession from '~/core/hooks/use-user-session';
@@ -90,7 +91,11 @@ function CollapsibleButton({
       </TooltipTrigger>
 
       <TooltipContent sideOffset={20}>
-        {collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+        <Trans
+          i18nKey={
+            collapsed ? 'common:expandSidebar' : 'common:collapseSidebar'
+          }
+        />
       </TooltipContent>
     </Tooltip>
   );

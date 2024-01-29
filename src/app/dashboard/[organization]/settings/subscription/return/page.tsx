@@ -5,6 +5,7 @@ import getSupabaseServerComponentClient from '~/core/supabase/server-component-c
 import getStripeInstance from '~/core/stripe/get-stripe';
 import { StripeSessionStatus } from './components/StripeSessionStatus';
 import RecoverStripeCheckout from './components/RecoverStripeCheckout';
+import { withI18n } from '~/i18n/with-i18n';
 
 interface SessionPageProps {
   searchParams: {
@@ -40,7 +41,7 @@ async function ReturnStripeSessionPage({ searchParams }: SessionPageProps) {
   );
 }
 
-export default ReturnStripeSessionPage;
+export default withI18n(ReturnStripeSessionPage);
 
 export async function loadStripeSession(sessionId: string) {
   await requireSession(getSupabaseServerComponentClient());

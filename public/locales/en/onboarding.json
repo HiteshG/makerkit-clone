@@ -1,0 +1,15 @@
+{
+  "setupOrganization": "Setup Organization",
+  "setupOrganizationDescription": "Welcome! First, let's setup your organization.",
+  "organizationNameLabel": "Organization name",
+  "errorAlertHeading": "There was an error completing your onboarding.",
+  "inviteMembers": "Invite members",
+  "inviteMembersDescription": "Invite your team members to join your organization.",
+  "info": "Details",
+  "invites": "Invites",
+  "complete": "Complete",
+  "successStepHeading": "You're all set! You can now start using the app.",
+  "continue": "Continue to your Dashboard",
+  "settingAccount": "We're setting up your account. Please wait...",
+  "organizationNamePlaceholder": "Ex. Acme Inc."
+}

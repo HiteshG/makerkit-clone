@@ -6,6 +6,7 @@ import { useState } from 'react';
 import TextField from '~/core/ui/TextField';
 import Button from '~/core/ui/Button';
 import Alert from '~/core/ui/Alert';
+import Trans from '~/core/ui/Trans';
 import If from '~/core/ui/If';
 import { Dialog, DialogContent, DialogTitle } from '~/core/ui/Dialog';
 
@@ -19,7 +20,7 @@ const CreateOrganizationModal: React.FC<{
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent>
         <DialogTitle>
-          Create Organization
+          <Trans i18nKey={'organization:createOrganizationModalHeading'} />
         </DialogTitle>
 
         <CreateOrganizationForm setIsOpen={setIsOpen} />
@@ -55,7 +56,7 @@ function CreateOrganizationForm({
 
         <TextField>
           <TextField.Label>
-            Organization Name
+            <Trans i18nKey={'organization:organizationNameLabel'} />
 
             <TextField.Input
               data-cy={'create-organization-name-input'}
@@ -63,7 +64,7 @@ function CreateOrganizationForm({
               required
               minLength={2}
               maxLength={50}
-              placeholder={'Your Organization'}
+              placeholder={'ex. IndieCorp'}
             />
           </TextField.Label>
         </TextField>
@@ -74,7 +75,7 @@ function CreateOrganizationForm({
             type={'button'}
             onClick={() => setIsOpen(false)}
           >
-            Cancel
+            <Trans i18nKey={'common:cancel'} />
           </Button>
 
           <SubmitButton />
@@ -89,7 +90,7 @@ function SubmitButton() {
 
   return (
     <Button data-cy={'confirm-create-organization-button'} loading={pending}>
-      Create Organization
+      <Trans i18nKey={'organization:createOrganizationSubmitLabel'} />
     </Button>
   );
 }
@@ -98,10 +99,10 @@ function CreateOrganizationErrorAlert() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-        Sorry, we couldn&apos;t create your organization.
+        <Trans i18nKey={'organization:createOrganizationErrorHeading'} />
       </Alert.Heading>
 
-      We encountered an error creating your organization. Please try again.
+      <Trans i18nKey={'organization:createOrganizationErrorMessage'} />
     </Alert>
   );
 }

@@ -1,4 +1,5 @@
 import Heading from '~/core/ui/Heading';
+import Trans from '~/core/ui/Trans';
 import SubHeading from '~/core/ui/SubHeading';
 import Button from '~/core/ui/Button';
 import useUserSession from '~/core/hooks/use-user-session';
@@ -22,7 +23,7 @@ function OrganizationInvitesStep({
   const SubmitButton = (
     <div className={'flex flex-col space-y-2'}>
       <Button type={'submit'}>
-        Continue
+        <Trans i18nKey={'common:continue'} />
       </Button>
 
       <Button
@@ -31,7 +32,7 @@ function OrganizationInvitesStep({
         type={'button'}
         onClick={() => onSubmit([])}
       >
-        Skip
+        <Trans i18nKey={'common:skip'} />
       </Button>
     </div>
   );
@@ -40,12 +41,12 @@ function OrganizationInvitesStep({
     <div className={'flex w-full flex-1 flex-col space-y-12'}>
       <div className={'flex flex-col space-y-2'}>
         <Heading type={1}>
-          Invite members
+          <Trans i18nKey={'onboarding:inviteMembers'} />
         </Heading>
 
         <SubHeading>
           <span className={'text-base'}>
-            Invite your team members to join your organization.
+            <Trans i18nKey={'onboarding:inviteMembersDescription'} />
           </span>
         </SubHeading>
       </div>

@@ -16,6 +16,8 @@ import {
   DropdownMenuTrigger,
 } from '~/core/ui/Dropdown';
 
+import Trans from '~/core/ui/Trans';
+
 import NAVIGATION_CONFIG from '../navigation.config';
 import useCurrentOrganization from '~/lib/organizations/hooks/use-current-organization';
 import useSignOut from '~/core/hooks/use-sign-out';
@@ -96,7 +98,9 @@ function DropdownLink(
       >
         <props.Icon className={'h-6'} />
 
-        <span>{props.label}</span>
+        <span>
+          <Trans i18nKey={props.label} defaults={props.label} />
+        </span>
       </Link>
     </DropdownMenuItem>
   );
@@ -112,7 +116,9 @@ function SignOutDropdownItem() {
     >
       <ArrowLeftOnRectangleIcon className={'h-6'} />
 
-      <span>Sign Out</span>
+      <span>
+        <Trans i18nKey={'common:signOut'} defaults={'Sign out'} />
+      </span>
     </DropdownMenuItem>
   );
 }
@@ -128,11 +134,13 @@ function OrganizationsModal() {
           <button className={'flex items-center space-x-4'}>
             <BuildingLibraryIcon className={'h-6'} />
 
-            <span>Your Organizations</span>
+            <span>
+              <Trans i18nKey={'common:yourOrganizations'} />
+            </span>
           </button>
         </DropdownMenuItem>
       }
-      heading={"Your Organizations"}
+      heading={<Trans i18nKey={'common:yourOrganizations'} />}
     >
       <div className={'flex flex-col space-y-6 py-4'}>
         <Heading type={6}>Select an organization below to switch to it</Heading>

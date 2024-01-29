@@ -6,6 +6,7 @@ import configuration from '~/configuration';
 
 import If from '~/core/ui/If';
 import Alert from '~/core/ui/Alert';
+import Trans from '~/core/ui/Trans';
 
 import PhoneNumberCredentialForm from '~/app/auth/components/PhoneNumberCredentialForm';
 import VerificationCodeInput from '~/app/auth/components/VerificationCodeInput';
@@ -91,7 +92,7 @@ const PhoneNumberSignInContainer: React.FC<{
             loading={verifyOtp.isMutating}
             type={'submit'}
           >
-            Sign In
+            <Trans i18nKey={'auth:signIn'} />
           </Button>
         </div>
       </form>

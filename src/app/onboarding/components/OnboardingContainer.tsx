@@ -20,19 +20,10 @@ type Invite = {
   role: MembershipRole;
 };
 
-/**
- * Represents the list of steps for a user onboarding process.
- * The Array represents the list of step names to render within
- * the Stepper component. You can either use the i18n key or the label itself.
- *
- * Update this array to add/remove steps from the onboarding process.
- *
- * @type {Array<string>}
- */
 const STEPS: Array<string> = [
-  'Details',
-  'Invites',
-  'Complete',
+  'onboarding:info',
+  'onboarding:invites',
+  'onboarding:complete',
 ];
 
 function OnboardingContainer(

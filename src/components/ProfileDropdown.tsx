@@ -27,6 +27,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from '~/core/ui/Dropdown';
+import Trans from '~/core/ui/Trans';
 
 import configuration from '~/configuration';
 import ProfileAvatar from '~/components/ProfileAvatar';
@@ -109,7 +110,7 @@ const ProfileDropdown: React.FCC<{
             className={'flex flex-col justify-start truncate text-left text-xs'}
           >
             <div className={'text-gray-500'}>
-              Signed in as
+              <Trans i18nKey={'common:signedInAs'} />
             </div>
 
             <div>
@@ -126,7 +127,9 @@ const ProfileDropdown: React.FCC<{
             href={configuration.paths.appHome}
           >
             <Squares2X2Icon className={'h-5'} />
-            <span>Dashboard</span>
+            <span>
+              <Trans i18nKey={'common:dashboardTabLabel'} />
+            </span>
           </Link>
         </DropdownMenuItem>
 
@@ -139,7 +142,9 @@ const ProfileDropdown: React.FCC<{
           >
             <QuestionMarkCircleIcon className={'h-5'} />
 
-            <span>Documentation</span>
+            <span>
+              <Trans i18nKey={'common:documentation'} />
+            </span>
           </Link>
         </DropdownMenuItem>
 
@@ -171,7 +176,9 @@ const ProfileDropdown: React.FCC<{
           <span className={'flex w-full items-center space-x-2'}>
             <ArrowLeftOnRectangleIcon className={'h-5'} />
 
-            <span>Sign Out</span>
+            <span>
+              <Trans i18nKey={'auth:signOut'} />
+            </span>
           </span>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -195,7 +202,9 @@ function ThemeSelectorSubMenu() {
           <Wrapper>
             <PaintBrushIcon className={'h-4'} />
 
-            <span>Theme</span>
+            <span>
+              <Trans i18nKey={'common:theme'} />
+            </span>
           </Wrapper>
         </DropdownMenuSubTrigger>
 
@@ -207,7 +216,9 @@ function ThemeSelectorSubMenu() {
             <Wrapper>
               <SunIcon className={'h-4'} />
 
-              <span>Light</span>
+              <span>
+                <Trans i18nKey={'common:lightTheme'} />
+              </span>
             </Wrapper>
 
             <If condition={currentTheme === LIGHT_THEME_CLASSNAME}>
@@ -222,7 +233,9 @@ function ThemeSelectorSubMenu() {
             <Wrapper>
               <MoonIcon className={'h-4'} />
 
-              <span>Dark</span>
+              <span>
+                <Trans i18nKey={'common:darkTheme'} />
+              </span>
             </Wrapper>
 
             <If condition={currentTheme === DARK_THEME_CLASSNAME}>
@@ -237,7 +250,9 @@ function ThemeSelectorSubMenu() {
             <Wrapper>
               <ComputerDesktopIcon className={'h-4'} />
 
-              <span>System</span>
+              <span>
+                <Trans i18nKey={'common:systemTheme'} />
+              </span>
             </Wrapper>
 
             <If condition={currentTheme === SYSTEM_THEME_CLASSNAME}>

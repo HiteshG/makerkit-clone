@@ -2,6 +2,7 @@
 
 import { useCallback, useState, useTransition } from 'react';
 
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 import Modal from '~/core/ui/Modal';
 import If from '~/core/ui/If';
@@ -18,7 +19,7 @@ const TransferOrganizationOwnershipModal: React.FC<{
 }> = ({ isOpen, setIsOpen, targetDisplayName, membershipId }) => {
   return (
     <Modal
-      heading={"Transfer Ownership"}
+      heading={<Trans i18nKey="organization:transferOwnership" />}
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
@@ -71,7 +72,19 @@ function TransferOrganizationOwnershipForm({
         <TransferOwnershipErrorAlert />
       </If>
 
-      <p>You are transferring ownership of the selected organization to <b>{ targetDisplayName }</b>. Your new role will be <b>Admin</b>.</p>
+      <p>
+        <Trans
+          i18nKey={'organization:transferOwnershipDisclaimer'}
+          values={{
+            member: targetDisplayName,
+          }}
+          components={{ b: <b /> }}
+        />
+      </p>
+
+      <p>
+        <Trans i18nKey={'common:modalConfirmationQuestion'} />
+      </p>
 
       <div className={'flex justify-end space-x-2'}>
         <Modal.CancelButton onClick={() => setIsOpen(false)} />
@@ -84,9 +97,9 @@ function TransferOrganizationOwnershipForm({
         >
           <If
             condition={pending}
-            fallback={"Transfer Ownership"}
+            fallback={<Trans i18nKey={'organization:transferOwnership'} />}
           >
-            Transferring ownership...
+            <Trans i18nKey={'organization:transferringOwnership'} />
           </If>
         </Button>
       </div>
@@ -100,10 +113,10 @@ function TransferOwnershipErrorAlert() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-        Sorry, we couldn&apos;t transfer ownership of your organization.
+        <Trans i18nKey={'organization:transferOrganizationErrorHeading'} />
       </Alert.Heading>
 
-      We encountered an error transferring ownership of your organization. Please try again.
+      <Trans i18nKey={'organization:transferOrganizationErrorMessage'} />
     </Alert>
   );
 }

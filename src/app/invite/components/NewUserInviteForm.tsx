@@ -10,6 +10,7 @@ import EmailPasswordSignUpContainer from '~/app/auth/components/EmailPasswordSig
 
 import If from '~/core/ui/If';
 import Button from '~/core/ui/Button';
+import Trans from '~/core/ui/Trans';
 
 import configuration from '~/configuration';
 import LoadingOverlay from '~/core/ui/LoadingOverlay';
@@ -64,7 +65,7 @@ function NewUserInviteForm(
               size={'sm'}
               onClick={() => setMode(Mode.SignIn)}
             >
-              I already have an account, I want to sign in instead
+              <Trans i18nKey={'auth:alreadyHaveAccountStatement'} />
             </Button>
           </div>
         </If>
@@ -79,7 +80,7 @@ function NewUserInviteForm(
               size={'sm'}
               onClick={() => setMode(Mode.SignUp)}
             >
-              I do not have an account, I want to sign up instead
+              <Trans i18nKey={'auth:doNotHaveAccountStatement'} />
             </Button>
           </div>
         </If>

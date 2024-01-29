@@ -5,6 +5,7 @@ import useMutation from 'swr/mutation';
 import { CheckIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 import Alert from '~/core/ui/Alert';
+import Trans from '~/core/ui/Trans';
 import Spinner from '~/core/ui/Spinner';
 import Heading from '~/core/ui/Heading';
 import Button from '~/core/ui/Button';
@@ -27,8 +28,6 @@ const CompleteOnboardingStep: React.FC<{
   const submitted = useRef(false);
   const { trigger, data: response, error } = mutation;
 
-  // we make a request to the server to complete the onboarding process
-  // as soon as the component is mounted.
   useEffect(() => {
     if (!submitted.current) {
       void trigger(data);
@@ -56,7 +55,7 @@ const CompleteOnboardingStep: React.FC<{
       </span>
 
       <span>
-        We&apos;re setting up your account. Please wait...
+        <Trans i18nKey={'onboarding:settingAccount'} />
       </span>
     </div>
   );
@@ -68,10 +67,10 @@ function ErrorState() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-        There was an error completing your onboarding.
+        <Trans i18nKey={'onboarding:errorAlertHeading'} />
       </Alert.Heading>
 
-      Sorry, something went wrong.
+      <Trans i18nKey={'common:genericError'} />
     </Alert>
   );
 }
@@ -101,7 +100,7 @@ function SuccessState(props: { returnUrl: string }) {
 
         <Heading type={3}>
           <span className={'font-semibold mr-4'}>
-            You&apos;re all set! You can now start using the app.
+            <Trans i18nKey={'onboarding:successStepHeading'} />
           </span>
           🎉
         </Heading>
@@ -113,7 +112,7 @@ function SuccessState(props: { returnUrl: string }) {
         >
           <span className={'flex space-x-2.5 items-center'}>
             <span>
-              Continue to your Dashboard
+              <Trans i18nKey={'onboarding:continue'} />
             </span>
 
             <ChevronRightIcon className={'h-4'} />

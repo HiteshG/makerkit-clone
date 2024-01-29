@@ -1,5 +1,8 @@
+import Trans from '~/core/ui/Trans';
+
 import Plans from './components/Plans';
 import PlansStatusAlertContainer from './components/PlanStatusAlertContainer';
+import { withI18n } from '~/i18n/with-i18n';
 import Heading from '~/core/ui/Heading';
 
 export const metadata = {
@@ -11,11 +14,11 @@ const SubscriptionSettingsPage = () => {
     <div className={'flex flex-col space-y-4 w-full'}>
       <div className={'flex flex-col px-2 space-y-1'}>
         <Heading type={4}>
-          Subscription
+          <Trans i18nKey={'common:subscriptionSettingsTabLabel'} />
         </Heading>
 
         <span className={'text-gray-500 dark:text-gray-400'}>
-          Manage your Subscription and Billing
+          <Trans i18nKey={'subscription:subscriptionTabSubheading'} />
         </span>
       </div>
 
@@ -26,4 +29,4 @@ const SubscriptionSettingsPage = () => {
   );
 };
 
-export default SubscriptionSettingsPage;
+export default withI18n(SubscriptionSettingsPage);

@@ -6,6 +6,7 @@ import Modal from '~/core/ui/Modal';
 import Button from '~/core/ui/Button';
 import Heading from '~/core/ui/Heading';
 import { TextFieldInput, TextFieldLabel } from '~/core/ui/TextField';
+import Trans from '~/core/ui/Trans';
 import ErrorBoundary from '~/core/ui/ErrorBoundary';
 import Alert from '~/core/ui/Alert';
 import { deleteUserAccountAction } from '~/lib/user/actions.server';
@@ -21,11 +22,11 @@ function DeleteProfileContainer() {
     <div className={'flex flex-col space-y-4'}>
       <div className={'flex flex-col space-y-1'}>
         <Heading type={6}>
-          Delete your Account
+          <Trans i18nKey={'profile:deleteAccount'} />
         </Heading>
 
         <p className={'text-gray-500 text-sm'}>
-          This will delete your account and the organizations you own. Furthermore, we will immediately cancel any active subscriptions. This action cannot be undone. You will be asked to confirm this action in the next step.
+          <Trans i18nKey={'profile:deleteAccountDescription'} />
         </p>
       </div>
 
@@ -39,10 +40,10 @@ function DeleteProfileContainer() {
 function DeleteProfileModal() {
   return (
     <Modal
-      heading={"Delete your Account"}
+      heading={<Trans i18nKey={'profile:deleteAccount'} />}
       Trigger={
         <Button data-cy={'delete-account-button'} variant={'destructive'}>
-          Delete your Account
+          <Trans i18nKey={'profile:deleteAccount'} />
         </Button>
       }
     >
@@ -63,17 +64,17 @@ function DeleteProfileForm() {
         <div className={'border-2 border-red-500 p-4 text-sm text-red-500'}>
           <div className={'flex flex-col space-y-2'}>
             <div>
-              This will delete your account and the organizations you own. Furthermore, we will immediately cancel any active subscriptions. This action cannot be undone. You will be asked to confirm this action in the next step.
+              <Trans i18nKey={'profile:deleteAccountDescription'} />
             </div>
 
             <div>
-              Are you sure you want to continue?
+              <Trans i18nKey={'common:modalConfirmationQuestion'} />
             </div>
           </div>
         </div>
 
         <TextFieldLabel>
-          Type DELETE to confirm
+          <Trans i18nKey={'profile:deleteProfileConfirmationInputLabel'} />
 
           <TextFieldInput
             data-cy={'delete-account-input-field'}
@@ -104,7 +105,7 @@ function DeleteAccountSubmitButton() {
       variant={'destructive'}
       loading={pending}
     >
-      Delete your Account
+      <Trans i18nKey={'profile:deleteAccount'} />
     </Button>
   );
 }
@@ -113,10 +114,10 @@ function DeleteProfileErrorAlert() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-        Sorry, we couldn&apos;t delete your account
+        <Trans i18nKey={'profile:deleteAccountErrorHeading'} />
       </Alert.Heading>
 
-      Sorry, something went wrong.
+      <Trans i18nKey={'common:genericError'} />
     </Alert>
   );
 }

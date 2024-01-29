@@ -4,6 +4,7 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 
 import CardButton from '~/core/ui/CardButton';
+import Trans from '~/core/ui/Trans';
 
 import CreateOrganizationModal from '~/app/dashboard/[organization]/components/organizations/CreateOrganizationModal';
 import CsrfTokenContext from '~/lib/contexts/csrf';
@@ -22,7 +23,7 @@ function NewOrganizationButtonContainer({
           <PlusIcon className={'h-6 w-6'} />
 
           <span className={'text-base font-medium'}>
-            New organization
+            <Trans i18nKey={'organization:createOrganizationDropdownLabel'} />
           </span>
         </span>
       </CardButton>

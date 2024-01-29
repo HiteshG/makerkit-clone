@@ -1,3 +1,4 @@
+import Trans from '~/core/ui/Trans';
 import { cva } from 'cva';
 
 import MembershipRole from '~/lib/organizations/types/membership-role';
@@ -24,7 +25,7 @@ const RoleBadge: React.FCC<{
   return (
     <Badge color={'custom'} size={'small'} className={className}>
       <span data-cy={'member-role-badge'}>
-        {data?.label}
+        <Trans i18nKey={data?.label} />
       </span>
     </Badge>
   );

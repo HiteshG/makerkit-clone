@@ -1,11 +1,13 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useMutation from 'swr/mutation';
 import { toast } from 'sonner';
 
 import UserSession from '~/core/session/types/user-session';
 import TextField from '~/core/ui/TextField';
+import Trans from '~/core/ui/Trans';
 import If from '~/core/ui/If';
 
 import Button from '~/core/ui/Button';
@@ -25,6 +27,7 @@ function UpdatePhoneNumberForm({
   onUpdate,
 }: UpdatePhoneNumberFormProps) {
   const { trigger, isMutating } = useUpdatePhoneNumber();
+  const { t } = useTranslation();
   const currentPhoneNumber = session.auth?.user?.phone ?? '';
 
   return (
@@ -41,9 +44,9 @@ function UpdatePhoneNumberForm({
         });
 
         return toast.promise(promise, {
-          loading: "Updating phone number...",
-          success: "Phone number successfully updated",
-          error: "Sorry, we weren't able to update your phone number",
+          loading: t(`profile:updatePhoneNumberLoading`),
+          success: t(`profile:updatePhoneNumberSuccess`),
+          error: t(`profile:updatePhoneNumberError`),
         });
       }}
       data-cy={'update-phone-number-form'}
@@ -51,7 +54,7 @@ function UpdatePhoneNumberForm({
       <div className={'flex flex-col space-y-4'}>
         <TextField>
           <TextField.Label>
-            Phone Number
+            <Trans i18nKey={'profile:phoneNumberLabel'} />
 
             <TextField.Input
               name={'phoneNumber'}
@@ -75,7 +78,7 @@ function UpdatePhoneNumberForm({
 
         <div>
           <Button loading={isMutating}>
-            Update Phone Number
+            <Trans i18nKey={'profile:updatePhoneNumber'} />
           </Button>
         </div>
       </div>
@@ -91,6 +94,7 @@ function RemovePhoneNumberButton({
   onSuccess: () => void;
 }>) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t } = useTranslation();
   const { trigger, error, isMutating } = useUpdatePhoneNumber();
 
   const onUnlinkPhoneNumber = useCallback(() => {
@@ -100,11 +104,11 @@ function RemovePhoneNumberButton({
     });
 
     return toast.promise(promise, {
-      loading: "Unlinking account...",
-      success: "Account successfully unlinked",
-      error: "Sorry, we couldn't unlink this account",
+      loading: t(`profile:unlinkActionLoading`),
+      success: t(`profile:unlinkActionSuccess`),
+      error: t(`profile:unlinkActionError`),
     });
-  }, [trigger, onSuccess]);
+  }, [trigger, t, onSuccess]);
 
   return (
     <>
@@ -115,22 +119,22 @@ function RemovePhoneNumberButton({
         onClick={() => setIsModalOpen(true)}
       >
         <span className={'text-xs font-normal'}>
-          Remove Phone Number
+          <Trans i18nKey={'profile:removePhoneNumber'} />
         </span>
       </Button>
 
       <Modal
-        heading={"Remove Phone Number"}
+        heading={<Trans i18nKey={'profile:removePhoneNumber'} />}
         isOpen={isModalOpen}
         setIsOpen={setIsModalOpen}
       >
         <div className={'flex flex-col space-y-2.5 text-sm'}>
           <div>
-            You&apos;re about to remove your phone number. You will not be able to use it to login to your account.
+            <Trans i18nKey={'profile:confirmRemovePhoneNumberDescription'} />
           </div>
 
           <div>
-            Are you sure you want to continue?
+            <Trans i18nKey={'common:modalConfirmationQuestion'} />
           </div>
 
           <AuthErrorMessage error={error} />
@@ -144,7 +148,7 @@ function RemovePhoneNumberButton({
               loading={isMutating}
               onClick={onUnlinkPhoneNumber}
             >
-              Yes, remove phone number
+              <Trans i18nKey={'profile:confirmRemovePhoneNumber'} />
             </Button>
           </div>
         </div>

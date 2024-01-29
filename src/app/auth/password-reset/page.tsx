@@ -2,8 +2,10 @@ import Link from 'next/link';
 
 import configuration from '~/configuration';
 import Heading from '~/core/ui/Heading';
+import Trans from '~/core/ui/Trans';
 
 import PasswordResetRequestContainer from '~/app/auth/components/PasswordResetRequestContainer';
+import { withI18n } from '~/i18n/with-i18n';
 
 export const metadata = {
   title: 'Password Reset Request',
@@ -14,7 +16,7 @@ function PasswordResetPage() {
     <>
       <div>
         <Heading type={5}>
-          Reset Password
+          <Trans i18nKey={'auth:passwordResetLabel'} />
         </Heading>
       </div>
 
@@ -24,14 +26,14 @@ function PasswordResetPage() {
         <div className={'flex justify-center text-xs'}>
           <p className={'flex space-x-1'}>
             <span>
-              Password recovered?
+              <Trans i18nKey={'auth:passwordRecoveredQuestion'} />
             </span>
 
             <Link
               className={'text-primary-800 hover:underline dark:text-primary'}
               href={configuration.paths.signIn}
             >
-              Sign In
+              <Trans i18nKey={'auth:signIn'} />
             </Link>
           </p>
         </div>
@@ -40,4 +42,4 @@ function PasswordResetPage() {
   );
 }
 
-export default PasswordResetPage;
+export default withI18n(PasswordResetPage);

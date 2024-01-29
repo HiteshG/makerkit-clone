@@ -6,6 +6,7 @@ import type { OrganizationSubscription } from '~/lib/organizations/types/organiz
 
 import Heading from '~/core/ui/Heading';
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
 
 import PricingTable from '~/components/PricingTable';
 import SubscriptionStatusBadge from '~/app/dashboard/[organization]/components/organizations/SubscriptionStatusBadge';
@@ -97,7 +98,10 @@ function RenewStatusDescription(
         <XCircleIcon className={'h-5 text-yellow-700'} />
 
         <span>
-          Your subscription is scheduled to be canceled on { props.dates.endDate }.
+          <Trans
+            i18nKey={'subscription:cancelAtPeriodEndDescription'}
+            values={props.dates}
+          />
         </span>
       </If>
 
@@ -105,7 +109,10 @@ function RenewStatusDescription(
         <CheckCircleIcon className={'h-5 text-green-700'} />
 
         <span>
-          Your subscription is scheduled to be renewed on { props.dates.endDate }
+          <Trans
+            i18nKey={'subscription:renewAtPeriodEndDescription'}
+            values={props.dates}
+          />
         </span>
       </If>
     </span>

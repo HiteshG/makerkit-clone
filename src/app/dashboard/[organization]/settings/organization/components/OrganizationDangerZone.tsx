@@ -13,6 +13,7 @@ import {
   TextFieldLabel,
 } from '~/core/ui/TextField';
 
+import Trans from '~/core/ui/Trans';
 import ErrorBoundary from '~/core/ui/ErrorBoundary';
 import Alert from '~/core/ui/Alert';
 
@@ -49,24 +50,29 @@ function DeleteOrganizationContainer() {
     <div className={'flex flex-col space-y-4'}>
       <div className={'flex flex-col space-y-1'}>
         <Heading type={6}>
-          Delete Organization
+          <Trans i18nKey={'organization:deleteOrganization'} />
         </Heading>
 
         <p className={'text-gray-500 text-sm'}>
-          This action cannot be undone. All data associated with this organization will be deleted.
+          <Trans
+            i18nKey={'organization:deleteOrganizationDescription'}
+            values={{
+              organizationName: organization?.name,
+            }}
+          />
         </p>
       </div>
 
       <div>
         <Modal
-          heading={"Delete Organization"}
+          heading={<Trans i18nKey={'organization:deletingOrganization'} />}
           Trigger={
             <Button
               data-cy={'delete-organization-button'}
               type={'button'}
               variant={'destructive'}
             >
-              Delete Organization
+              <Trans i18nKey={'organization:deleteOrganization'} />
             </Button>
           }
         >
@@ -94,18 +100,23 @@ function DeleteOrganizationForm({ name, id }: { name: string; id: number }) {
             }
           >
             <div>
-              You are deleting the organization { name }. This action cannot be undone.
+              <Trans
+                i18nKey={'organization:deleteOrganizationDisclaimer'}
+                values={{
+                  organizationName: name,
+                }}
+              />
             </div>
 
             <div className={'text-sm'}>
-              Are you sure you want to continue?
+              <Trans i18nKey={'common:modalConfirmationQuestion'} />
             </div>
           </div>
 
           <input type="hidden" value={id} name={'id'} />
 
           <TextFieldLabel>
-            Organization Name
+            <Trans i18nKey={'organization:organizationNameInputLabel'} />
 
             <TextFieldInput
               name={'name'}
@@ -118,7 +129,7 @@ function DeleteOrganizationForm({ name, id }: { name: string; id: number }) {
             />
 
             <TextFieldHint>
-              Type the name of the organization to confirm
+              <Trans i18nKey={'organization:deleteOrganizationInputField'} />
             </TextFieldHint>
           </TextFieldLabel>
         </div>
@@ -140,7 +151,7 @@ function DeleteOrganizationSubmitButton() {
       loading={pending}
       variant={'destructive'}
     >
-      Delete Organization
+      <Trans i18nKey={'organization:deleteOrganization'} />
     </Button>
   );
 }
@@ -157,19 +168,26 @@ function LeaveOrganizationContainer() {
   return (
     <div className={'flex flex-col space-y-4'}>
       <p>
-        You will no longer have access to this organization.
+        <Trans
+          i18nKey={'organization:leaveOrganizationDescription'}
+          values={{
+            organizationName: name,
+          }}
+        />
       </p>
 
       <div>
         <Modal
-          heading={"Leaving Organization"}
+          heading={
+            <Trans i18nKey={'organization:leavingOrganizationModalHeading'} />
+          }
           Trigger={
             <Button
               data-cy={'leave-organization-button'}
               type={'button'}
               variant={'destructive'}
             >
-              Leave Organization
+              <Trans i18nKey={'organization:leaveOrganization'} />
             </Button>
           }
         >
@@ -180,7 +198,12 @@ function LeaveOrganizationContainer() {
               <div className={'flex flex-col space-y-4'}>
                 <div>
                   <div>
-                    You are leaving the organization {organization?.name}. You will no longer have access to it.
+                    <Trans
+                      i18nKey={'organization:leaveOrganizationDisclaimer'}
+                      values={{
+                        organizationName: organization?.name,
+                      }}
+                    />
                   </div>
                 </div>
 
@@ -205,7 +228,7 @@ function LeaveOrganizationSubmitButton() {
       loading={pending}
       variant={'destructive'}
     >
-      Leave Organization
+      <Trans i18nKey={'organization:leaveOrganization'} />
     </Button>
   );
 }
@@ -214,10 +237,10 @@ function LeaveOrganizationErrorAlert() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-        Sorry, we couldn&apos;t leave your organization.
+        <Trans i18nKey={'organization:leaveOrganizationErrorHeading'} />
       </Alert.Heading>
 
-      Sorry, something went wrong.
+      <Trans i18nKey={'common:genericError'} />
     </Alert>
   );
 }
@@ -226,10 +249,10 @@ function DeleteOrganizationErrorAlert() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-      Sorry, we couldn&apos;t delete your organization.
+        <Trans i18nKey={'organization:deleteOrganizationErrorHeading'} />
       </Alert.Heading>
 
-      Sorry, something went wrong.
+      <Trans i18nKey={'common:genericError'} />
     </Alert>
   );
 }

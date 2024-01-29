@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 
@@ -9,6 +10,7 @@ import useUpdateProfileMutation from '~/lib/user/hooks/use-update-profile';
 import Button from '~/core/ui/Button';
 import TextField from '~/core/ui/TextField';
 import ImageUploadInput from '~/core/ui/ImageUploadInput';
+import Trans from '~/core/ui/Trans';
 import useSupabase from '~/core/hooks/use-supabase';
 
 import type UserSession from '~/core/session/types/user-session';
@@ -28,6 +30,8 @@ function UpdateProfileForm({
   const updateProfileMutation = useUpdateProfileMutation();
 
   const client = useSupabase();
+  const { t } = useTranslation();
+
   const currentPhotoURL = session.data?.photoUrl ?? '';
   const currentDisplayName = session?.data?.displayName ?? '';
 
@@ -98,9 +102,9 @@ function UpdateProfileForm({
     });
 
     return toast.promise(promise, {
-      success: "Profile successfully updated",
-      error: "Encountered an error. Please try again",
-      loading: "Updating profile...",
+      success: t(`profile:updateProfileSuccess`),
+      error: t(`profile:updateProfileError`),
+      loading: t(`profile:updateProfileLoading`),
     });
   };
 
@@ -129,7 +133,7 @@ function UpdateProfileForm({
       <div className={'flex flex-col space-y-4'}>
         <TextField>
           <TextField.Label>
-            Your Name
+            <Trans i18nKey={'profile:displayNameLabel'} />
 
             <TextField.Input
               {...displayNameControl}
@@ -143,7 +147,7 @@ function UpdateProfileForm({
 
         <TextField>
           <TextField.Label>
-            Your Photo
+            <Trans i18nKey={'profile:profilePictureLabel'} />
 
             <ImageUploadInput
               {...photoURLControl}
@@ -151,14 +155,14 @@ function UpdateProfileForm({
               onClear={() => setValue('photoURL', '')}
               image={currentPhotoURL}
             >
-              Click here to upload an image
+              <Trans i18nKey={'common:imageInputLabel'} />
             </ImageUploadInput>
           </TextField.Label>
         </TextField>
 
         <TextField>
           <TextField.Label>
-            Email Address
+            <Trans i18nKey={'profile:emailLabel'} />
 
             <TextField.Input disabled value={email} />
           </TextField.Label>
@@ -171,7 +175,7 @@ function UpdateProfileForm({
               href={'../' + configuration.paths.settings.email}
             >
               <span className={'text-xs font-normal'}>
-                Update Email Address
+                <Trans i18nKey={'profile:updateEmailSubmitLabel'} />
               </span>
             </Button>
           </div>
@@ -182,7 +186,7 @@ function UpdateProfileForm({
             className={'w-full md:w-auto'}
             loading={updateProfileMutation.isMutating}
           >
-            Update Profile
+            <Trans i18nKey={'profile:updateProfileSubmitLabel'} />
           </Button>
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import TopLoadingBarIndicator from '~/components/TopLoadingBarIndicator';
+import Trans from '~/core/ui/Trans';
 import LoadingOverlay from '~/core/ui/LoadingOverlay';
 
 function GlobalLoadingIndicator({
@@ -11,7 +12,7 @@ function GlobalLoadingIndicator({
   displayLogo?: boolean;
   fullPage?: boolean;
 }>) {
-  const Text = children ?? "Loading. Please wait...";
+  const Text = children ?? <Trans i18nKey={'common:loading'} />;
 
   return (
     <>

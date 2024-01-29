@@ -3,6 +3,7 @@
 import useCurrentOrganization from '~/lib/organizations/hooks/use-current-organization';
 
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
 
 import SubscriptionCard from './SubscriptionCard';
 
@@ -35,11 +36,11 @@ const Plans: React.FC = () => {
         <If condition={customerId}>
           <div className={'flex flex-col space-y-2'}>
             <BillingPortalRedirectButton customerId={customerId as string}>
-              Go to Customer Portal
+              <Trans i18nKey={'subscription:manageBilling'} />
             </BillingPortalRedirectButton>
 
             <span className={'text-xs text-gray-500 dark:text-gray-400'}>
-              Visit your Customer Portal to manage your subscription and billing.
+              <Trans i18nKey={'subscription:manageBillingDescription'} />
             </span>
           </div>
         </If>

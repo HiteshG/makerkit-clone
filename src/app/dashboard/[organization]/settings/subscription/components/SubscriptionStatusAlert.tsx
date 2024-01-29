@@ -1,6 +1,7 @@
 import type { OrganizationSubscription } from '~/lib/organizations/types/organization-subscription';
 
 import Alert from '~/core/ui/Alert';
+import Trans from '~/core/ui/Trans';
 
 function SubscriptionStatusAlert(
   props: React.PropsWithChildren<{
@@ -19,38 +20,38 @@ function SubscriptionStatusAlert(
 
   switch (status) {
     case 'active':
-      heading = 'Your subscription is active';
-      message = 'Your subscription is active. You can manage your subscription and billing in the Customer Portal.';
+      heading = 'subscription:status.active.heading';
+      message = 'subscription:status.active.description';
       type = 'success';
       break;
     case 'trialing':
-      heading = `You're on a trial`;
-      message = `Your trial will end on ${ props.values.trialEndDate }.`;
+      heading = 'subscription:status.trialing.heading';
+      message = 'subscription:status.trialing.description';
       type = 'success';
       break;
     case 'canceled':
-      heading = 'Your subscription is canceled';
-      message = `Your subscription is canceled. It is scheduled to end on ${ props.values.trialEndDate }.`;
+      heading = 'subscription:status.canceled.heading';
+      message = 'subscription:status.canceled.description';
       type = 'warn';
       break;
     case 'incomplete':
-      heading = `We're waiting for your payment`;
-      message = `We're waiting for your payment to go through. Please bear with us.`;
+      heading = 'subscription:status.incomplete.heading';
+      message = 'subscription:status.incomplete.description';
       type = 'warn';
       break;
     case 'incomplete_expired':
-      heading = `Your payment has expired`;
-      message = `Your payment has expired. Please update your payment method.`;
+      heading = 'subscription:status.incomplete_expired.heading';
+      message = 'subscription:status.incomplete_expired.description';
       type = 'error';
       break;
     case 'unpaid':
-      heading = `Your invoice is unpaid`;
-      message = `Your invoice is unpaid. Please update your payment method.`;
+      heading = 'subscription:status.unpaid.heading';
+      message = 'subscription:status.unpaid.description';
       type = 'error';
       break;
     case 'past_due':
-      heading = `Your invoice is past due`;
-      heading = `Your invoice is past due. Please update your payment method.`;
+      heading = 'subscription:status.past_due.heading';
+      heading = 'subscription:status.past_due.description';
       type = 'error';
 
       break;
@@ -61,11 +62,11 @@ function SubscriptionStatusAlert(
   return (
     <Alert type={type}>
       <Alert.Heading>
-        {heading}
+        <Trans i18nKey={heading} />
       </Alert.Heading>
 
       <span className={'block'}>
-        {message}
+        <Trans i18nKey={message} values={props.values} />
       </span>
     </Alert>
   );

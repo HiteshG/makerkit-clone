@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import VerificationCodeInput from '~/app/auth/components/VerificationCodeInput';
 
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 import If from '~/core/ui/If';
 import { TextFieldInput, TextFieldLabel } from '~/core/ui/TextField';
@@ -21,8 +22,6 @@ function EmailOtpContainer({
 }: React.PropsWithChildren<{
   inviteCode?: string;
   shouldCreateUser: boolean;
-  // providing a callback will disable the redirect to the app home page
-  // so you can hande the redirect yourself
   onSuccess?: () => void;
 }>) {
   const [email, setEmail] = useState('');
@@ -94,9 +93,9 @@ function VerifyOtpForm({
 
         <Button loading={verifyOtpMutation.isMutating} disabled={!verifyCode}>
           {verifyOtpMutation.isMutating ? (
-            "Verifying code..."
+            <Trans i18nKey={'profile:verifyingCode'} />
           ) : (
-            "Submit Verification Code"
+            <Trans i18nKey={'profile:submitVerificationCode'} />
           )}
         </Button>
       </div>
@@ -133,16 +132,16 @@ function EmailOtpForm({
     >
       <div className={'flex flex-col space-y-4'}>
         <TextFieldLabel>
-          Email Address
+          <Trans i18nKey={'auth:emailAddress'} />
           <TextFieldInput name={'email'} type={'email'} placeholder={''} />
         </TextFieldLabel>
 
         <Button loading={signInWithOtpMutation.isMutating}>
           <If
             condition={signInWithOtpMutation.isMutating}
-            fallback={"Get code to your Email"}
+            fallback={<Trans i18nKey={'auth:sendEmailCode'} />}
           >
-            Sending code...
+            <Trans i18nKey={'auth:sendingEmailCode'} />
           </If>
         </Button>
       </div>

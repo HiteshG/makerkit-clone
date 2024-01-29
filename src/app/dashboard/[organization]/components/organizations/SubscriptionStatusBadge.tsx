@@ -1,3 +1,4 @@
+import Trans from '~/core/ui/Trans';
 import type { OrganizationSubscription } from '~/lib/organizations/types/organization-subscription';
 import { Tooltip, TooltipTrigger, TooltipContent } from '~/core/ui/Tooltip';
 import Badge from '~/core/ui/Badge';
@@ -13,54 +14,52 @@ function SubscriptionStatusBadge({
 
   const status = subscription?.status ?? 'free';
 
-  const dates = getDates(subscription);
-
   switch (status) {
     case 'active':
-      label = 'Active';
-      description = "Your subscription is active. You can manage your subscription and billing in the Customer Portal.";
+      label = 'subscription:status.active.label';
+      description = 'subscription:status.active.description';
       type = 'success';
       break;
 
     case 'trialing':
-      label = 'Trial';
-      description = `Your trial will end on ${ dates.trialEndDate }.`;
+      label = 'subscription:status.trialing.label';
+      description = 'subscription:status.trialing.description';
       type = 'success';
       break;
 
     case 'canceled':
-      label = 'Canceled';
-      description = `Your subscription is canceled. It is scheduled to end on ${ dates.endDate }.`;
+      label = 'subscription:status.canceled.label';
+      description = 'subscription:status.canceled.description';
       type = 'warn';
       break;
 
     case 'incomplete':
-      label = 'Incomplete';
-      description = `We're waiting for your payment to go through. Please bear with us.`;
+      label = 'subscription:status.incomplete.label';
+      description = 'subscription:status.incomplete.description';
       type = 'warn';
       break;
 
     case 'incomplete_expired':
-      label = 'Expired';
-      description = 'Your payment has expired. Please update your payment method.';
+      label = 'subscription:status.incomplete_expired.label';
+      description = 'subscription:status.incomplete_expired.description';
       type = 'error';
       break;
 
     case 'unpaid':
-      label = 'Unpaid';
-      description = 'Your invoice is unpaid. Please update your payment method.';
+      label = 'subscription:status.unpaid.label';
+      description = 'subscription:status.unpaid.description';
       type = 'error';
       break;
 
     case 'past_due':
-      label = 'Past Due';
-      description = 'Your invoice is past due. Please update your payment method.';
+      label = 'subscription:status.past_due.label';
+      description = 'subscription:status.past_due.description';
       type = 'error';
       break;
 
     default:
-      label = 'Free Plan';
-      description = `You're on a free plan. You can upgrade to a paid plan at any time.`;
+      label = 'subscription:status.free.label';
+      description = 'subscription:status.free.description';
       type = 'success';
       break;
   }
@@ -69,11 +68,13 @@ function SubscriptionStatusBadge({
     <Tooltip>
       <TooltipTrigger>
         <Badge size={'small'} color={type}>
-          {label}
+          <Trans i18nKey={label} />
         </Badge>
       </TooltipTrigger>
 
-      {description}
+      <TooltipContent>
+        <Trans i18nKey={description} values={getDates(subscription)} />
+      </TooltipContent>
     </Tooltip>
   );
 }

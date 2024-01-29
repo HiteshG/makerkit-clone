@@ -1,4 +1,6 @@
+import { withI18n } from '~/i18n/with-i18n';
 import { Section, SectionBody, SectionHeader } from '~/core/ui/Section';
+import Trans from '~/core/ui/Trans';
 import UpdatePasswordFormContainer from '../components/UpdatePasswordFormContainer';
 
 export const metadata = {
@@ -9,8 +11,8 @@ const ProfilePasswordSettingsPage = () => {
   return (
     <Section>
       <SectionHeader
-        title={"Password"}
-        description={"Update your password"}
+        title={<Trans i18nKey={'profile:passwordTab'} />}
+        description={<Trans i18nKey={'profile:passwordTabSubheading'} />}
       />
       <SectionBody>
         <UpdatePasswordFormContainer />
@@ -19,4 +21,4 @@ const ProfilePasswordSettingsPage = () => {
   );
 };
 
-export default ProfilePasswordSettingsPage;
+export default withI18n(ProfilePasswordSettingsPage);

@@ -1,5 +1,6 @@
 'use client';
 
+import Trans from '~/core/ui/Trans';
 import { SidebarItem, SidebarDivider, SidebarGroup } from '~/core/ui/Sidebar';
 
 import createNavigationConfig from '~/navigation.config';
@@ -20,7 +21,7 @@ function AppSidebarNavigation({
           return (
             <SidebarGroup
               key={item.label}
-              label={item.label}
+              label={<Trans i18nKey={item.label} defaults={item.label} />}
               collapsible={item.collapsible}
               collapsed={item.collapsed}
             >
@@ -32,7 +33,7 @@ function AppSidebarNavigation({
                     path={child.path}
                     Icon={child.Icon}
                   >
-                    {child.label}
+                    <Trans i18nKey={child.label} defaults={child.label} />
                   </SidebarItem>
                 );
               })}
@@ -47,7 +48,7 @@ function AppSidebarNavigation({
             path={item.path}
             Icon={item.Icon}
           >
-            {item.label}
+            <Trans i18nKey={item.label} defaults={item.label} />
           </SidebarItem>
         );
       })}

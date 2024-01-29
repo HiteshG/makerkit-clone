@@ -2,6 +2,7 @@
 
 import { useCallback, useContext, useEffect } from 'react';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import type { SupabaseClient } from '@supabase/supabase-js';
 
@@ -12,6 +13,7 @@ import Button from '~/core/ui/Button';
 import TextField from '~/core/ui/TextField';
 import ImageUploadInput from '~/core/ui/ImageUploadInput';
 import Label from '~/core/ui/Label';
+import Trans from '~/core/ui/Trans';
 
 import useSupabase from '~/core/hooks/use-supabase';
 import type Organization from '~/lib/organizations/types/organization';
@@ -21,6 +23,7 @@ const UpdateOrganizationForm = () => {
 
   const { organization, setOrganization } = useContext(OrganizationContext);
   const updateOrganizationMutation = useUpdateOrganizationMutation();
+  const { t } = useTranslation('organization');
 
   const currentOrganizationName = organization?.name ?? '';
   const currentLogoUrl = organization?.logoURL || null;
@@ -37,7 +40,7 @@ const UpdateOrganizationForm = () => {
       const organizationId = organization?.id;
 
       if (!organizationId) {
-        const errorMessage = "Could not update Organization. Please try again.";
+        const errorMessage = t(`updateOrganizationErrorMessage`);
 
         return toast.error(errorMessage);
       }
@@ -55,7 +58,7 @@ const UpdateOrganizationForm = () => {
           logo: logoFile,
           organizationId,
         }).catch(() => {
-          toast.error("Could not update Logo. Please try again.");
+          toast.error(t(`updateLogoErrorMessage`));
 
           return null;
         });
@@ -113,9 +116,9 @@ const UpdateOrganizationForm = () => {
         });
 
       toast.promise(promise, {
-        loading: "Updating Organization...",
-        success: "Organization successfully updated",
-        error: "Could not update Organization. Please try again.",
+        loading: t(`updateOrganizationLoadingMessage`),
+        success: t(`updateOrganizationSuccessMessage`),
+        error: t(`updateOrganizationErrorMessage`),
       });
     },
     [
@@ -123,6 +126,7 @@ const UpdateOrganizationForm = () => {
       getValues,
       currentLogoUrl,
       updateOrganizationMutation,
+      t,
       client,
       setOrganization,
     ],
@@ -151,7 +155,7 @@ const UpdateOrganizationForm = () => {
       <div className={'flex flex-col space-y-4'}>
         <TextField>
           <TextField.Label>
-            Organization Name
+            <Trans i18nKey={'organization:organizationNameInputLabel'} />
 
             <TextField.Input
               {...nameControl}
@@ -163,7 +167,7 @@ const UpdateOrganizationForm = () => {
         </TextField>
 
         <Label>
-          Organization Logo
+          <Trans i18nKey={'organization:organizationLogoInputLabel'} />
 
           <ImageUploadInput
             {...logoControl}
@@ -171,7 +175,7 @@ const UpdateOrganizationForm = () => {
             image={currentLogoUrl}
             onClear={() => setValue('logoURL', '')}
           >
-            Click here to upload an image
+            <Trans i18nKey={'common:imageInputLabel'} />
           </ImageUploadInput>
         </Label>
 
@@ -181,7 +185,7 @@ const UpdateOrganizationForm = () => {
             data-cy={'update-organization-submit-button'}
             loading={updateOrganizationMutation.isMutating}
           >
-            Update Organization
+            <Trans i18nKey={'organization:updateOrganizationSubmitLabel'} />
           </Button>
         </div>
       </div>

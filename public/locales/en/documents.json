@@ -1,0 +1,12 @@
+{
+  "addDocument": "Add Document",
+  "addDocumentDescription": "Upload a PDF document from your computer to chat with it",
+  "view": "View",
+  "name": "Name",
+  "details": "Details",
+  "title": "Title",
+  "confirm": "Confirm",
+  "createdAt": "Created At",
+  "uploadDocument": "Upload your Document",
+  "uploadDocumentDescription": "Upload a PDF document, and our magical AI will do the rest."
+}

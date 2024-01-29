@@ -7,6 +7,7 @@ import { UserPlusIcon } from '@heroicons/react/24/outline';
 import If from '~/core/ui/If';
 import Badge from '~/core/ui/Badge';
 import RoleBadge from './RoleBadge';
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 import { TextFieldInput } from '~/core/ui/TextField';
 
@@ -17,6 +18,7 @@ import type MembershipRole from '~/lib/organizations/types/membership-role';
 import ProfileAvatar from '~/components/ProfileAvatar';
 import useUserId from '~/core/hooks/use-user-id';
 import useUserCanInviteUsers from '~/lib/organizations/hooks/use-user-can-invite-users';
+import { useTranslation } from 'react-i18next';
 
 function OrganizationMembersList({
   members,
@@ -30,6 +32,7 @@ function OrganizationMembersList({
 }>) {
   const currentUserId = useUserId();
   const [search, setSearch] = useState('');
+  const { t } = useTranslation('organization');
 
   const currentUser = useMemo(() => {
     return members.find((member) => {
@@ -53,7 +56,7 @@ function OrganizationMembersList({
       >
         <TextFieldInput
           value={search}
-          placeholder={"Search members"}
+          placeholder={t('organization:searchMembersPlaceholder')}
           className={'w-full'}
           onInput={(event: React.FormEvent<HTMLInputElement>) =>
             setSearch(event.currentTarget.value)
@@ -107,7 +110,7 @@ function OrganizationMembersList({
 
                 <If condition={isCurrentUser}>
                   <Badge color={'info'} size={'small'}>
-                    You
+                    <Trans i18nKey={'organization:youBadgeLabel'} />
                   </Badge>
                 </If>
               </div>
@@ -155,7 +158,7 @@ function InviteMembersLinkButton(
       <UserPlusIcon className="h-5 mr-2" />
 
       <span>
-        Invite Members
+        <Trans i18nKey={'organization:inviteMembersButtonLabel'} />
       </span>
     </Button>
   );

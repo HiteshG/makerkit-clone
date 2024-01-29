@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
 import { Fragment } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 
@@ -11,6 +12,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '~/core/ui/Tooltip';
 import TextField from '~/core/ui/TextField';
 import Button from '~/core/ui/Button';
 import IconButton from '~/core/ui/IconButton';
+import Trans from '~/core/ui/Trans';
 
 import MembershipRoleSelector from './MembershipRoleSelector';
 
@@ -27,6 +29,8 @@ const InviteMembersForm = ({
   currentUserRole: Maybe<MembershipRole>;
   SubmitButton: React.ReactNode;
 }) => {
+  const { t } = useTranslation('organization');
+
   const { register, handleSubmit, setValue, control, clearErrors, watch } =
     useInviteMembersForm();
 
@@ -67,13 +71,13 @@ const InviteMembersForm = ({
               const invalid = getFormValidator(watchFieldArray)(value, index);
 
               if (invalid) {
-                return "You have already entered this email address";
+                return t(`duplicateInviteEmailError`);
               }
 
               const isSameAsCurrentUserEmail = currentUserEmail === value;
 
               if (isSameAsCurrentUserEmail) {
-                return "Hey, that's your email!";
+                return t(`invitingOwnAccountError`);
               }
 
               return true;
@@ -115,7 +119,7 @@ const InviteMembersForm = ({
                         type={'button'}
                         disabled={fields.length <= 1}
                         data-cy={'remove-invite-button'}
-                        label={"Remove invite"}
+                        label={t('removeInviteButtonLabel')}
                         onClick={() => {
                           remove(index);
                           clearErrors(emailInputName);
@@ -126,7 +130,7 @@ const InviteMembersForm = ({
                     </TooltipTrigger>
 
                     <TooltipContent>
-                      {"Remove invite"}
+                      {t('removeInviteButtonLabel')}
                     </TooltipContent>
                   </Tooltip>
                 </div>
@@ -147,7 +151,7 @@ const InviteMembersForm = ({
               <PlusCircleIcon className={'h-5'} />
 
               <span>
-                Add another one
+                <Trans i18nKey={'organization:addAnotherMemberButtonLabel'} />
               </span>
             </span>
           </Button>

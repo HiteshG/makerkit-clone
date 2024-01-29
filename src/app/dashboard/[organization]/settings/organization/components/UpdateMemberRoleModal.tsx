@@ -1,4 +1,5 @@
 import { useCallback, useState, useTransition } from 'react';
+import Trans from '~/core/ui/Trans';
 
 import Button from '~/core/ui/Button';
 import Modal from '~/core/ui/Modal';
@@ -19,7 +20,7 @@ const UpdateMemberRoleModal: React.FCC<{
 }> = ({ isOpen, setIsOpen, memberRole, membershipId }) => {
   return (
     <Modal
-      heading={"Update Member's Role"}
+      heading={<Trans i18nKey={'organization:updateMemberRoleModalHeading'} />}
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
@@ -82,7 +83,7 @@ function UpdateMemberForm({
           loading={isSubmitting}
           onClick={onRoleUpdated}
         >
-          Update Role
+          <Trans i18nKey={'organization:updateRoleSubmitLabel'} />
         </Button>
       </div>
     </div>
@@ -95,10 +96,10 @@ function UpdateRoleErrorAlert() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-        Sorry, we couldn&apos;t update the role of the selected member.
+        <Trans i18nKey={'organization:updateRoleErrorHeading'} />
       </Alert.Heading>
 
-      We encountered an error updating the role of the selected member. Please try again.
+      <Trans i18nKey={'organization:updateRoleErrorMessage'} />
     </Alert>
   );
 }

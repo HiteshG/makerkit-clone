@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from '~/core/ui/Select';
 
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 
 const DarkModeToggle = () => {
@@ -82,7 +83,9 @@ const DarkModeToggle = () => {
             <span className={'flex items-center space-x-2.5'}>
               <SunIcon className={'h-4'} />
 
-              <span>Light</span>
+              <span>
+                <Trans i18nKey={'common:lightTheme'} />
+              </span>
             </span>
           </SelectItem>
 
@@ -93,7 +96,9 @@ const DarkModeToggle = () => {
             <span className={'flex items-center space-x-2.5'}>
               <MoonIcon className={'h-4'} />
 
-              <span>Dark</span>
+              <span>
+                <Trans i18nKey={'common:darkTheme'} />
+              </span>
             </span>
           </SelectItem>
 
@@ -104,7 +109,9 @@ const DarkModeToggle = () => {
             <span className={'flex items-center space-x-2.5'}>
               <ComputerDesktopIcon className={'h-4'} />
 
-              <span>System</span>
+              <span>
+                <Trans i18nKey={'common:systemTheme'} />
+              </span>
             </span>
           </SelectItem>
         </SelectGroup>

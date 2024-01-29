@@ -2,6 +2,7 @@
 
 import useMutation from 'swr/mutation';
 
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 import useSupabase from '~/core/hooks/use-supabase';
 import { TextFieldInput, TextFieldLabel } from '~/core/ui/TextField';
@@ -13,7 +14,7 @@ function ResendLinkForm() {
   if (resendLink.data && !resendLink.isMutating) {
     return (
       <Alert type={'success'}>
-        We sent you a new link to your email! Follow the link to sign in.
+        <Trans i18nKey={'auth:resendLinkSuccess'} defaults={'Success!'} />
       </Alert>
     );
   }
@@ -30,12 +31,12 @@ function ResendLinkForm() {
       }}
     >
       <TextFieldLabel>
-        Email Address
+        <Trans i18nKey={'common:emailAddress'} />
         <TextFieldInput name={'email'} required placeholder={''} />
       </TextFieldLabel>
 
       <Button loading={resendLink.isMutating}>
-        Resend Link
+        <Trans i18nKey={'auth:resendLink'} defaults={'Resend Link'} />
       </Button>
     </form>
   );

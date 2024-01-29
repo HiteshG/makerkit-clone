@@ -7,6 +7,7 @@ import { CheckCircleIcon, SparklesIcon } from '@heroicons/react/24/outline';
 import Heading from '~/core/ui/Heading';
 import Button from '~/core/ui/Button';
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
 
 import configuration from '~/configuration';
 
@@ -197,7 +198,10 @@ function FeaturesList(
       {props.features.map((feature) => {
         return (
           <ListItem key={feature}>
-            {feature}
+            <Trans
+              i18nKey={`common:plans.features.${feature}`}
+              defaults={feature}
+            />
           </ListItem>
         );
       })}
@@ -267,7 +271,9 @@ function PlansSwitcher(
                 <CheckCircleIcon className={'h-4'} />
               </If>
 
-              <span>{plan}</span>
+              <span>
+                <Trans i18nKey={`common:plans.${plan}`} defaults={plan} />
+              </span>
             </span>
           </Button>
         );
@@ -286,6 +292,8 @@ function DefaultCheckoutButton(
     props.plan.href ??
     `${configuration.paths.signUp}?utm_source=${props.plan.stripePriceId}`;
 
+  const label = props.plan.label ?? 'common:getStarted';
+
   return (
     <div className={'bottom-0 left-0 w-full p-0'}>
       <Button
@@ -293,7 +301,7 @@ function DefaultCheckoutButton(
         href={linkHref}
         variant={props.recommended ? 'default' : 'outline'}
       >
-        Get Started
+        <Trans i18nKey={label} defaults={label} />
       </Button>
     </div>
   );

@@ -25,6 +25,7 @@ import {
 } from '~/core/ui/Select';
 
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
 import { Avatar, AvatarFallback } from '~/core/ui/Avatar';
 
 import UserSessionContext from '~/core/session/contexts/user-session';
@@ -85,7 +86,7 @@ const OrganizationsSelector = ({ displayName = true }) => {
 
           <SelectGroup>
             <SelectLabel>
-              Your Organizations
+              <Trans i18nKey={'common:yourOrganizations'} />
             </SelectLabel>
 
             <SelectSeparator />
@@ -109,7 +110,11 @@ const OrganizationsSelector = ({ displayName = true }) => {
             >
               <PlusCircleIcon className={'h-5'} />
 
-              <span>New organization</span>
+              <span>
+                <Trans
+                  i18nKey={'organization:createOrganizationDropdownLabel'}
+                />
+              </span>
             </SelectAction>
           </SelectGroup>
         </SelectContent>

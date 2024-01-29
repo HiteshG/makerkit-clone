@@ -5,6 +5,7 @@ import { CheckIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 import Heading from '~/core/ui/Heading';
 import Button from '~/core/ui/Button';
+import Trans from '~/core/ui/Trans';
 import configuration from '~/configuration';
 
 /**
@@ -55,7 +56,7 @@ function SuccessSessionStatus({
 
         <Heading type={3}>
           <span className={'font-semibold mr-4'}>
-            Done! You&apos;re all set.
+            <Trans i18nKey={'subscription:checkoutSuccessTitle'} />
           </span>
           🎉
         </Heading>
@@ -64,7 +65,10 @@ function SuccessSessionStatus({
           className={'flex flex-col space-y-4 text-gray-500 dark:text-gray-400'}
         >
           <p>
-            Thank you for subscribing, we have successfully processed your subscription! A confirmation email will be sent to { customerEmail }.
+            <Trans
+              i18nKey={'subscription:checkoutSuccessDescription'}
+              values={{ customerEmail }}
+            />
           </p>
         </div>
 
@@ -75,7 +79,7 @@ function SuccessSessionStatus({
         >
           <span className={'flex space-x-2.5 items-center'}>
             <span>
-              Proceed to App
+              <Trans i18nKey={'subscription:checkoutSuccessBackButton'} />
             </span>
 
             <ChevronRightIcon className={'h-4'} />

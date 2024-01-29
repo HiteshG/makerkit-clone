@@ -1,4 +1,6 @@
+import Trans from '~/core/ui/Trans';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import TextField from '~/core/ui/TextField';
 import Button from '~/core/ui/Button';
@@ -12,6 +14,8 @@ const EmailPasswordSignUpForm: React.FCC<{
   }) => unknown;
   loading: boolean;
 }> = ({ onSubmit, loading }) => {
+  const { t } = useTranslation();
+
   const { register, handleSubmit, watch, formState } = useForm({
     defaultValues: {
       email: '',
@@ -27,7 +31,7 @@ const EmailPasswordSignUpForm: React.FCC<{
     required: true,
     minLength: {
       value: 6,
-      message: "Please provide a password with at least 6 characters",
+      message: t(`auth:passwordLengthError`),
     },
   });
 
@@ -37,11 +41,11 @@ const EmailPasswordSignUpForm: React.FCC<{
     required: true,
     minLength: {
       value: 6,
-      message: "Please provide a password with at least 6 characters",
+      message: t(`auth:passwordLengthError`),
     },
     validate: (value) => {
       if (value !== passwordValue) {
-        return "The passwords do not match";
+        return t(`auth:passwordsDoNotMatch`);
       }
 
       return true;
@@ -53,7 +57,7 @@ const EmailPasswordSignUpForm: React.FCC<{
       <div className={'flex-col space-y-4'}>
         <TextField>
           <TextField.Label>
-            Email Address
+            <Trans i18nKey={'common:emailAddress'} />
 
             <TextField.Input
               {...emailControl}
@@ -69,7 +73,7 @@ const EmailPasswordSignUpForm: React.FCC<{
 
         <TextField>
           <TextField.Label>
-            Password
+            <Trans i18nKey={'common:password'} />
 
             <TextField.Input
               {...passwordControl}
@@ -80,7 +84,7 @@ const EmailPasswordSignUpForm: React.FCC<{
             />
 
             <TextField.Hint>
-              Ensure it&apos;s at least 6 characters
+              <Trans i18nKey={'auth:passwordHint'} />
             </TextField.Hint>
 
             <TextField.Error
@@ -92,7 +96,7 @@ const EmailPasswordSignUpForm: React.FCC<{
 
         <TextField>
           <TextField.Label>
-            Repeat password
+            <Trans i18nKey={'auth:repeatPassword'} />
 
             <TextField.Input
               {...repeatPasswordControl}
@@ -103,7 +107,7 @@ const EmailPasswordSignUpForm: React.FCC<{
             />
 
             <TextField.Hint>
-              Type your password again
+              <Trans i18nKey={'auth:repeatPasswordHint'} />
             </TextField.Hint>
 
             <TextField.Error
@@ -122,9 +126,9 @@ const EmailPasswordSignUpForm: React.FCC<{
           >
             <If
               condition={loading}
-              fallback={"Get started"}
+              fallback={<Trans i18nKey={'auth:getStarted'} />}
             >
-              Signing up...
+              <Trans i18nKey={'auth:signingUp'} />
             </If>
           </Button>
         </div>

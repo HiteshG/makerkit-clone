@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
 
 import EmailPasswordSignUpContainer from '~/app/auth/components/EmailPasswordSignUpContainer';
 import PhoneNumberSignInContainer from '~/app/auth/components/PhoneNumberSignInContainer';
@@ -39,7 +40,7 @@ function SignUpMethodsContainer() {
         <If condition={providers.emailPassword}>
           <div>
             <span className={'text-xs text-gray-400'}>
-              or continue with email
+              <Trans i18nKey={'auth:orContinueWithEmail'} />
             </span>
           </div>
         </If>

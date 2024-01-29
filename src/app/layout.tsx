@@ -3,6 +3,9 @@ import './globals.css';
 import { cookies } from 'next/headers';
 import classNames from 'clsx';
 
+import initializeServerI18n from '~/i18n/i18n.server';
+import { I18N_COOKIE_NAME } from '~/i18n/i18n.settings';
+
 import ThemeSetter from '~/components/ThemeSetter';
 import Fonts from '~/components/Fonts';
 
@@ -13,9 +16,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const i18n = await initializeServerI18n(getLanguageCookie());
 
   return (
-    <html lang={"en"} className={getClassName()}>
+    <html lang={i18n.language} className={getClassName()}>
       <Fonts />
       <ThemeSetter />
 
@@ -32,6 +36,10 @@ function getClassName() {
   return classNames({
     dark,
   });
+}
+
+function getLanguageCookie() {
+  return cookies().get(I18N_COOKIE_NAME)?.value;
 }
 
 export const metadata = {

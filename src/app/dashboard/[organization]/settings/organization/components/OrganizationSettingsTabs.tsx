@@ -6,11 +6,11 @@ import configuration from '~/configuration';
 const getLinks = (organizationId: string) => ({
   General: {
     path: getPath(organizationId, 'organization'),
-    label: 'General',
+    label: 'organization:generalTabLabel',
   },
   Members: {
     path: getPath(organizationId, 'organization/members'),
-    label: 'Members',
+    label: 'organization:membersTabLabel',
   },
 });
 

@@ -3,6 +3,7 @@
 import { useCallback, useTransition } from 'react';
 import type { Session } from '@supabase/gotrue-js';
 
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 
 import useSignOut from '~/core/hooks/use-sign-out';
@@ -36,7 +37,11 @@ function ExistingUserInviteForm(
     <>
       <div className={'flex flex-col space-y-4'}>
         <p className={'text-center text-sm'}>
-          Click the button below to accept the invite with as <b>{props.session?.user.email}</b>
+          <Trans
+            i18nKey={'auth:clickToAcceptAs'}
+            values={{ email: props.session?.user.email }}
+            components={{ b: <b /> }}
+          />
         </p>
 
         <Button
@@ -46,7 +51,7 @@ function ExistingUserInviteForm(
           data-cy={'accept-invite-submit-button'}
           type={'submit'}
         >
-          Accept invite
+          <Trans i18nKey={'auth:acceptInvite'} />
         </Button>
 
         <div>
@@ -57,7 +62,7 @@ function ExistingUserInviteForm(
                   'text-center text-sm text-gray-700 dark:text-gray-300'
                 }
               >
-                Want to accept the invite with a different account?
+                <Trans i18nKey={'auth:acceptInviteWithDifferentAccount'} />
               </span>
             </p>
 
@@ -70,7 +75,7 @@ function ExistingUserInviteForm(
                 onClick={onSignOut}
                 type={'button'}
               >
-                Sign Out
+                <Trans i18nKey={'auth:signOut'} />
               </Button>
             </div>
           </div>

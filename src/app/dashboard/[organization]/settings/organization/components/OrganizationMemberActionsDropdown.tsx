@@ -1,3 +1,5 @@
+import Trans from '~/core/ui/Trans';
+
 import {
   AdjustmentsHorizontalIcon,
   EllipsisVerticalIcon,
@@ -45,7 +47,7 @@ const OrganizationMemberActionsDropdown: React.FCC<{
             <AdjustmentsHorizontalIcon className={'h-5'} />
 
             <span>
-              Change Role
+              <Trans i18nKey={'organization:changeRole'} />
             </span>
           </span>
         </DropdownMenuItem>
@@ -59,7 +61,7 @@ const OrganizationMemberActionsDropdown: React.FCC<{
             <span className={'flex items-center space-x-2'}>
               <UserCircleIcon className={'h-5'} />
               <span>
-                Transfer Ownership
+                <Trans i18nKey={'organization:transferOwnership'} />
               </span>
             </span>
           </DropdownMenuItem>
@@ -81,7 +83,7 @@ const OrganizationMemberActionsDropdown: React.FCC<{
           >
             <XMarkIcon className={'h-5'} />
             <span>
-              Remove
+              <Trans i18nKey={'organization:removeMember'} />
             </span>
           </span>
         </DropdownMenuItem>

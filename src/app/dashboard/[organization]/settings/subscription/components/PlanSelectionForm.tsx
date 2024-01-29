@@ -7,6 +7,7 @@ import type Organization from '~/lib/organizations/types/organization';
 import { canChangeBilling } from '~/lib/organizations/permissions';
 
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
 import Alert from '~/core/ui/Alert';
 
 import PricingTable from '~/components/PricingTable';
@@ -59,7 +60,10 @@ const PlanSelectionForm: React.FCC<{
                     recommended={props.recommended}
                     onCheckoutCreated={setClientSecret}
                   >
-                    Checkout
+                    <Trans
+                      i18nKey={'subscription:checkout'}
+                      defaults={'Checkout'}
+                    />
                   </CheckoutRedirectButton>
                 </ErrorBoundary>
               );
@@ -69,11 +73,11 @@ const PlanSelectionForm: React.FCC<{
           <If condition={customerId}>
             <div className={'flex flex-col space-y-2'}>
               <BillingPortalRedirectButton customerId={customerId as string}>
-                Go to Customer Portal
+                <Trans i18nKey={'subscription:manageBilling'} />
               </BillingPortalRedirectButton>
 
               <span className={'text-xs text-gray-500 dark:text-gray-400'}>
-                Visit your Customer Portal to manage your subscription and billing.
+                <Trans i18nKey={'subscription:manageBillingDescription'} />
               </span>
             </div>
           </If>
@@ -89,10 +93,10 @@ function NoPermissionsAlert() {
   return (
     <Alert type={'warn'}>
       <Alert.Heading>
-        You don&apos;t have permissions to change the billing
+        <Trans i18nKey={'subscription:noPermissionsAlertHeading'} />
       </Alert.Heading>
 
-      Please contact your organization owner to change the billing settings for your organization.
+      <Trans i18nKey={'subscription:noPermissionsAlertBody'} />
     </Alert>
   );
 }
@@ -101,11 +105,11 @@ function CheckoutErrorMessage({ onRetry }: { onRetry: () => void }) {
   return (
     <div className={'flex flex-col space-y-2'}>
       <span className={'text-red-500 text-sm font-medium'}>
-        Sorry, something went wrong
+        <Trans i18nKey={'subscription:unknownErrorAlertHeading'} />
       </span>
 
       <Button onClick={onRetry} variant={'ghost'}>
-        Retry
+        <Trans i18nKey={'common:retry'} />
       </Button>
     </div>
   );

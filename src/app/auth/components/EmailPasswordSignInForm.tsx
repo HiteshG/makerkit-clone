@@ -1,5 +1,6 @@
 'use client';
 
+import Trans from '~/core/ui/Trans';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 
@@ -26,7 +27,7 @@ const EmailPasswordSignInForm: React.FCC<{
       <div className={'flex-col space-y-4'}>
         <TextField>
           <TextField.Label>
-            Email Address
+            <Trans i18nKey={'common:emailAddress'} />
 
             <TextField.Input
               data-cy={'email-input'}
@@ -40,7 +41,7 @@ const EmailPasswordSignInForm: React.FCC<{
 
         <TextField>
           <TextField.Label>
-            Password
+            <Trans i18nKey={'common:password'} />
 
             <TextField.Input
               required
@@ -52,7 +53,7 @@ const EmailPasswordSignInForm: React.FCC<{
 
             <div className={'py-0.5 text-xs'}>
               <Link href={'/auth/password-reset'} className={'hover:underline'}>
-                Password forgotten?
+                <Trans i18nKey={'auth:passwordForgottenQuestion'} />
               </Link>
             </div>
           </TextField.Label>
@@ -67,9 +68,9 @@ const EmailPasswordSignInForm: React.FCC<{
           >
             <If
               condition={loading}
-              fallback={"Sign In"}
+              fallback={<Trans i18nKey={'auth:signIn'} />}
             >
-              Sign In
+              <Trans i18nKey={'auth:signingIn'} />
             </If>
           </Button>
         </div>

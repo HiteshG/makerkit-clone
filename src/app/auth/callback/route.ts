@@ -80,12 +80,6 @@ export async function GET(request: NextRequest) {
   return redirect(nextUrl);
 }
 
-/**
- * @name acceptInviteFromEmailLink
- * @description If we find an invite code, we try to accept the invite
- * received from the email link method
- * @param params
- */
 async function acceptInviteFromEmailLink(params: {
   inviteCode: string;
   userId: Maybe<string>;
@@ -100,12 +94,15 @@ async function acceptInviteFromEmailLink(params: {
 
   logger.info(params, `Found invite code. Accepting invite...`);
 
-  const adminClient = getSupabaseRouteHandlerClient({ admin: true });
-
-  await acceptInviteToOrganization(adminClient, {
-    code: params.inviteCode,
-    userId: params.userId,
-  });
+  await acceptInviteToOrganization(
+    getSupabaseRouteHandlerClient({
+      admin: true,
+    }),
+    {
+      code: params.inviteCode,
+      userId: params.userId,
+    },
+  );
 
   logger.info(params, `Invite successfully accepted`);
 }
@@ -125,19 +122,12 @@ function onError({ error }: { error: string }) {
   return redirect(redirectUrl);
 }
 
-/**
- * Checks if the given error message indicates a verifier error.
- * We check for this specific error because it's highly likely that the
- * user is trying to sign in using a different browser than the one they
- * used to request the sign in link. This is a common mistake, so we
- * want to provide a helpful error message.
- */
 function isVerifierError(error: string) {
   return error.includes('both auth code and code verifier should be non-empty');
 }
 
 function getAuthErrorMessage(error: string) {
   return isVerifierError(error)
-    ? `auth:codeMismatch`
-    : `auth:error`;
+    ? `auth:errors.codeVerifierMismatch`
+    : `auth:authenticationErrorAlertBody`;
 }

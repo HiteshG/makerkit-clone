@@ -9,6 +9,7 @@ import If from '~/core/ui/If';
 import Alert from '~/core/ui/Alert';
 import TextField from '~/core/ui/TextField';
 import Button from '~/core/ui/Button';
+import Trans from '~/core/ui/Trans';
 import configuration from '~/configuration';
 
 function PasswordResetRequestContainer() {
@@ -36,7 +37,7 @@ function PasswordResetRequestContainer() {
     <>
       <If condition={success}>
         <Alert type={'success'}>
-          Check your Inbox! We emailed you a link for resetting your Password.
+          <Trans i18nKey={'auth:passwordResetSuccessMessage'} />
         </Alert>
       </If>
 
@@ -46,13 +47,13 @@ function PasswordResetRequestContainer() {
             <div className={'flex-col space-y-4'}>
               <div>
                 <p className={'text-sm text-gray-700 dark:text-gray-400'}>
-                  Enter your email address below. You will receive a link to reset your password.
+                  <Trans i18nKey={'auth:passwordResetSubheading'} />
                 </p>
               </div>
 
               <div>
                 <TextField.Label>
-                  Email Address
+                  <Trans i18nKey={'common:emailAddress'} />
 
                   <TextField.Input
                     name="email"
@@ -70,7 +71,7 @@ function PasswordResetRequestContainer() {
                 type="submit"
                 block
               >
-                Reset Password
+                <Trans i18nKey={'auth:passwordResetLabel'} />
               </Button>
             </div>
           </form>

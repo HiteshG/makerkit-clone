@@ -1,9 +1,6 @@
 import React, { use } from 'react';
 import { redirect } from 'next/navigation';
- 
-import ArrowLeftIcon from '@heroicons/react/24/outline/ArrowLeftIcon';
- 
-import Button from '~/core/ui/Button';
+
 import getSupabaseServerComponentClient from '~/core/supabase/server-component-client';
 import { getTask } from '~/lib/tasks/database/queries';
 import TaskItemContainer from '~/app/dashboard/[organization]/tasks/components/TaskItemContainer';

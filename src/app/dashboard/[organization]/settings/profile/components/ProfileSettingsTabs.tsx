@@ -12,19 +12,19 @@ import configuration from '~/configuration';
 const profileTabLinks = (organizationId: string) => ({
   General: {
     path: getPath(organizationId, `profile`),
-    label: 'My Details',
+    label: 'profile:generalTab',
   },
   Authentication: {
     path: getPath(organizationId, `profile/authentication`),
-    label: 'Authentication',
+    label: 'profile:authenticationTab',
   },
   Email: {
     path: getPath(organizationId, `profile/email`),
-    label: 'Email',
+    label: 'profile:emailTab',
   },
   Password: {
     path: getPath(organizationId, `profile/password`),
-    label: 'Password',
+    label: 'profile:passwordTab',
   },
 });
 

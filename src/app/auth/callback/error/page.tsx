@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 
 import { Alert, AlertHeading } from '~/core/ui/Alert';
 import Button from '~/core/ui/Button';
+import Trans from '~/core/ui/Trans';
 
 import ResendLinkForm from './ResendLinkForm';
 
@@ -24,11 +25,10 @@ function AuthCallbackErrorPage({ searchParams }: Params) {
       <div>
         <Alert type={'error'}>
           <AlertHeading>
-            Authentication Error
+            <Trans i18nKey={'auth:authenticationErrorAlertHeading'} />
           </AlertHeading>
 
-          {error === "auth:error" && "Sorry, we could not authenticate you. Please try again."}
-          {error === "auth:codeMismatch" && "It looks like you're trying to sign in using a different browser than the one you used to request the sign in link. Please try again using the same browser."}
+          <Trans i18nKey={error} />
         </Alert>
       </div>
 
@@ -37,7 +37,7 @@ function AuthCallbackErrorPage({ searchParams }: Params) {
       <div className={'flex flex-col space-y-2'}>
         <Button variant={'ghost'}>
           <a href={'/auth/sign-in'}>
-            Sign In
+            <Trans i18nKey={'auth:signIn'} />
           </a>
         </Button>
       </div>

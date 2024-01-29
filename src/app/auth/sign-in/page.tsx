@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import Trans from '~/core/ui/Trans';
 
 import Heading from '~/core/ui/Heading';
+import { withI18n } from '~/i18n/with-i18n';
 
 import configuration from '~/configuration';
 import SignInMethodsContainer from '~/app/auth/components/SignInMethodsContainer';
@@ -16,7 +18,7 @@ function SignInPage() {
     <>
       <div>
         <Heading type={5}>
-          Sign in to your account
+          <Trans i18nKey={'auth:signInHeading'} />
         </Heading>
       </div>
 
@@ -25,14 +27,14 @@ function SignInPage() {
       <div className={'flex justify-center text-xs'}>
         <p className={'flex space-x-1'}>
           <span>
-            Do not have an account yet?
+            <Trans i18nKey={'auth:doNotHaveAccountYet'} />
           </span>
 
           <Link
             className={'text-primary-800 hover:underline dark:text-primary'}
             href={SIGN_UP_PATH}
           >
-            Sign Up
+            <Trans i18nKey={'auth:signUp'} />
           </Link>
         </p>
       </div>
@@ -40,4 +42,4 @@ function SignInPage() {
   );
 }
 
-export default SignInPage;
+export default withI18n(SignInPage);

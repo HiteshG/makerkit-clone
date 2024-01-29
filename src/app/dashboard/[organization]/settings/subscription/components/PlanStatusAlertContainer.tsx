@@ -5,6 +5,7 @@ import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation';
 
 import If from '~/core/ui/If';
 import Alert from '~/core/ui/Alert';
+import Trans from '~/core/ui/Trans';
 
 enum SubscriptionStatusQueryParams {
   Success = 'success',
@@ -34,11 +35,11 @@ function PlansStatusAlert({
       return (
         <Alert type={'warn'} useCloseButton={true}>
           <Alert.Heading>
-            The checkout was canceled
+            <Trans i18nKey={'subscription:checkOutCanceledAlertHeading'} />
           </Alert.Heading>
 
           <p>
-            The checkout was canceled. Please contact us if you&apos;re experiencing any issues.
+            <Trans i18nKey={'subscription:checkOutCanceledAlert'} />
           </p>
         </Alert>
       );
@@ -47,11 +48,11 @@ function PlansStatusAlert({
       return (
         <Alert type={'error'} useCloseButton={true}>
           <Alert.Heading>
-            Sorry, something went wrong
+            <Trans i18nKey={'subscription:unknownErrorAlertHeading'} />
           </Alert.Heading>
 
           <p>
-            We encountered an unknown error while processing your payment. Please try again or contact support.
+            <Trans i18nKey={'subscription:unknownErrorAlert'} />
           </p>
         </Alert>
       );
@@ -60,11 +61,11 @@ function PlansStatusAlert({
       return (
         <Alert type={'success'} useCloseButton={true}>
           <Alert.Heading>
-            Checkout successfully completed
+            <Trans i18nKey={'subscription:checkOutCompletedAlertHeading'} />
           </Alert.Heading>
 
           <p>
-            Yay, your payment went through!
+            <Trans i18nKey={'subscription:checkOutCompletedAlert'} />
           </p>
         </Alert>
       );

@@ -3,6 +3,8 @@
 import type { FormEventHandler } from 'react';
 import { useCallback } from 'react';
 import { toast } from 'sonner';
+import { useTranslation } from 'react-i18next';
+import Trans from '~/core/ui/Trans';
 
 import TextField from '~/core/ui/TextField';
 import Button from '~/core/ui/Button';
@@ -14,6 +16,7 @@ import configuration from '~/configuration';
 const EmailLinkAuth: React.FC<{
   inviteCode?: string;
 }> = ({ inviteCode }) => {
+  const { t } = useTranslation();
   const signInWithOtpMutation = useSignInWithOtp();
 
   const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
@@ -41,18 +44,18 @@ const EmailLinkAuth: React.FC<{
       });
 
       toast.promise(promise, {
-        loading: "Sending Email Link...",
-        success: "Link successfully sent",
-        error: "Sorry, we encountered an error while sending your link. Please try again.",
+        loading: t('auth:sendingEmailLink'),
+        success: t(`auth:sendLinkSuccessToast`),
+        error: t(`auth:errors.link`),
       });
     },
-    [signInWithOtpMutation, inviteCode],
+    [signInWithOtpMutation, inviteCode, t],
   );
 
   if (signInWithOtpMutation.data) {
     return (
       <Alert type={'success'}>
-        We sent you a link to your email! Follow the link to sign in.
+        <Trans i18nKey={'auth:sendLinkSuccess'} />
       </Alert>
     );
   }
@@ -62,7 +65,7 @@ const EmailLinkAuth: React.FC<{
       <div className={'flex flex-col space-y-4'}>
         <TextField>
           <TextField.Label>
-            Email Address
+            <Trans i18nKey={'common:emailAddress'} />
 
             <TextField.Input
               data-cy={'email-input'}
@@ -77,16 +80,16 @@ const EmailLinkAuth: React.FC<{
         <Button loading={signInWithOtpMutation.isMutating}>
           <If
             condition={signInWithOtpMutation.isMutating}
-            fallback={"Send Email Link"}
+            fallback={<Trans i18nKey={'auth:sendEmailLink'} />}
           >
-            Sending Email Link...
+            <Trans i18nKey={'auth:sendingEmailLink'} />
           </If>
         </Button>
       </div>
 
       <If condition={signInWithOtpMutation.error}>
         <Alert type={'error'}>
-          Sorry, we encountered an error while sending your link. Please try again.
+          <Trans i18nKey={'auth:errors.link'} />
         </Alert>
       </If>
     </form>

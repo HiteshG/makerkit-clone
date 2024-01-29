@@ -1,3 +1,5 @@
+import Trans from '~/core/ui/Trans';
+
 import {
   Select,
   SelectItem,
@@ -46,7 +48,7 @@ const MembershipRoleSelector: React.FCC<{
               value={role.value.toString()}
             >
               <span className={'text-sm'}>
-                {role.label}
+                <Trans i18nKey={role.label} />
               </span>
             </SelectItem>
           );

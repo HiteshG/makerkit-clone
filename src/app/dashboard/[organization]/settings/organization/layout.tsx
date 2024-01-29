@@ -1,5 +1,6 @@
 import OrganizationSettingsTabs from '~/app/dashboard/[organization]/settings/organization/components/OrganizationSettingsTabs';
 import SettingsContentContainer from '~/app/dashboard/[organization]/settings/components/SettingsContentContainer';
+import { withI18n } from '~/i18n/with-i18n';
 
 async function OrganizationSettingsLayout({
   children,
@@ -20,4 +21,4 @@ async function OrganizationSettingsLayout({
   );
 }
 
-export default OrganizationSettingsLayout;
+export default withI18n(OrganizationSettingsLayout);

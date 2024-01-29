@@ -1,5 +1,6 @@
 import { useCallback, useState, useTransition } from 'react';
 
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 import Modal from '~/core/ui/Modal';
 
@@ -14,7 +15,7 @@ const RemoveOrganizationMemberModal: React.FCC<{
 }> = ({ isOpen, setIsOpen, membershipId }) => {
   return (
     <Modal
-      heading={"You are removing this user"}
+      heading={<Trans i18nKey="organization:removeMemberModalHeading" />}
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
@@ -51,7 +52,7 @@ function RemoveMemberForm({
     <form action={onMemberRemoved}>
       <div className={'flex flex-col space-y-6'}>
         <p className={'text-sm'}>
-          Are you sure you want to continue?
+          <Trans i18nKey={'common:modalConfirmationQuestion'} />
         </p>
 
         <If condition={error}>
@@ -70,7 +71,7 @@ function RemoveMemberForm({
             loading={isSubmitting}
             onClick={onMemberRemoved}
           >
-            Remove User from Organization
+            <Trans i18nKey={'organization:removeMemberSubmitLabel'} />
           </Button>
         </div>
       </div>
@@ -82,10 +83,10 @@ function RemoveMemberErrorAlert() {
   return (
     <Alert type={'error'}>
       <Alert.Heading>
-        Sorry, we couldn&apos;t remove the selected member.
+        <Trans i18nKey={'organization:removeMemberErrorHeading'} />
       </Alert.Heading>
 
-      Sorry, we encountered an error. Please try again
+      <Trans i18nKey={'organization:removeMemberErrorMessage'} />
     </Alert>
   );
 }

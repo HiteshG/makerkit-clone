@@ -6,6 +6,7 @@ import { useCallback } from 'react';
 import If from '~/core/ui/If';
 import TextField from '~/core/ui/TextField';
 import Button from '~/core/ui/Button';
+import Trans from '~/core/ui/Trans';
 
 type ActionTypes = `link` | `signIn`;
 
@@ -31,7 +32,7 @@ const PhoneNumberCredentialForm: React.FC<{
     <form className={'w-full'} onSubmit={onLinkPhoneNumberSubmit}>
       <div className={'flex flex-col space-y-2'}>
         <TextField.Label>
-          Phone Number
+          <Trans i18nKey={'profile:phoneNumberLabel'} />
 
           <TextField.Input
             required
@@ -45,11 +46,11 @@ const PhoneNumberCredentialForm: React.FC<{
 
         <Button loading={loading} block type={'submit'}>
           <If condition={action === 'link'}>
-            Verify your Phone Number
+            <Trans i18nKey={'profile:verifyPhoneNumberSubmitLabel'} />
           </If>
 
           <If condition={action === 'signIn'}>
-            Sign in with Phone Number
+            <Trans i18nKey={'auth:signInWithPhoneNumber'} />
           </If>
         </Button>
       </div>

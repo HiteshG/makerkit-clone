@@ -4,6 +4,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 
 import If from '~/core/ui/If';
 import Heading from '~/core/ui/Heading';
+import Trans from '~/core/ui/Trans';
 
 import getLogger from '~/core/logger';
 import getSupabaseServerComponentClient from '~/core/supabase/server-component-client';
@@ -12,6 +13,7 @@ import { getMembershipByInviteCode } from '~/lib/memberships/queries';
 import ExistingUserInviteForm from '~/app/invite/components/ExistingUserInviteForm';
 import NewUserInviteForm from '~/app/invite/components/NewUserInviteForm';
 import InviteCsrfTokenProvider from '~/app/invite/components/InviteCsrfTokenProvider';
+import { withI18n } from '~/i18n/with-i18n';
 import { Database } from '~/database.types';
 
 interface Context {
@@ -37,17 +39,28 @@ async function InvitePage({ params }: Context) {
   return (
     <>
       <Heading type={4}>
-        Join {organization.name}
+        <Trans
+          i18nKey={'auth:joinOrganizationHeading'}
+          values={{
+            organization: organization.name,
+          }}
+        />
       </Heading>
 
       <div>
         <p className={'text-center'}>
-          You were invited to join <b>{organization.name}</b>
+          <Trans
+            i18nKey={'auth:joinOrganizationSubHeading'}
+            values={{
+              organization: organization.name,
+            }}
+            components={{ b: <b /> }}
+          />
         </p>
 
         <p className={'text-center'}>
           <If condition={!data.session}>
-            Please sign in/up to accept the invite
+            <Trans i18nKey={'auth:signUpToAcceptInvite'} />
           </If>
         </p>
       </div>
@@ -66,19 +79,16 @@ async function InvitePage({ params }: Context) {
   );
 }
 
-export default InvitePage;
+export default withI18n(InvitePage);
 
 async function loadInviteData(code: string) {
   const logger = getLogger();
   const client = getSupabaseServerComponentClient();
 
-  // we use an admin client to be able to read the pending membership
-  // without having to be logged in
   const adminClient = getSupabaseServerComponentClient({ admin: true });
 
   const { data: membership, error } = await getInvite(adminClient, code);
 
-  // if the invite wasn't found, it's 404
   if (error) {
     logger.warn(
       {

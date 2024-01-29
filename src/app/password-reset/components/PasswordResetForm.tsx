@@ -1,6 +1,7 @@
 'use client';
 
 import Heading from '~/core/ui/Heading';
+import Trans from '~/core/ui/Trans';
 import TextField from '~/core/ui/TextField';
 import Button from '~/core/ui/Button';
 import configuration from '~/configuration';
@@ -15,14 +16,14 @@ function PasswordResetForm() {
       <div className={'flex flex-col space-y-4'}>
         <Alert type={'error'}>
           <Alert.Heading>
-            Sorry, we could not reset your password. Please try again.
+            <Trans i18nKey={'auth:resetPasswordError'} />
           </Alert.Heading>
 
-          Sorry, something went wrong.
+          <Trans i18nKey={'common:genericError'} />
         </Alert>
 
         <Button onClick={() => updateUser.reset()} variant={'outline'}>
-          Retry
+          <Trans i18nKey={'common:retry'} />
         </Button>
       </div>
     );
@@ -33,13 +34,13 @@ function PasswordResetForm() {
       <div className={'flex flex-col space-y-4'}>
         <Alert type={'success'}>
           <Alert.Heading>
-            Password update request successful
+            <Trans i18nKey={'profile:updatePasswordSuccess'} />
           </Alert.Heading>
-          Your password has been successfully updated!
+          <Trans i18nKey={'profile:updatePasswordSuccessMessage'} />
         </Alert>
 
         <Button href={configuration.paths.appHome} variant={'outline'}>
-          Back to Home Page
+          <Trans i18nKey={'common:backToHomePage'} />
         </Button>
       </div>
     );
@@ -49,7 +50,7 @@ function PasswordResetForm() {
     <div className={'flex flex-col space-y-6 w-full'}>
       <div className={'flex justify-center'}>
         <Heading type={5}>
-          Reset Password
+          <Trans i18nKey={'auth:passwordResetLabel'} />
         </Heading>
       </div>
 
@@ -77,7 +78,7 @@ function PasswordResetForm() {
         <div className={'flex-col space-y-4'}>
           <div>
             <TextField.Label>
-              Password
+              <Trans i18nKey={'common:password'} />
 
               <TextField.Input required name="password" type="password" />
             </TextField.Label>
@@ -85,14 +86,14 @@ function PasswordResetForm() {
 
           <div>
             <TextField.Label>
-              Repeat password
+              <Trans i18nKey={'common:repeatPassword'} />
 
               <TextField.Input required name="repeatPassword" type="password" />
             </TextField.Label>
           </div>
 
           <Button loading={updateUser.isMutating} type="submit" block>
-            Reset Password
+            <Trans i18nKey={'auth:passwordResetLabel'} />
           </Button>
         </div>
       </form>

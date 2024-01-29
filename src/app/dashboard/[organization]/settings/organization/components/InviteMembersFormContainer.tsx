@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
 import { useCallback, useTransition } from 'react';
 import { toast } from 'sonner';
 
@@ -11,8 +12,10 @@ import InviteMembersForm from './InviteMembersForm';
 
 import Button from '~/core/ui/Button';
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
 
 const InviteMembersFormContainer = () => {
+  const { t } = useTranslation('organization');
   const user = useUserSession();
   const organization = useCurrentOrganization();
 
@@ -30,7 +33,7 @@ const InviteMembersFormContainer = () => {
           return;
         }
 
-        const id = toast.loading("Inviting members...");
+        const id = toast.loading(t('organization:inviteMembersLoading'));
 
         try {
           await inviteMembersToOrganizationAction({
@@ -38,17 +41,17 @@ const InviteMembersFormContainer = () => {
             organizationUid: organization.uuid,
           });
 
-          toast.success("Members invited successfully!", {
+          toast.success(t('organization:inviteMembersSuccess'), {
             id,
           });
         } catch (e) {
-          toast.error("Sorry, we encountered an error! Please try again", {
+          toast.error(t('organization:inviteMembersError'), {
             id,
           });
         }
       });
     },
-    [organization],
+    [organization, t],
   );
 
   const SubmitButton = (
@@ -60,11 +63,11 @@ const InviteMembersFormContainer = () => {
         loading={isSubmitting}
       >
         <If condition={!isSubmitting}>
-          Send Invites
+          <Trans i18nKey={'organization:inviteMembersSubmitLabel'} />
         </If>
 
         <If condition={isSubmitting}>
-          Inviting members...
+          <Trans i18nKey={'organization:inviteMembersLoading'} />
         </If>
       </Button>
     </div>

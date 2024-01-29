@@ -2,6 +2,8 @@ import 'server-only';
 
 import { getUserDataById } from '~/lib/server/queries';
 import getSupabaseServerComponentClient from '~/core/supabase/server-component-client';
+import initializeServerI18n from '~/i18n/i18n.server';
+import getLanguageCookie from '~/i18n/get-language-cookie';
 
 async function loadUserData() {
   const client = getSupabaseServerComponentClient();
@@ -17,6 +19,7 @@ async function loadUserData() {
     const userId = session.user.id;
 
     const userData = await getUserDataById(client, userId);
+    const language = await getLanguage();
 
     return {
       session: {
@@ -31,6 +34,7 @@ async function loadUserData() {
         data: userData || undefined,
         role: undefined,
       },
+      language,
     };
   } catch (e) {
     return emptyUserData();
@@ -38,10 +42,19 @@ async function loadUserData() {
 }
 
 async function emptyUserData() {
+  const language = await getLanguage();
+
   return {
     accessToken: undefined,
+    language,
     session: undefined,
   };
 }
 
 export default loadUserData;
+
+async function getLanguage() {
+  const { language } = await initializeServerI18n(getLanguageCookie());
+
+  return language;
+}

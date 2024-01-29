@@ -1,7 +1,9 @@
 import ArrowLeftIcon from '@heroicons/react/24/outline/ArrowLeftIcon';
 
 import SettingsTile from '~/app/dashboard/[organization]/settings/components/SettingsTile';
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
+import { withI18n } from '~/i18n/with-i18n';
 import InviteMembersFormContainer from '../../components/InviteMembersFormContainer';
 
 export const metadata = {
@@ -12,8 +14,10 @@ const OrganizationMembersInvitePage = () => {
   return (
     <>
       <SettingsTile
-        heading={"Invite Members"}
-        subHeading={"Invite members to your organization"}
+        heading={<Trans i18nKey={'organization:inviteMembersPageHeading'} />}
+        subHeading={
+          <Trans i18nKey={'organization:inviteMembersPageSubheading'} />
+        }
       >
         <InviteMembersFormContainer />
       </SettingsTile>
@@ -25,7 +29,7 @@ const OrganizationMembersInvitePage = () => {
   );
 };
 
-export default OrganizationMembersInvitePage;
+export default withI18n(OrganizationMembersInvitePage);
 
 function GoBackToMembersButton() {
   return (
@@ -34,7 +38,7 @@ function GoBackToMembersButton() {
         <ArrowLeftIcon className={'h-3'} />
 
         <span>
-          Go back to members
+          <Trans i18nKey={'organization:goBackToMembersPage'} />
         </span>
       </span>
     </Button>

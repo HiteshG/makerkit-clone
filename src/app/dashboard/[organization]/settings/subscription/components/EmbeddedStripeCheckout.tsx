@@ -21,6 +21,7 @@ import IconButton from '~/core/ui/IconButton';
 import If from '~/core/ui/If';
 import LogoImage from '~/core/ui/Logo/LogoImage';
 import Button from '~/core/ui/Button';
+import Trans from '~/core/ui/Trans';
 
 const STRIPE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 
@@ -101,7 +102,7 @@ function EmbeddedCheckoutPopup({
               <LogoImage />
 
               <Button onClick={close} variant={'outline'}>
-                Cancel
+                <Trans i18nKey={'common:cancel'} />
               </Button>
             </div>
           </div>
@@ -116,7 +117,7 @@ function EmbeddedCheckoutPopup({
             >
               <XMarkIcon className={'h-6 text-gray-900'} />
               <span className="sr-only">
-                Cancel
+                <Trans i18nKey={'common:cancel'} />
               </span>
             </IconButton>
           </DialogPrimitiveClose>

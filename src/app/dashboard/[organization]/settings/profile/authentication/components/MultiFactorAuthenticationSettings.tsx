@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import useMutation from 'swr/mutation';
 import { Factor } from '@supabase/gotrue-js';
+import { useTranslation } from 'react-i18next';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { toast } from 'sonner';
 
@@ -16,6 +17,7 @@ import Button from '~/core/ui/Button';
 import Modal from '~/core/ui/Modal';
 import Badge from '~/core/ui/Badge';
 import IconButton from '~/core/ui/IconButton';
+import Trans from '~/core/ui/Trans';
 
 import useSupabase from '~/core/hooks/use-supabase';
 import useFactorsMutationKey from '~/core/hooks/use-user-factors-mutation-key';
@@ -40,8 +42,8 @@ function MultiFactorAuthenticationSettings() {
   return (
     <div>
       <SettingsTile
-        heading={"Multi-Factor Authentication"}
-        subHeading={"Set up a MFA method to secure your account"}
+        heading={<Trans i18nKey={'profile:multiFactorAuth'} />}
+        subHeading={<Trans i18nKey={'profile:multiFactorAuthSubheading'} />}
       >
         <MultiFactorAuthFactorsList
           onEnrollRequested={() => setIsMfaModalOpen(true)}
@@ -71,7 +73,9 @@ function MultiFactorAuthFactorsList({
       <div className={'flex items-center space-x-4'}>
         <Spinner />
 
-        <div>Loading factors...</div>
+        <div>
+          <Trans i18nKey={'profile:loadingFactors'} />
+        </div>
       </div>
     );
   }
@@ -80,7 +84,7 @@ function MultiFactorAuthFactorsList({
     return (
       <div>
         <Alert type={'error'}>
-          Error loading factors list
+          <Trans i18nKey={'profile:factorsListError'} />
         </Alert>
       </div>
     );
@@ -93,10 +97,10 @@ function MultiFactorAuthFactorsList({
       <div className={'flex flex-col space-y-4'}>
         <Alert type={'info'}>
           <Alert.Heading>
-            Secure your account with Multi-Factor Authentication
+            <Trans i18nKey={'profile:multiFactorAuthHeading'} />
           </Alert.Heading>
 
-          Enable Multi-Factor Authentication to verify your identity for an extra layer of security to your account in case your password is stolen. In addition to entering your password, it requires you confirm your identity via SMS.
+          <Trans i18nKey={'profile:multiFactorAuthDescription'} />
         </Alert>
 
         <SetupMfaButton onClick={onEnrollRequested} />
@@ -134,7 +138,7 @@ function SetupMfaButton(
   return (
     <div>
       <Button onClick={props.onClick}>
-        Setup a new Factor
+        <Trans i18nKey={'profile:setupMfaButtonLabel'} />
       </Button>
     </div>
   );
@@ -146,6 +150,7 @@ function ConfirmUnenrollFactorModal(
     setIsModalOpen: (isOpen: boolean) => void;
   }>,
 ) {
+  const { t } = useTranslation();
   const unEnroll = useUnenrollFactor();
 
   const onUnenrollRequested = useCallback(
@@ -157,23 +162,23 @@ function ConfirmUnenrollFactorModal(
       });
 
       toast.promise(promise, {
-        loading: "Unenrolling factor...",
-        success: "Factor successfully unenrolled",
-        error: "Unenrolling factor failed",
+        loading: t(`profile:unenrollingFactor`),
+        success: t(`profile:unenrollFactorSuccess`),
+        error: t(`profile:unenrollFactorError`),
       });
     },
-    [props, unEnroll],
+    [props, t, unEnroll],
   );
 
   return (
     <Modal
-      heading={"Unenroll Factor"}
+      heading={<Trans i18nKey={'profile:unenrollFactorModalHeading'} />}
       isOpen={!!props.factorId}
       setIsOpen={props.setIsModalOpen}
     >
       <div className={'flex flex-col space-y-4'}>
         <div className={'text-sm'}>
-        You&apos;re about to unenroll this factor. You will not be able to use it to login to your account.
+          <Trans i18nKey={'profile:unenrollFactorModalBody'} />
         </div>
 
         <div className={'flex flex-row justify-end space-x-2'}>
@@ -188,7 +193,7 @@ function ConfirmUnenrollFactorModal(
             variant={'destructive'}
             onClick={() => onUnenrollRequested(props.factorId)}
           >
-            Yes, unenroll factor
+            <Trans i18nKey={'profile:unenrollFactorModalButtonLabel'} />
           </Button>
         </div>
       </div>
@@ -208,13 +213,13 @@ function FactorsTable({
       <TableHeader>
         <TableRow>
           <TableHead>
-            Factor Name
+            <Trans i18nKey={'profile:factorName'} />
           </TableHead>
           <TableHead>
-            Type
+            <Trans i18nKey={'profile:factorType'} />
           </TableHead>
           <TableHead>
-            Status
+            <Trans i18nKey={'profile:factorStatus'} />
           </TableHead>
 
           <TableHead />
@@ -253,7 +258,7 @@ function FactorsTable({
                 </TooltipTrigger>
 
                 <TooltipContent>
-                  Unenroll this factor
+                  <Trans i18nKey={'profile:unenrollTooltip'} />
                 </TooltipContent>
               </Tooltip>
             </TableCell>

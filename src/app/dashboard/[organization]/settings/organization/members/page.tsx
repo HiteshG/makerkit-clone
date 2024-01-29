@@ -3,6 +3,7 @@ import { use } from 'react';
 
 import type { User } from '@supabase/gotrue-js';
 import type { SupabaseClient } from '@supabase/supabase-js';
+import Trans from '~/core/ui/Trans';
 
 import {
   getMembersAuthMetadata,
@@ -20,6 +21,7 @@ import SettingsTile from '../../components/SettingsTile';
 import OrganizationMembersList from '../components/OrganizationMembersList';
 import OrganizationInvitedMembersList from '../components/OrganizationInvitedMembersList';
 import getCurrentOrganization from '~/lib/server/organizations/get-current-organization';
+import { withI18n } from '~/i18n/with-i18n';
 
 export const metadata = {
   title: 'Members',
@@ -36,15 +38,17 @@ const OrganizationMembersPage: React.FC<{
     <>
       <div className="flex flex-1 flex-col space-y-6">
         <SettingsTile
-          heading={"Members"}
-          subHeading={"Manage and Invite members"}
+          heading={<Trans i18nKey={'organization:membersTabLabel'} />}
+          subHeading={<Trans i18nKey={'organization:membersTabSubheading'} />}
         >
           <OrganizationMembersList members={data.members} />
         </SettingsTile>
 
         <SettingsTile
-          heading={"Pending Invites"}
-          subHeading={"Manage invites not yet accepted"}
+          heading={<Trans i18nKey={'organization:pendingInvitesHeading'} />}
+          subHeading={
+            <Trans i18nKey={'organization:pendingInvitesSubheading'} />
+          }
         >
           <OrganizationInvitedMembersList
             invitedMembers={data.invitedMembers || []}
@@ -55,7 +59,7 @@ const OrganizationMembersPage: React.FC<{
   );
 };
 
-export default OrganizationMembersPage;
+export default withI18n(OrganizationMembersPage);
 
 function getMembersPayload<
   Payload extends {

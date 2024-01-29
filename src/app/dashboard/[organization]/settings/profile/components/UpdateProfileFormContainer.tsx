@@ -5,6 +5,7 @@ import { useCallback, useContext } from 'react';
 import UserSessionContext from '~/core/session/contexts/user-session';
 import useUserSession from '~/core/hooks/use-user-session';
 import UserData from '~/core/session/types/user-data';
+import Trans from '~/core/ui/Trans';
 import If from '~/core/ui/If';
 
 import UpdatePhoneNumberForm from '../components/UpdatePhoneNumberForm';
@@ -49,8 +50,8 @@ function UpdateProfileFormContainer() {
   return (
     <div className={'flex flex-col space-y-8'}>
       <SettingsTile
-        heading={"My Details"}
-        subHeading={"Manage your profile details"}
+        heading={<Trans i18nKey={'profile:generalTab'} />}
+        subHeading={<Trans i18nKey={'profile:generalTabSubheading'} />}
       >
         <UpdateProfileForm
           session={session}
@@ -60,8 +61,8 @@ function UpdateProfileFormContainer() {
 
       <If condition={allowPhoneNumberUpdate}>
         <SettingsTile
-          heading={"Update Phone Number"}
-          subHeading={"Link your phone number to your account"}
+          heading={<Trans i18nKey={'profile:updatePhoneNumber'} />}
+          subHeading={<Trans i18nKey={'profile:updatePhoneNumberSubheading'} />}
         >
           <UpdatePhoneNumberForm
             session={session}
@@ -74,8 +75,8 @@ function UpdateProfileFormContainer() {
 
       <If condition={allowAccountDeletion}>
         <SettingsTile
-          heading={"Danger Zone"}
-          subHeading={"Some actions cannot be undone. Please be careful."}
+          heading={<Trans i18nKey={'profile:dangerZone'} />}
+          subHeading={<Trans i18nKey={'profile:dangerZoneSubheading'} />}
         >
           <ProfileDangerZone />
         </SettingsTile>
