@@ -19,6 +19,8 @@ import {
 } from '~/core/ui/Dropdown';
 
 import IconButton from '~/core/ui/IconButton';
+import { useTranslation } from 'react-i18next';
+import Trans from '~/core/ui/Trans';
 
 type Data = {
   id: Membership['id'];
@@ -28,74 +30,6 @@ type Data = {
     displayName: UserData['displayName'];
   };
 };
-
-const columns: ColumnDef<Data>[] = [
-  {
-    header: 'Membership ID',
-    id: 'id',
-    accessorKey: 'id',
-  },
-  {
-    header: 'User ID',
-    id: 'user-id',
-    cell: ({ row }) => {
-      const userId = row.original.user.id;
-
-      return (
-        <Link className={'hover:underline'} href={`/admin/users/${userId}`}>
-          {userId}
-        </Link>
-      );
-    },
-  },
-  {
-    header: 'Name',
-    id: 'name',
-    accessorKey: 'user.displayName',
-  },
-  {
-    header: 'Role',
-    cell: ({ row }) => {
-      return (
-        <div className={'inline-flex'}>
-          <RoleBadge role={row.original.role} />
-        </div>
-      );
-    },
-  },
-  {
-    header: 'Actions',
-    cell: ({ row }) => {
-      const membership = row.original;
-      const userId = membership.user.id;
-
-      return (
-        <div className={'flex'}>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <IconButton>
-                <span className="sr-only">Open menu</span>
-                <EllipsisHorizontalIcon className="h-4 w-4" />
-              </IconButton>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem asChild>
-                <Link href={`/admin/users/${userId}`}>View User</Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem asChild>
-                <Link href={`/admin/users/${userId}/impersonate`}>
-                  Impersonate User
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      );
-    },
-  },
-];
 
 function OrganizationsMembersTable({
   memberships,
@@ -108,6 +42,80 @@ function OrganizationsMembersTable({
   perPage: number;
   pageCount: number;
 }>) {
+  const { t } = useTranslation('admin');
+
+  const columns: ColumnDef<Data>[] = [
+    {
+      header: t('admin:membershipId'),
+      id: 'id',
+      accessorKey: 'id',
+    },
+    {
+      header: t('admin:userId'),
+      id: 'user-id',
+      cell: ({ row }) => {
+        const userId = row.original.user.id;
+  
+        return (
+          <Link className={'hover:underline'} href={`/admin/users/${userId}`}>
+            {userId}
+          </Link>
+        );
+      },
+    },
+    {
+      header: t('admin:orgTableName'),
+      id: 'name',
+      accessorKey: 'user.displayName',
+    },
+    {
+      header: 'Role',
+      cell: ({ row }) => {
+        return (
+          <div className={'inline-flex'}>
+            <RoleBadge role={row.original.role} />
+          </div>
+        );
+      },
+    },
+    {
+      header: t('admin:actions'),
+      cell: ({ row }) => {
+        const membership = row.original;
+        const userId = membership.user.id;
+  
+        return (
+          <div className={'flex'}>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <IconButton>
+                  <span className="sr-only">
+                    <Trans i18nKey={'admin:openMenu'} />
+                  </span>
+                  <EllipsisHorizontalIcon className="h-4 w-4" />
+                </IconButton>
+              </DropdownMenuTrigger>
+  
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem asChild>
+                  <Link href={`/admin/users/${userId}`}>
+                    <Trans i18nKey={'admin:viewUser'} />
+                  </Link>
+                </DropdownMenuItem>
+  
+                <DropdownMenuItem asChild>
+                  <Link href={`/admin/users/${userId}/impersonate`}>
+                    <Trans i18nKey={'admin:impersonateUser'} />
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        );
+      },
+    },
+  ];
+
   const data = memberships.filter((membership) => {
     return membership.user;
   });

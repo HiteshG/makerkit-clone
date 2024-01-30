@@ -8,16 +8,6 @@ import Button from '~/core/ui/Button';
 import Trans from '~/core/ui/Trans';
 import configuration from '~/configuration';
 
-/**
- * Retrieves the session status for a Stripe checkout session.
- * Since we should only arrive here for a successful checkout, we only check
- * for the `paid` status.
- *
- * @param {Stripe.Checkout.Session['status']} status - The status of the Stripe checkout session.
- * @param {string} customerEmail - The email address of the customer associated with the session.
- *
- * @returns {ReactElement} - The component to render based on the session status.
- */
 export function StripeSessionStatus({
   customerEmail,
 }: React.PropsWithChildren<{

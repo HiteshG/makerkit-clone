@@ -7,6 +7,7 @@ import Textarea from '~/core/ui/Textarea';
 import Label from '~/core/ui/Label';
 import Button from '~/core/ui/Button';
 import Heading from '~/core/ui/Heading';
+import Trans from '~/core/ui/Trans';
 import { TextFieldInput, TextFieldLabel } from '~/core/ui/TextField';
  
 import type Task from '~/lib/tasks/types/task';
@@ -46,12 +47,14 @@ const TaskItemContainer: React.FC<{
         <Heading type={2}>{task.name}</Heading>
  
         <TextFieldLabel>
-          Name
+          <Trans i18nKey={'task:taskNameLabel'} />
+
           <TextFieldInput required defaultValue={task.name} name={'name'} />
         </TextFieldLabel>
  
         <Label>
-          Description
+          <Trans i18nKey={'task:taskDescriptionLabel'} />
+
           <Textarea
             className={'h-32'}
             name={'description'}
@@ -63,11 +66,15 @@ const TaskItemContainer: React.FC<{
           <Button href={'../tasks'} variant={'ghost'}>
             <span className={'flex space-x-2 items-center'}>
               <ChevronLeftIcon className={'w-4'} />
-              <span>Back to Tasks</span>
+              <span>
+                <Trans i18nKey={'task:backToTasksLabel'} />
+              </span>
             </span>
           </Button>
  
-          <Button loading={isMutating}>Update Task</Button>
+          <Button loading={isMutating}>
+            <Trans i18nKey={'task:updateTaskLabel'} />
+          </Button>
         </div>
       </div>
     </form>

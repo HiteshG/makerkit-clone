@@ -13,6 +13,7 @@ import useCsrfToken from '~/core/hooks/use-csrf-token';
 import { TextFieldInput, TextFieldLabel } from '~/core/ui/TextField';
 import ErrorBoundary from '~/core/ui/ErrorBoundary';
 import Alert from '~/core/ui/Alert';
+import Trans from '~/core/ui/Trans';
 
 function BanUserModal({
   user,
@@ -46,25 +47,34 @@ function BanUserModal({
           <div className={'flex flex-col space-y-4'}>
             <div className={'flex flex-col space-y-2 text-sm'}>
               <p>
-                You are about to ban <b>{displayText}</b>.
+                <Trans
+                  i18nKey={'admin:userBanConfirm'}
+                  values={{ user: displayText }}
+                  components={{ b: <b /> }}
+                />
               </p>
 
               <p>
-                You can unban them later, but they will not be able to log in or
-                use their account until you do.
+                <Trans i18nKey={'admin:userBanDetail'} />
               </p>
 
               <TextFieldLabel>
-                Type <b>BAN</b> to confirm
+                <Trans
+                  i18nKey={'admin:confirmBanByTyping'}
+                  values={{ ban: "BAN" }}
+                  components={{ b: <b /> }}
+                />
                 <TextFieldInput type="text" required pattern={'BAN'} />
               </TextFieldLabel>
 
-              <p>Are you sure you want to do this?</p>
+              <p>
+                <Trans i18nKey={'admin:reallyWantThis'} />
+              </p>
             </div>
 
             <div className={'flex space-x-2.5 justify-end'}>
               <Modal.CancelButton onClick={onDismiss}>
-                Cancel
+                <Trans i18nKey={'admin:cancel'} />
               </Modal.CancelButton>
 
               <SubmitButton />
@@ -81,7 +91,7 @@ function SubmitButton() {
 
   return (
     <Button loading={pending} variant={'destructive'}>
-      Yes, ban user
+      <Trans i18nKey={'admin:banUserOkay'} />
     </Button>
   );
 }
@@ -91,8 +101,11 @@ export default BanUserModal;
 function BanErrorAlert() {
   return (
     <Alert type={'error'}>
-      <Alert.Heading>There was an error banning this user.</Alert.Heading>
-      Check the logs for more information.
+      <Alert.Heading>
+        <Trans i18nKey={'admin:banUserError'} />
+      </Alert.Heading>
+      
+      <Trans i18nKey={'admin:banUserErrorDetail'} />
     </Alert>
   );
 }

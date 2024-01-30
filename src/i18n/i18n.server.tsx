@@ -18,7 +18,6 @@ async function initializeServerI18n(lang?: Maybe<string>) {
     .use(
       resourcesToBackend(async (language, namespace, callback) => {
         try {
-          // never extract the path to a variable, won't work
           const data = await import(
             `../../public/locales/${language}/${namespace}.json`
           );

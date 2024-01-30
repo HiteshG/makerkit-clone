@@ -193,12 +193,6 @@ const UpdateOrganizationForm = () => {
   );
 };
 
-/**
- * @description Upload file to Storage
- * @param client
- * @param organizationId
- * @param logo
- */
 async function uploadLogo({
   client,
   organizationId,

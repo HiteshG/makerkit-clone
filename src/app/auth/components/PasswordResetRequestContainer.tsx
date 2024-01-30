@@ -83,11 +83,6 @@ function PasswordResetRequestContainer() {
 
 export default PasswordResetRequestContainer;
 
-/**
- * @description
- * Return the URL where the user will be redirected to after resetting
- * their password
- */
 function getReturnUrl() {
   const host = window.location.origin;
   const callback = configuration.paths.authCallback;

@@ -1,8 +1,3 @@
-/**
- * Get page from query params
- * @name getPageFromQueryParams
- * @param pageParam
- */
 function getPageFromQueryParams(pageParam: string | undefined) {
   const page = pageParam ? parseInt(pageParam) : 1;
 

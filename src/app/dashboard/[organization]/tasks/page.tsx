@@ -12,12 +12,14 @@ import { getTasks } from '~/lib/tasks/database/queries';
 import Heading from '~/core/ui/Heading';
 import Button from '~/core/ui/Button';
 import If from '~/core/ui/If';
+import Trans from '~/core/ui/Trans';
  
 import type Task from '~/lib/tasks/types/task';
 import TasksTable from '~/app/dashboard/[organization]/tasks/components/TasksTable';
 import SearchTaskInput from '~/app/dashboard/[organization]/tasks/components/SearchTaskInput';
 import CreateTaskModal from '~/app/dashboard/[organization]/tasks/components/CreateTaskModal';
- 
+import { withI18n } from '~/i18n/with-i18n'; 
+
 export const metadata = {
   title: 'Tasks',
 };
@@ -99,7 +101,7 @@ export async function loadTasksData(params: {
   };
 }
  
-export default TasksPage;
+export default withI18n(TasksPage);
  
 function TasksTableContainer({
   tasks,
@@ -121,7 +123,9 @@ function TasksTableContainer({
               <span className={'flex space-x-2 items-center'}>
                 <PlusCircleIcon className={'w-4'} />
  
-                <span>New Task</span>
+                <span>
+                  <Trans i18nKey={'task:newTaskLabel'} />
+                </span>
               </span>
             </Button>
           </CreateTaskModal>
@@ -141,12 +145,12 @@ function TasksEmptyState() {
       <div className={'flex flex-col'}>
         <Heading type={2}>
           <span className={'font-semibold'}>
-            Hey, it looks like you don&apos;t have any tasks yet... 🤔
+            <Trans i18nKey={'task:emptyTaskLabel'} /> 🤔
           </span>
         </Heading>
  
         <Heading type={4}>
-          Create your first task by clicking on the button below
+          <Trans i18nKey={'task:emptyTaskDescription'} />
         </Heading>
       </div>
     </div>

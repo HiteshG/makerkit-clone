@@ -8,6 +8,7 @@ import Modal from '~/core/ui/Modal';
 import Button from '~/core/ui/Button';
 import { reactivateUser } from '~/app/admin/users/@modal/[uid]/actions.server';
 import useCsrfToken from '~/core/hooks/use-csrf-token';
+import Trans from '~/core/ui/Trans';
 
 function ReactivateUserModal({
   user,
@@ -42,20 +43,25 @@ function ReactivateUserModal({
       <div className={'flex flex-col space-y-4'}>
         <div className={'flex flex-col space-y-2 text-sm'}>
           <p>
-            You are about to reactivate the account belonging to{' '}
-            <b>{displayText}</b>.
+            <Trans
+              i18nKey={'admin:userReactiveConfirm'}
+              values={{ user: displayText }}
+              components={{ b: <b /> }}
+            />
           </p>
 
-          <p>Are you sure you want to do this?</p>
+          <p>
+            <Trans i18nKey={'admin:reallyWantThis'} />
+          </p>
         </div>
 
         <div className={'flex space-x-2.5 justify-end'}>
           <Modal.CancelButton disabled={pending} onClick={onDismiss}>
-            Cancel
+            <Trans i18nKey={'admin:cancel'} />
           </Modal.CancelButton>
 
           <Button loading={pending} onClick={onConfirm}>
-            Yes, reactivate user
+            <Trans i18nKey={'admin:reactivateUserOkay'} />
           </Button>
         </div>
       </div>

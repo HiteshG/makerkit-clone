@@ -1,0 +1,23 @@
+{
+	"newTaskLabel": "New Task",
+	"emptyTaskLabel": "Hey, it looks like you don't have any tasks yet...",
+	"emptyTaskDescription": "Create your first task by clicking on the button below",
+	"createTaskLabel": "Create Task",
+	"searchForTaskPlaceholder": "Search for task...",
+	"taskNameError": "Task name must be at least 3 characters long",
+	"taskNameLabel": "Name",
+	"taskDescriptionLabel": "Description",
+	"taskDueDateLabel": "Due Date",
+	"taskDueDateHint": "Leave empty to set the due date to tomorrow",
+	"creatingTaskLabel": "Creating Task...",
+	"backToTasksLabel": "Back to Tasks",
+	"updateTaskLabel": "Update Task",
+	"doneTaskLabel": "Done",
+	"viewTaskLabel": "View Task",
+	"deleteTaskLabel": "Delete Task",
+	"markAsTodo": "Mark as Todo",
+	"markAsDone": "Mark as Done",
+	"deleteTaskModalDescription": "You are about to delete the task {{ task }}",
+	"continueProceed": "Do you want to continue?",
+	"confirmDeleteTask": "Yep, delete task"
+}

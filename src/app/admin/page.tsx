@@ -5,6 +5,8 @@ import getSupabaseServerComponentClient from '~/core/supabase/server-component-c
 
 import configuration from '~/configuration';
 import { PageBody } from '~/core/ui/Page';
+import { withI18n } from '~/i18n/with-i18n';
+import Trans from '~/core/ui/Trans';
 
 export const metadata = {
   title: `Admin | ${configuration.site.siteName}`,
@@ -15,7 +17,9 @@ async function AdminPage() {
 
   return (
     <div className={'flex flex-col flex-1'}>
-      <AdminHeader>Admin</AdminHeader>
+      <AdminHeader>
+        <Trans i18nKey={'admin:adminTab'} />
+      </AdminHeader>
 
       <PageBody>
         <AdminDashboard data={data} />
@@ -24,7 +28,7 @@ async function AdminPage() {
   );
 }
 
-export default AdminGuard(AdminPage);
+export default withI18n(AdminGuard(AdminPage));
 
 async function loadData() {
   const client = getSupabaseServerComponentClient({ admin: true });

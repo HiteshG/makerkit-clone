@@ -1,4 +1,5 @@
 import Tile from '~/core/ui/Tile';
+import Trans from '~/core/ui/Trans';
 
 interface Data {
   usersCount: number;
@@ -20,7 +21,9 @@ function AdminDashboard({
       }
     >
       <Tile>
-        <Tile.Heading>Users</Tile.Heading>
+        <Tile.Heading>
+          <Trans i18nKey={'admin:userTab'} />
+        </Tile.Heading>
 
         <Tile.Body>
           <div className={'flex justify-between'}>
@@ -30,7 +33,9 @@ function AdminDashboard({
       </Tile>
 
       <Tile>
-        <Tile.Heading>Organizations</Tile.Heading>
+        <Tile.Heading>
+          <Trans i18nKey={'admin:organizationTab'} />
+        </Tile.Heading>
 
         <Tile.Body>
           <div className={'flex justify-between'}>
@@ -40,7 +45,9 @@ function AdminDashboard({
       </Tile>
 
       <Tile>
-        <Tile.Heading>Paying Customers</Tile.Heading>
+        <Tile.Heading>
+          <Trans i18nKey={'admin:payingCustomerTab'} />
+        </Tile.Heading>
 
         <Tile.Body>
           <div className={'flex justify-between'}>
@@ -50,7 +57,9 @@ function AdminDashboard({
       </Tile>
 
       <Tile>
-        <Tile.Heading>Trials</Tile.Heading>
+        <Tile.Heading>
+          <Trans i18nKey={'admin:trialTab'} />
+        </Tile.Heading>
 
         <Tile.Body>
           <div className={'flex justify-between'}>

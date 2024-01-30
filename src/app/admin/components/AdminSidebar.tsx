@@ -3,6 +3,7 @@
 import { HomeIcon, UserGroupIcon, UserIcon } from '@heroicons/react/24/outline';
 import Sidebar, { SidebarContent, SidebarItem } from '~/core/ui/Sidebar';
 import Logo from '~/core/ui/Logo';
+import Trans from '~/core/ui/Trans';
 
 function AdminSidebar() {
   return (
@@ -17,21 +18,21 @@ function AdminSidebar() {
           path={'/admin'}
           Icon={() => <HomeIcon className={'h-6'} />}
         >
-          Admin
+          <Trans i18nKey={'admin:adminTab'} />
         </SidebarItem>
 
         <SidebarItem
           path={'/admin/users'}
           Icon={() => <UserIcon className={'h-6'} />}
         >
-          Users
+          <Trans i18nKey={'admin:userTab'} />
         </SidebarItem>
 
         <SidebarItem
           path={'/admin/organizations'}
           Icon={() => <UserGroupIcon className={'h-6'} />}
         >
-          Organizations
+          <Trans i18nKey={'admin:organizationTab'} />
         </SidebarItem>
       </SidebarContent>
     </Sidebar>

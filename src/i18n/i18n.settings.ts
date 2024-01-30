@@ -5,12 +5,6 @@ const languages: string[] = [fallbackLng];
 
 export const I18N_COOKIE_NAME = 'lang';
 
-/**
- * The default array of Internationalization (i18n) namespaces.
- * These namespaces are commonly used in the application for translation purposes.
- *
- * Add your own namespaces here
- **/
 export const defaultI18nNamespaces = [
   'common',
   'auth',
@@ -19,6 +13,8 @@ export const defaultI18nNamespaces = [
   'subscription',
   'onboarding',
   'documents',
+  'task',
+  'admin',
 ];
 
 function getI18nSettings(

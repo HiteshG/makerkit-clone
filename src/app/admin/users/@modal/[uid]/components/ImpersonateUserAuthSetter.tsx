@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import Spinner from '~/core/ui/Spinner';
+import Trans from '~/core/ui/Trans';
 import useSupabase from '~/core/hooks/use-supabase';
 
 function ImpersonateUserAuthSetter({
@@ -40,7 +41,9 @@ function ImpersonateUserAuthSetter({
         <Spinner />
 
         <div>
-          <p>Setting up your session...</p>
+          <p>
+            <Trans i18nKey={'admin:settingUpSession'} />
+          </p>
         </div>
       </div>
     </div>

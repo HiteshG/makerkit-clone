@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { FormEventHandler, useCallback } from "react";
 import { TextFieldInput } from "~/core/ui/TextField";
+import { useTranslation } from 'react-i18next';
 
 function SearchTaskInput({
   query,
@@ -11,6 +12,7 @@ function SearchTaskInput({
 }>) {
   const router = useRouter();
   const pathName = usePathname();
+  const { t } = useTranslation('organization');
 
   const onSubmit: FormEventHandler<HTMLFormElement> = useCallback(
     (event) => {
@@ -35,7 +37,7 @@ function SearchTaskInput({
         defaultValue={query}
         className={'w-full'}
         name={'query'}
-        placeholder={'Search for task...'}
+        placeholder={t('task:searchForTaskPlaceholder')}
       />
     </form>
   )

@@ -9,6 +9,8 @@ import Button from "~/core/ui/Button";
 import If from "~/core/ui/If";
 import Label from "~/core/ui/Label";
 import Textarea from "~/core/ui/Textarea";
+import Trans from "~/core/ui/Trans";
+import { useTranslation } from "react-i18next";
 
 import useCurrentOrganization from "~/lib/organizations/hooks/use-current-organization";
 import { createTaskAction } from "~/lib/tasks/actions";
@@ -19,6 +21,7 @@ const TaskForm: React.FC = () => {
   const organization = useCurrentOrganization();
   const organizationId = organization?.id as number;
   const csrfToken = useCsrfToken();
+  const { t } = useTranslation();
 
   const onCreateTask: FormEventHandler<HTMLFormElement> = useCallback(
     async (event) => {
@@ -31,7 +34,7 @@ const TaskForm: React.FC = () => {
       const dueDate = (data.get('dueDate') as string) || getDefaultDueDate();
 
       if (name.trim().length < 3) {
-        toast.error('Task name must be at least 3 characters long');
+        toast.error(t('task:taskNameError'));
         return;
       }
 
@@ -47,14 +50,15 @@ const TaskForm: React.FC = () => {
         await createTaskAction({ task, csrfToken });
       });
     },
-    [csrfToken, organizationId],
+    [csrfToken, organizationId, t],
   );
 
   return (
     <form className={'flex flex-col'} onSubmit={onCreateTask}>
       <div className={'flex flex-col space-y-4 w-full'}>
         <TextField.Label>
-          Name
+          <Trans i18nKey={'task:taskNameLabel'} />
+
           <TextField.Input
             required
             name={'name'}
@@ -63,7 +67,8 @@ const TaskForm: React.FC = () => {
         </TextField.Label>
 
         <Label>
-          Description
+          <Trans i18nKey={'task:taskDescriptionLabel'} />
+
           <Textarea
             name={'description'}
             className={'h-32'}
@@ -72,17 +77,18 @@ const TaskForm: React.FC = () => {
         </Label>
 
         <TextField.Label>
-          Due date
+          <Trans i18nKey={'task:taskDueDateLabel'} />
+
           <TextField.Input name={'dueDate'} type={'date'} />
           <TextField.Hint>
-            Leave empty to set the due date to tomorrow
+            <Trans i18nKey={'task:taskDueDateHint'} />
           </TextField.Hint>
         </TextField.Label>
 
         <div className={'flex justify-end'}>
           <Button variant={'flat'} loading={isMutating}>
-            <If condition={isMutating} fallback={<>Create Task</>}>
-              Creating Task...
+            <If condition={isMutating} fallback={<Trans i18nKey={'task:createTaskLabel'} />}>
+              <Trans i18nKey={'task:creatingTaskLabel'} />
             </If>
           </Button>
         </div>

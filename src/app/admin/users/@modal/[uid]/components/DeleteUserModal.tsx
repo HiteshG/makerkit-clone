@@ -9,6 +9,7 @@ import Button from '~/core/ui/Button';
 import { deleteUserAction } from '~/app/admin/users/@modal/[uid]/actions.server';
 import useCsrfToken from '~/core/hooks/use-csrf-token';
 import { TextFieldInput, TextFieldLabel } from '~/core/ui/TextField';
+import Trans from '~/core/ui/Trans';
 
 function DeleteUserModal({
   user,
@@ -44,36 +45,45 @@ function DeleteUserModal({
         <div className={'flex flex-col space-y-4'}>
           <div className={'flex flex-col space-y-2 text-sm'}>
             <p>
-              You are about to delete the user <b>{displayText}</b>.
+              <Trans
+                i18nKey={'admin:userDeleteConfirm'}
+                values={{ user: displayText }}
+                components={{ b: <b /> }}
+              />
             </p>
 
             <p>
-              Delete this user will also delete the organizations they are a
-              Owner of, and potentially the data associated with those
-              organizations.
+              <Trans i18nKey={'admin:deleteUserDataWarning'} />
             </p>
 
             <p>
-              <b>This action is not reversible</b>.
+              <b><Trans i18nKey={'admin:actionNotReversible'} /></b>.
             </p>
 
-            <p>Are you sure you want to do this?</p>
+            <p>
+              <Trans i18nKey={'admin:reallyWantThis'} />
+            </p>
           </div>
 
           <div>
             <TextFieldLabel>
-              Confirm by typing <b>DELETE</b>
+              <Trans
+                i18nKey={'admin:confirmByTyping'}
+                values={{ delete: "DELETE" }}
+                components={{ b: <b /> }}
+              />
+
               <TextFieldInput required type={'text'} pattern={'DELETE'} />
             </TextFieldLabel>
           </div>
 
           <div className={'flex space-x-2.5 justify-end'}>
             <Modal.CancelButton disabled={pending} onClick={onDismiss}>
-              Cancel
+              <Trans i18nKey={'admin:cancel'} />
             </Modal.CancelButton>
 
             <Button loading={pending} variant={'destructive'}>
-              Yes, delete user
+              <Trans i18nKey={'admin:deleteUserOkay'} />
             </Button>
           </div>
         </div>

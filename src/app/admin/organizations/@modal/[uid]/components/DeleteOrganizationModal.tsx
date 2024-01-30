@@ -5,6 +5,7 @@ import { useState, useTransition } from 'react';
 
 import Modal from '~/core/ui/Modal';
 import Button from '~/core/ui/Button';
+import Trans from '~/core/ui/Trans';
 import useCsrfToken from '~/core/hooks/use-csrf-token';
 import { TextFieldInput, TextFieldLabel } from '~/core/ui/TextField';
 import Organization from '~/lib/organizations/types/organization';
@@ -47,36 +48,44 @@ function DeleteOrganizationModal({
         <div className={'flex flex-col space-y-4'}>
           <div className={'flex flex-col space-y-2 text-sm'}>
             <p>
-              You are about to delete the organization{' '}
-              <b>{organization.name}</b>.
+              <Trans
+                i18nKey={'admin:organizationDeleteConfirm'}
+                values={{ organization: organization.name }}
+                components={{ b: <b /> }}
+              />
             </p>
 
             <p>
-              Delete this organization will potentially delete the data
-              associated with it.
+              <Trans i18nKey={'admin:deleteAssociatedData'} />
             </p>
 
             <p>
-              <b>This action is not reversible</b>.
+              <b><Trans i18nKey={'admin:actionNotReversible'} /></b>.
             </p>
 
-            <p>Are you sure you want to do this?</p>
+            <p>
+              <Trans i18nKey={'admin:reallyWantThis'} />
+            </p>
           </div>
 
           <div>
             <TextFieldLabel>
-              Confirm by typing <b>DELETE</b>
+              <Trans
+                i18nKey={'admin:confirmByTyping'}
+                values={{ delete: 'DELETE' }}
+                components={{ b: <b /> }}
+              />
               <TextFieldInput required type={'text'} pattern={'DELETE'} />
             </TextFieldLabel>
           </div>
 
           <div className={'flex space-x-2.5 justify-end'}>
             <Modal.CancelButton disabled={pending} onClick={onDismiss}>
-              Cancel
+              <Trans i18nKey={'admin:cancel'} />
             </Modal.CancelButton>
 
             <Button loading={pending} variant={'destructive'}>
-              Yes, delete organization
+              <Trans i18nKey={'admin:deleteOrganization'} />
             </Button>
           </div>
         </div>

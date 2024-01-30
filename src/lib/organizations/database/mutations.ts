@@ -13,11 +13,6 @@ type OrganizationRow = Database['public']['Tables']['organizations']['Row'];
 
 type Client = SupabaseClient<Database>;
 
-/**
- * @name updateOrganization
- * @param client
- * @param params
- */
 export async function updateOrganization(
   client: Client,
   params: {
@@ -47,10 +42,6 @@ export async function updateOrganization(
   return data;
 }
 
-/**
- * @name setOrganizationSubscriptionData
- * @description Adds or updates a subscription to an Organization
- */
 export async function setOrganizationSubscriptionData(
   client: Client,
   props: {

@@ -3,6 +3,7 @@ import { use } from 'react';
 import BanUserModal from '../components/BanUserModal';
 import getSupabaseServerComponentClient from '~/core/supabase/server-component-client';
 import AdminGuard from '~/app/admin/components/AdminGuard';
+import { withI18n } from '~/i18n/with-i18n';
 
 interface Params {
   params: {
@@ -28,4 +29,4 @@ function BanUserModalPage({ params }: Params) {
   return <BanUserModal user={user} />;
 }
 
-export default AdminGuard(BanUserModalPage);
+export default withI18n(AdminGuard(BanUserModalPage));

@@ -2,18 +2,23 @@
 
 import Alert from '~/core/ui/Alert';
 import { PageBody } from '~/core/ui/Page';
+import Trans from '~/core/ui/Trans';
+import I18nProvider from '~/i18n/I18nProvider';
 
 function OrganizationsAdminPageError() {
   return (
-    <PageBody>
-      <Alert type={'error'}>
-        <Alert.Heading>Could not load organizations</Alert.Heading>
-        <p>
-          There was an error loading the organizations. Please check your
-          console errors.
-        </p>
-      </Alert>
-    </PageBody>
+    <I18nProvider>
+      <PageBody>
+        <Alert type={'error'}>
+          <Alert.Heading>
+            <Trans i18nKey={'admin:loadOrganizationError'} />
+          </Alert.Heading>
+          <p>
+            <Trans i18nKey={'admin:loadOrganizationErrorDetail'} />
+          </p>
+        </Alert>
+      </PageBody>
+    </I18nProvider>
   );
 }
 

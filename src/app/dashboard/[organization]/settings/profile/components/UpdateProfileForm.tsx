@@ -194,12 +194,6 @@ function UpdateProfileForm({
   );
 }
 
-/**
- * @name getPhotoFile
- * @param value
- * @description Returns the file of the photo when submitted
- * It returns undefined when the user hasn't selected a file
- */
 function getPhotoFile(value: string | null | FileList) {
   if (!value || typeof value === 'string') {
     return;

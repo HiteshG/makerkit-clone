@@ -12,8 +12,9 @@ import { impersonateUser } from '~/app/admin/users/@modal/[uid]/actions.server';
 import useCsrfToken from '~/core/hooks/use-csrf-token';
 
 import ImpersonateUserAuthSetter from '../components/ImpersonateUserAuthSetter';
-import PageLoadingIndicator from '~/core/ui/PageLoadingIndicator';
+import LoadingOverlay from '~/core/ui/LoadingOverlay';
 import { Alert, AlertHeading } from '~/core/ui/Alert';
+import Trans from '~/core/ui/Trans';
 
 function ImpersonateUserConfirmationModal({
   user,
@@ -62,9 +63,9 @@ function ImpersonateUserConfirmationModal({
             <>
               <ImpersonateUserAuthSetter tokens={tokens} />
 
-              <PageLoadingIndicator>
-                Setting up your session...
-              </PageLoadingIndicator>
+              <LoadingOverlay>
+                <Trans i18nKey={'admin:settingUpSession'} />
+              </LoadingOverlay>
             </>
           );
         }}
@@ -72,8 +73,11 @@ function ImpersonateUserConfirmationModal({
 
       <If condition={error}>
         <Alert type={'error'}>
-          <AlertHeading>Impersonation Error</AlertHeading>
-          Sorry, something went wrong. Please check the logs.
+          <AlertHeading>
+            <Trans i18nKey={'admin:impersonationError'} />
+          </AlertHeading>
+          
+          <Trans i18nKey={'admin:impersonationErrorDetail'} />
         </Alert>
       </If>
 
@@ -81,24 +85,25 @@ function ImpersonateUserConfirmationModal({
         <div className={'flex flex-col space-y-4'}>
           <div className={'flex flex-col space-y-2 text-sm'}>
             <p>
-              You are about to impersonate the account belonging to{' '}
-              <b>{displayText}</b> with ID <b>{user.id}</b>.
+              <Trans
+                i18nKey={'admin:impersonateUserDetail1'}
+                values={{ user: displayText, userId: user.id }}
+                components={{ b: <b /> }}
+              />
             </p>
 
             <p>
-              You will be able to log in as them, see and do everything they
-              can. To return to your own account, simply log out.
+              <Trans i18nKey={'admin:impersonateUserDetail2'} />
             </p>
 
             <p>
-              Like Uncle Ben said, with great power comes great responsibility.
-              Use this power wisely.
+              <Trans i18nKey={'admin:impersonateUserDetail3'} />
             </p>
           </div>
 
           <div className={'flex space-x-2.5 justify-end'}>
             <Modal.CancelButton disabled={pending} onClick={onDismiss}>
-              Cancel
+              <Trans i18nKey={'admin:cancel'} />
             </Modal.CancelButton>
 
             <Button
@@ -107,7 +112,7 @@ function ImpersonateUserConfirmationModal({
               variant={'destructive'}
               onClick={onConfirm}
             >
-              Yes, let&apos;s do it
+              <Trans i18nKey={'admin:letsDoIt'} />
             </Button>
           </div>
         </div>

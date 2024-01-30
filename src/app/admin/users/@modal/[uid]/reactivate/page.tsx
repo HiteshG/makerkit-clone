@@ -5,6 +5,7 @@ import getSupabaseServerComponentClient from '~/core/supabase/server-component-c
 import AdminGuard from '~/app/admin/components/AdminGuard';
 
 import ReactivateUserModal from '~/app/admin/users/@modal/[uid]/components/ReactivateUserModal';
+import { withI18n } from '~/i18n/with-i18n';
 
 interface Params {
   params: {
@@ -30,4 +31,4 @@ function ReactivateUserModalPage({ params }: Params) {
   return <ReactivateUserModal user={user} />;
 }
 
-export default AdminGuard(ReactivateUserModalPage);
+export default withI18n(AdminGuard(ReactivateUserModalPage));

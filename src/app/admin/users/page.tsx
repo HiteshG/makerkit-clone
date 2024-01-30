@@ -7,6 +7,8 @@ import UserData from '~/core/session/types/user-data';
 import getPageFromQueryParams from '~/app/admin/utils/get-page-from-query-param';
 import { PageBody } from '~/core/ui/Page';
 import configuration from '~/configuration';
+import { withI18n } from '~/i18n/with-i18n';
+import Trans from '~/core/ui/Trans';
 
 interface UsersAdminPageProps {
   searchParams: {
@@ -26,7 +28,9 @@ async function UsersAdminPage({ searchParams }: UsersAdminPageProps) {
 
   return (
     <div className={'flex flex-1 flex-col'}>
-      <AdminHeader>Users</AdminHeader>
+      <AdminHeader>
+        <Trans i18nKey={'admin:userTab'} />
+      </AdminHeader>
 
       <PageBody>
         <UsersTable
@@ -40,7 +44,7 @@ async function UsersAdminPage({ searchParams }: UsersAdminPageProps) {
   );
 }
 
-export default AdminGuard(UsersAdminPage);
+export default withI18n(AdminGuard(UsersAdminPage));
 
 async function loadAuthUsers(page = 1, perPage = 20) {
   const client = getSupabaseServerComponentClient({ admin: true });

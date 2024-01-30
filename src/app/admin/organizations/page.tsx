@@ -10,6 +10,8 @@ import { PageBody } from '~/core/ui/Page';
 import getSupabaseServerComponentClient from '~/core/supabase/server-component-client';
 
 import configuration from '~/configuration';
+import { withI18n } from '~/i18n/with-i18n';
+import Trans from '~/core/ui/Trans';
 
 interface OrganizationsAdminPageProps {
   searchParams: {
@@ -41,7 +43,9 @@ async function OrganizationsAdminPage({
 
   return (
     <div className={'flex flex-1 flex-col'}>
-      <AdminHeader>Manage Organizations</AdminHeader>
+      <AdminHeader>
+        <Trans i18nKey={'admin:manageOrganization'} />
+      </AdminHeader>
 
       <PageBody>
         <div className={'flex flex-col space-y-4'}>
@@ -65,4 +69,4 @@ async function OrganizationsAdminPage({
   );
 }
 
-export default AdminGuard(OrganizationsAdminPage);
+export default withI18n(AdminGuard(OrganizationsAdminPage));

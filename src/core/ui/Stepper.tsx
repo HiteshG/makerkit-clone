@@ -9,14 +9,6 @@ type Variant = 'numbers' | 'default';
 
 const classNameBuilder = getClassNameBuilder();
 
-/**
- * Renders a stepper component with multiple steps.
- *
- * @param {Object} props - The props object containing the following properties:
- *   - steps {string[]} - An array of strings representing the step labels.
- *   - currentStep {number} - The index of the currently active step.
- *   - variant {string} (optional) - The variant of the stepper component (default: 'default').
- **/
 function Stepper(props: {
   steps: string[];
   currentStep: number;

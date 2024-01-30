@@ -11,11 +11,6 @@ import type UserData from '~/core/session/types/user-data';
 
 type Client = SupabaseClient<Database>;
 
-/**
- * Query to fetch the organization data from the Database
- * Returns the organization data and the subscription data
- * {@link UserOrganizationData.organization}
- */
 const FETCH_ORGANIZATION_QUERY = `
   id,
   uuid,
@@ -49,12 +44,6 @@ export type UserOrganizationData = {
   };
 };
 
-/**
- * @name getOrganizationsByUserId
- * @description Get all the organizations where the user {@link userId} is a member
- * @param client
- * @param userId
- */
 export function getOrganizationsByUserId(client: Client, userId: string) {
   return client
     .from(MEMBERSHIPS_TABLE)
@@ -93,12 +82,6 @@ export async function getOrganizationInvitedMembers(
     .throwOnError();
 }
 
-/**
- * @name getOrganizationMembers
- * @description Get all the members of an organization
- * @param client
- * @param organizationId
- */
 export function getOrganizationMembers(client: Client, organizationId: number) {
   return client
     .from(MEMBERSHIPS_TABLE)
@@ -124,11 +107,6 @@ export function getOrganizationMembers(client: Client, organizationId: number) {
     .is('code', null);
 }
 
-/**
- * @name getOrganizationByUid
- * @description Returns the Database record of the organization by its UUID
- * {@link uid}
- */
 export function getOrganizationByUid(client: Client, uid: string) {
   return client
     .from(ORGANIZATIONS_TABLE)
@@ -140,11 +118,6 @@ export function getOrganizationByUid(client: Client, uid: string) {
     .maybeSingle();
 }
 
-/**
- * @name getOrganizationById
- * @description Returns the Database record of the organization by its ID
- * {@link organizationId}
- */
 export function getOrganizationById(client: Client, organizationId: number) {
   return client
     .from(ORGANIZATIONS_TABLE)
@@ -156,13 +129,6 @@ export function getOrganizationById(client: Client, organizationId: number) {
     .single();
 }
 
-/**
- * @name getOrganizationByCustomerId
- * @description Retrieve an organization using the customer ID assigned by
- * Stripe after the first checkout, e,g. when the customer record is created
- * @param client
- * @param customerId
- */
 export async function getOrganizationByCustomerId(
   client: Client,
   customerId: string,
@@ -185,11 +151,6 @@ export async function getOrganizationByCustomerId(
     .single();
 }
 
-/**
- * @name getMembersAuthMetadata
- * @param client
- * @param userIds
- */
 export async function getMembersAuthMetadata(
   client: Client,
   userIds: string[],
