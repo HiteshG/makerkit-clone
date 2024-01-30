@@ -9,6 +9,7 @@ import { cva } from 'cva';
 
 import { NavigationMenuContext } from './NavigationMenuContext';
 import isRouteActive from '~/core/generic/is-route-active';
+import Trans from '../Trans';
 
 interface Link {
   path: string;
@@ -44,7 +45,7 @@ const NavigationMenuItem: React.FCC<{
         href={disabled ? '' : link.path}
         shallow={shallow ?? active}
       >
-        {label}
+        <Trans i18nKey={label} defaults={label} />
       </Link>
     </li>
   );
