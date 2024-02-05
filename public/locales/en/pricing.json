@@ -1,0 +1,28 @@
+{
+  "plans": {
+    "Monthly": "Monthly",
+    "Yearly": "Yearly",
+    "features": {
+      "Basic Reporting": "Basic Reporting",
+      "Up to 20 users": "Up to 20 users",
+      "1GB for each user": "1GB for each user",
+      "Chat Support": "Chat Support",
+      "Advanced Reporting": "Advanced Reporting",
+      "Up to 50 users": "Up to 50 users",
+      "5GB for each user": "5GB for each user",
+      "Chat and Phone Support": "Chat and Phone Support",
+      "Unlimited users": "Unlimited users",
+      "50GB for each user": "50GB for each user",
+      "Account Manager": "Account Manager"
+    }
+  },
+  "pricingDescription": "Our pricing is designed to scale with your business. Get started for free, then grow with us.",
+  "Basic": "Basic",
+  "Description of your Basic plan": "Description of your Basic plan",
+  "Up to 20 users": "Up to 20 users",
+  "Pro": "Pro",
+  "Most Popular": "Most Popular",
+  "Description of your Pro plan": "Description of your Pro plan",
+  "Premium": "Premium",
+  "Description of your Premium plan": "Description of your Premium plan"
+}

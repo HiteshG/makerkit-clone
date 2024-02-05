@@ -1,0 +1,15 @@
+{
+  "setupOrganization": "Configurar Organización",
+  "setupOrganizationDescription": "¡Bienvenido! Primero, configuremos tu organización.",
+  "organizationNameLabel": "Nombre de la organización",
+  "errorAlertHeading": "Hubo un error al completar tu incorporación.",
+  "inviteMembers": "Invitar miembros",
+  "inviteMembersDescription": "Invita a los miembros de tu equipo a unirse a tu organización.",
+  "info": "Detalles",
+  "invites": "Invitaciones",
+  "complete": "Completar",
+  "successStepHeading": "¡Todo listo! Ahora puedes empezar a usar la aplicación.",
+  "continue": "Continuar a tu Tablero",
+  "settingAccount": "Estamos configurando tu cuenta. Por favor espera...",
+  "organizationNamePlaceholder": "Ej. Acme Inc."
+}

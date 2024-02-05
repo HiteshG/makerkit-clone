@@ -1,5 +1,6 @@
 import MobileAppNavigation from '~/components/MobileAppNavigation';
 import { PageHeader } from '~/core/ui/Page';
+import LanguageDropdownSwitcher from '~/components/LanguageDropdownSwitcher';
 
 const AppHeader: React.FCC<{
   title: string | React.ReactNode;
@@ -12,6 +13,9 @@ const AppHeader: React.FCC<{
       mobileNavigation={<MobileAppNavigation />}
     >
       {children}
+      <div className="w-40">
+        <LanguageDropdownSwitcher />
+      </div>
     </PageHeader>
   );
 };

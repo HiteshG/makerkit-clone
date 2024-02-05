@@ -11,28 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '~/core/ui/Dropdown';
 
-const links = {
-  SignIn: {
-    label: 'Sign In',
-    path: '/auth/sign-in',
-  },
-  Blog: {
-    label: 'Blog',
-    path: '/blog',
-  },
-  Docs: {
-    label: 'Documentation',
-    path: '/docs',
-  },
-  Pricing: {
-    label: 'Pricing',
-    path: '/pricing',
-  },
-  FAQ: {
-    label: 'FAQ',
-    path: '/faq',
-  },
-};
+import { siteNavigationLinks } from '~/configuration';
 
 const SiteNavigation = () => {
   const className = 'font-semibold';
@@ -43,13 +22,12 @@ const SiteNavigation = () => {
         <NavigationMenu>
           <NavigationMenuItem
             className={'flex lg:hidden'}
-            link={links.SignIn}
+            link={{label: 'Sign In', path: '/auth/sign-in'}}
           />
-
-          <NavigationMenuItem className={className} link={links.Blog} />
-          <NavigationMenuItem className={className} link={links.Docs} />
-          <NavigationMenuItem className={className} link={links.Pricing} />
-          <NavigationMenuItem className={className} link={links.FAQ} />
+          
+          {
+            siteNavigationLinks.map((link) => <NavigationMenuItem key={`nav_${link.label}`} className={className} link={link} />)
+          }
         </NavigationMenu>
       </div>
 
@@ -68,7 +46,7 @@ function MobileDropdown() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        {Object.values(links).map((item) => {
+        {Object.values(siteNavigationLinks).map((item) => {
           const className = 'flex w-full h-full items-center';
 
           return (

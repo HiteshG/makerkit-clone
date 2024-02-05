@@ -13,6 +13,7 @@ import {
   DropdownMenu,
 } from '~/core/ui/Dropdown';
 
+import Trans from '~/core/ui/Trans';
 import Button from '~/core/ui/Button';
 
 const MobileNavigationDropdown: React.FC<{
@@ -35,7 +36,7 @@ const MobileNavigationDropdown: React.FC<{
             className={'flex w-full items-center justify-between space-x-2'}
           >
             <span>
-              {currentPathName}
+              <Trans i18nKey={currentPathName} defaults={currentPathName} />
             </span>
 
             <ChevronDownIcon className={'h-5'} />
@@ -56,7 +57,7 @@ const MobileNavigationDropdown: React.FC<{
                 className={'flex h-12 w-full items-center'}
                 href={link.path}
               >
-                {link.label}
+                <Trans i18nKey={link.label} defaults={link.label} />
               </Link>
             </DropdownMenuItem>
           );

@@ -1,6 +1,8 @@
 'use client';
 
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import Trans from '~/core/ui/Trans';
+import { useTranslation } from 'react-i18next';
 
 function FaqItem({
   item,
@@ -10,6 +12,8 @@ function FaqItem({
     answer: string;
   };
 }>) {
+  const { t } = useTranslation('faq');
+
   return (
     <details
       className={
@@ -26,7 +30,7 @@ function FaqItem({
             ' dark:hover:text-white'
           }
         >
-          {item.question}
+          <Trans i18nKey={item.question} defaults={item.question} />
         </h2>
 
         <div>
@@ -40,7 +44,7 @@ function FaqItem({
         className={
           'flex flex-col space-y-2 py-1 text-gray-500 dark:text-gray-400'
         }
-        dangerouslySetInnerHTML={{ __html: item.answer }}
+        dangerouslySetInnerHTML={{ __html: t(item.answer) }}
       />
     </details>
   );

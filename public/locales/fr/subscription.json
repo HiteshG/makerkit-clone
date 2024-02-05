@@ -1,0 +1,69 @@
+{
+  "subscriptionTabSubheading": "Gérez votre abonnement et votre facturation",
+  "checkout": "Paiement",
+  "manageBillingDescription": "Rendez-vous sur votre portail client pour gérer votre abonnement et votre facturation.",
+  "manageBilling": "Accéder au portail client",
+  "notSubscribedToAnyPlan": "Vous n'êtes actuellement abonné à aucun plan",
+  "choosePlan": "Sélectionnez un plan ci-dessous",
+  "currentPlan": "Votre plan",
+  "subscriptionWillEndOn": "L'abonnement prendra fin le {{ endDate }}",
+  "unknownErrorAlertHeading": "Désolé, une erreur s'est produite",
+  "unknownErrorAlert": "Nous avons rencontré une erreur inconnue lors du traitement de votre paiement. Veuillez réessayer ou contacter le support.",
+  "checkOutCanceledAlertHeading": "Le paiement a été annulé",
+  "checkOutCanceledAlert": "Le paiement a été annulé. Veuillez nous contacter si vous rencontrez des problèmes.",
+  "checkOutCompletedAlertHeading": "Paiement effectué avec succès",
+  "checkOutCompletedAlert": "Super, votre paiement a été accepté !",
+  "cancelAtPeriodEndDescription": "Votre abonnement est programmé pour être annulé le {{ endDate }}.",
+  "renewAtPeriodEndDescription": "Votre abonnement est programmé pour être renouvelé le {{ endDate }}",
+  "noPermissionsAlertHeading": "Vous n'avez pas les autorisations pour modifier la facturation",
+  "noPermissionsAlertBody": "Veuillez contacter le propriétaire de votre organisation pour modifier les paramètres de facturation de votre organisation.",
+  "checkoutSuccessTitle": "Terminé ! Tout est en ordre.",
+  "checkoutSuccessDescription": "Merci de vous abonner, nous avons traité votre abonnement avec succès ! Un e-mail de confirmation sera envoyé à {{ customerEmail }}.",
+  "checkoutSuccessBackButton": "Accéder à l'application",
+  "status": {
+    "free": {
+      "label": "Plan gratuit",
+      "heading": "Vous êtes actuellement sur le plan gratuit",
+      "description": "Vous êtes sur un plan gratuit. Vous pouvez passer à un plan payant à tout moment."
+    },
+    "active": {
+      "label": "Actif",
+      "heading": "Votre abonnement est actif",
+      "description": "Votre abonnement est actif. Vous pouvez gérer votre abonnement et votre facturation dans le portail client."
+    },
+    "trialing": {
+      "label": "Essai",
+      "heading": "Vous êtes en période d'essai",
+      "description": "Votre période d'essai prendra fin le {{ trialEndDate }}."
+    },
+    "past_due": {
+      "label": "En retard",
+      "heading": "Votre facture est en retard",
+      "description": "Votre facture est en retard. Veuillez mettre à jour votre mode de paiement."
+    },
+    "canceled": {
+      "label": "Annulé",
+      "heading": "Votre abonnement est annulé",
+      "description": "Votre abonnement est annulé. Il est prévu de prendre fin le {{ endDate }}."
+    },
+    "unpaid": {
+      "label": "Impayé",
+      "heading": "Votre facture est impayée",
+      "description": "Votre facture est impayée. Veuillez mettre à jour votre mode de paiement."
+    },"incomplete": {
+      "label": "Incomplet",
+      "heading": "Nous attendons votre paiement",
+      "description": "Nous attendons que votre paiement soit effectué. Veuillez patienter."
+    },
+    "incomplete_expired": {
+      "label": "Expiré",
+      "heading": "Votre paiement a expiré",
+      "description": "Votre paiement a expiré. Veuillez mettre à jour votre méthode de paiement."
+    },
+    "paused": {
+      "label": "En pause",
+      "heading": "Votre abonnement est en pause",
+      "description": "Votre abonnement est en pause. Vous pouvez le reprendre à tout moment."
+    }
+  }
+}

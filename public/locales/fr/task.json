@@ -1,0 +1,23 @@
+{
+	"newTaskLabel": "Nouvelle tâche",
+	"emptyTaskLabel": "Eh bien, il semble que vous n'ayez pas encore de tâches...",
+	"emptyTaskDescription": "Créez votre première tâche en cliquant sur le bouton ci-dessous",
+	"createTaskLabel": "Créer une tâche",
+	"searchForTaskPlaceholder": "Rechercher une tâche...",
+	"taskNameError": "Le nom de la tâche doit comporter au moins 3 caractères",
+	"taskNameLabel": "Nom",
+	"taskDescriptionLabel": "Description",
+	"taskDueDateLabel": "Date d'échéance",
+	"taskDueDateHint": "Laissez vide pour définir la date d'échéance à demain",
+	"creatingTaskLabel": "Création de la tâche en cours...",
+	"backToTasksLabel": "Retour aux tâches",
+	"updateTaskLabel": "Mettre à jour la tâche",
+	"doneTaskLabel": "Terminé",
+	"viewTaskLabel": "Voir la tâche",
+	"deleteTaskLabel": "Supprimer la tâche",
+	"markAsTodo": "Marquer comme À faire",
+	"markAsDone": "Marquer comme Terminé",
+	"deleteTaskModalDescription": "Vous êtes sur le point de supprimer la tâche {{ task }}",
+	"continueProceed": "Voulez-vous continuer ?",
+	"confirmDeleteTask": "Oui, supprimer la tâche"
+}

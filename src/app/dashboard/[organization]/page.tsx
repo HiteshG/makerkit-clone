@@ -33,8 +33,7 @@ function DashboardPage() {
       <AppHeader
         title={<Trans i18nKey={'common:dashboardTabLabel'} />}
         description={<Trans i18nKey={'common:dashboardTabDescription'} />}
-      >
-      </AppHeader>
+      />
 
       <PageBody>
         <DashboardDemo />

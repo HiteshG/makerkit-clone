@@ -1,7 +1,7 @@
 import configuration from '~/configuration';
 
 const fallbackLng = configuration.site.locale ?? 'en';
-const languages: string[] = [fallbackLng];
+const languages: string[] = configuration.site.languages;
 
 export const I18N_COOKIE_NAME = 'lang';
 
@@ -12,9 +12,11 @@ export const defaultI18nNamespaces = [
   'profile',
   'subscription',
   'onboarding',
-  'documents',
   'task',
   'admin',
+  'pricing',
+  'faq',
+  'home'
 ];
 
 function getI18nSettings(

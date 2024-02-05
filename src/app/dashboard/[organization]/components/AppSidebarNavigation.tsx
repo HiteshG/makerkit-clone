@@ -3,7 +3,7 @@
 import Trans from '~/core/ui/Trans';
 import { SidebarItem, SidebarDivider, SidebarGroup } from '~/core/ui/Sidebar';
 
-import createNavigationConfig from '~/navigation.config';
+import { NAVIGATION_CONFIG } from '~/configuration';
 
 function AppSidebarNavigation({
   organization,
@@ -12,7 +12,7 @@ function AppSidebarNavigation({
 }>) {
   return (
     <>
-      {createNavigationConfig(organization).items.map((item, index) => {
+      {NAVIGATION_CONFIG(organization).items.map((item, index) => {
         if ('divider' in item) {
           return <SidebarDivider key={index} />;
         }

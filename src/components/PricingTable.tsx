@@ -121,7 +121,9 @@ function PricingItem(
       <div className={'flex flex-col space-y-2.5'}>
         <div className={'flex items-center space-x-6'}>
           <Heading type={3}>
-            <b className={'font-semibold'}>{props.product.name}</b>
+            <b className={'font-semibold'}>
+              <Trans i18nKey={`pricing:${props.product.name}`} defaults={props.product.name} />
+            </b>
           </Heading>
 
           <If condition={props.product.badge}>
@@ -137,27 +139,31 @@ function PricingItem(
               <If condition={recommended}>
                 <SparklesIcon className={'h-4 w-4 mr-1'} />
               </If>
-              <span>{props.product.badge}</span>
+              <span>
+                <Trans i18nKey={`pricing:product.${props.product.badge}`} defaults={props.product.badge} />
+              </span>
             </div>
           </If>
         </div>
 
         <span className={'text-sm text-gray-500 dark:text-gray-400'}>
-          {props.product.description}
+          <Trans i18nKey={`pricing:product.${props.product.description}`} defaults={props.product.description} />
         </span>
       </div>
 
       <div className={'flex items-end space-x-1'}>
-        <Price>{props.plan.price}</Price>
+        <Price name={props.plan.name}>{props.plan.price}</Price>
 
         <If condition={props.plan.name}>
           <span
             className={classNames(
-              `text-lg lowercase text-gray-500 dark:text-gray-400`,
+              `text-lg text-gray-500 dark:text-gray-400`,
             )}
           >
             <span>/</span>
-            <span>{props.plan.name}</span>
+            <span>
+              <Trans i18nKey={`pricing:plans.${props.plan.name}`} defaults={props.plan.name} />
+            </span>
           </span>
         </If>
       </div>
@@ -199,7 +205,7 @@ function FeaturesList(
         return (
           <ListItem key={feature}>
             <Trans
-              i18nKey={`common:plans.features.${feature}`}
+              i18nKey={`pricing:plans.features.${feature}`}
               defaults={feature}
             />
           </ListItem>
@@ -209,7 +215,12 @@ function FeaturesList(
   );
 }
 
-function Price({ children }: React.PropsWithChildren) {
+function Price(
+  props: React.PropsWithChildren<{
+    name: string;
+    children: React.ReactNode;
+  }>,
+) {
   // little trick to re-animate the price when switching plans
   const key = Math.random();
 
@@ -219,7 +230,10 @@ function Price({ children }: React.PropsWithChildren) {
       className={`animate-in duration-500 slide-in-from-left-4 fade-in`}
     >
       <span className={'text-2xl font-bold lg:text-3xl xl:text-4xl'}>
-        {children}
+        {props.name ? 
+          props.children
+          :
+          <Trans i18nKey={`common:contactUs`} defaults={'Contact us'} />}
       </span>
     </div>
   );
@@ -272,7 +286,7 @@ function PlansSwitcher(
               </If>
 
               <span>
-                <Trans i18nKey={`common:plans.${plan}`} defaults={plan} />
+                <Trans i18nKey={`pricing:plans.${plan}`} defaults={plan} />
               </span>
             </span>
           </Button>

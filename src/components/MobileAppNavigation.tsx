@@ -18,7 +18,7 @@ import {
 
 import Trans from '~/core/ui/Trans';
 
-import NAVIGATION_CONFIG from '../navigation.config';
+import { NAVIGATION_CONFIG } from '../configuration';
 import useCurrentOrganization from '~/lib/organizations/hooks/use-current-organization';
 import useSignOut from '~/core/hooks/use-sign-out';
 
@@ -143,7 +143,9 @@ function OrganizationsModal() {
       heading={<Trans i18nKey={'common:yourOrganizations'} />}
     >
       <div className={'flex flex-col space-y-6 py-4'}>
-        <Heading type={6}>Select an organization below to switch to it</Heading>
+        <Heading type={6}>
+          <Trans i18nKey={'common:selectOrganization'} />
+        </Heading>
 
         <OrganizationsSelector displayName />
       </div>

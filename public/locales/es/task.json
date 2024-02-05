@@ -1,0 +1,23 @@
+{
+  "newTaskLabel": "Nueva Tarea",
+	"emptyTaskLabel": "¡Hola! Parece que aún no tienes ninguna tarea...",
+	"emptyTaskDescription": "Crea tu primera tarea haciendo clic en el botón de abajo",
+	"createTaskLabel": "Crear Tarea",
+	"searchForTaskPlaceholder": "Buscar tarea...",
+	"taskNameError": "El nombre de la tarea debe tener al menos 3 caracteres",
+	"taskNameLabel": "Nombre",
+	"taskDescriptionLabel": "Descripción",
+	"taskDueDateLabel": "Fecha de Vencimiento",
+	"taskDueDateHint": "Deja vacío para establecer la fecha de vencimiento para mañana",
+	"creatingTaskLabel": "Creando Tarea...",
+	"backToTasksLabel": "Volver a Tareas",
+	"updateTaskLabel": "Actualizar Tarea",
+	"doneTaskLabel": "Hecho",
+	"viewTaskLabel": "Ver Tarea",
+	"deleteTaskLabel": "Eliminar Tarea",
+	"markAsTodo": "Marcar como Pendiente",
+	"markAsDone": "Marcar como Hecho",
+	"deleteTaskModalDescription": "Estás a punto de eliminar la tarea {{ task }}",
+	"continueProceed": "¿Deseas continuar?",
+	"confirmDeleteTask": "Sí, eliminar tarea"
+}

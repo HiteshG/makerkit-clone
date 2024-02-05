@@ -4,6 +4,7 @@ import Container from '~/core/ui/Container';
 import LogoImage from '~/core/ui/Logo/LogoImage';
 import configuration from '~/configuration';
 import NewsletterSignup from './NewsletterSignup';
+import Trans from '~/core/ui/Trans';
 
 const YEAR = new Date().getFullYear();
 
@@ -25,14 +26,14 @@ function Footer() {
 
               <div>
                 <p className={'text-sm text-gray-500 dark:text-gray-400'}>
-                  Add a short tagline about your product
+                  <Trans i18nKey={'common:projectTagLine'} />
                 </p>
               </div>
 
               <div className={'flex text-xs text-gray-500 dark:text-gray-400'}>
                 <p>
-                  © Copyright {YEAR} {configuration.site.siteName}. All Rights
-                  Reserved.
+                  © Copyright {YEAR} {configuration.site.siteName}.
+                  &nbsp;<Trans i18nKey={'common:allRightReserved'} />
                 </p>
               </div>
             </div>
@@ -47,17 +48,25 @@ function Footer() {
           >
             <div>
               <div className={'flex flex-col space-y-4'}>
-                <FooterSectionHeading>About</FooterSectionHeading>
+                <FooterSectionHeading>
+                  <Trans i18nKey={'common:about'} />
+                </FooterSectionHeading>
 
                 <FooterSectionList>
                   <FooterLink>
-                    <Link href={'#'}>Who we are</Link>
+                    <Link href={'#'}>
+                      <Trans i18nKey={'common:whoWeAre'} />
+                    </Link>
                   </FooterLink>
                   <FooterLink>
-                    <Link href={'/blog'}>Blog</Link>
+                    <Link href={'/blog'}>
+                      <Trans i18nKey={'common:blog'} />
+                    </Link>
                   </FooterLink>
                   <FooterLink>
-                    <Link href={'/contact'}>Contact</Link>
+                    <Link href={'/contact'}>
+                      <Trans i18nKey={'common:contactUs'} />
+                    </Link>
                   </FooterLink>
                 </FooterSectionList>
               </div>
@@ -65,17 +74,25 @@ function Footer() {
 
             <div>
               <div className={'flex flex-col space-y-4'}>
-                <FooterSectionHeading>Product</FooterSectionHeading>
+                <FooterSectionHeading>
+                  <Trans i18nKey={'common:product'} />
+                </FooterSectionHeading>
 
                 <FooterSectionList>
                   <FooterLink>
-                    <Link href={'/docs'}>Documentation</Link>
+                    <Link href={'/docs'}>
+                      <Trans i18nKey={'common:documentation'} />
+                    </Link>
                   </FooterLink>
                   <FooterLink>
-                    <Link href={'#'}>Help Center</Link>
+                    <Link href={'#'}>
+                      <Trans i18nKey={'common:helpCenter'} />
+                    </Link>
                   </FooterLink>
                   <FooterLink>
-                    <Link href={'#'}>Changelog</Link>
+                    <Link href={'#'}>
+                      <Trans i18nKey={'common:changeLog'} />
+                    </Link>
                   </FooterLink>
                 </FooterSectionList>
               </div>
@@ -83,17 +100,25 @@ function Footer() {
 
             <div>
               <div className={'flex flex-col space-y-4'}>
-                <FooterSectionHeading>Legal</FooterSectionHeading>
+                <FooterSectionHeading>
+                  <Trans i18nKey={'common:legal'} />
+                </FooterSectionHeading>
 
                 <FooterSectionList>
                   <FooterLink>
-                    <Link href={'#'}>Terms of Service</Link>
+                    <Link href={'#'}>
+                      <Trans i18nKey={'common:termsOfService'} />
+                    </Link>
                   </FooterLink>
                   <FooterLink>
-                    <Link href={'#'}>Privacy Policy</Link>
+                    <Link href={'#'}>
+                      <Trans i18nKey={'common:privacyPolicy'} />
+                    </Link>
                   </FooterLink>
                   <FooterLink>
-                    <Link href={'#'}>Cookie Policy</Link>
+                    <Link href={'#'}>
+                      <Trans i18nKey={'common:cookiePolicy'} />
+                    </Link>
                   </FooterLink>
                 </FooterSectionList>
               </div>

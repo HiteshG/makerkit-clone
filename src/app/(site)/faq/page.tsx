@@ -2,6 +2,7 @@ import Container from '~/core/ui/Container';
 import SubHeading from '~/core/ui/SubHeading';
 import Heading from '~/core/ui/Heading';
 import FaqItem from '~/app/(site)/components/FaqItem';
+import Trans from '~/core/ui/Trans';
 
 export const metadata = {
   title: 'FAQ',
@@ -9,28 +10,28 @@ export const metadata = {
 
 const DATA = [
   {
-    question: `Do you offer a free trial?`,
-    answer: `Yes, we offer a 14-day free trial. You can cancel at any time during the trial period and you won't be charged.`,
+    question: 'faq:question1',
+    answer: 'faq:answer1',
   },
   {
-    question: `Can I cancel my subscription?`,
-    answer: `You can cancel your subscription at any time. You can do this from your account settings.`,
+    question: 'faq:question2',
+    answer: 'faq:answer2',
   },
   {
-    question: `Where can I find my invoices?`,
-    answer: `You can find your invoices in your account settings.`,
+    question: 'faq:question3',
+    answer: 'faq:answer3',
   },
   {
-    question: `What payment methods do you accept?`,
-    answer: `We accept all major credit cards and PayPal.`,
+    question: 'faq:question4',
+    answer: 'faq:answer4',
   },
   {
-    question: `Can I upgrade or downgrade my plan?`,
-    answer: `Yes, you can upgrade or downgrade your plan at any time. You can do this from your account settings.`,
+    question: 'faq:question5',
+    answer: 'faq:answer5',
   },
   {
-    question: `Do you offer discounts for non-profits?`,
-    answer: `Yes, we offer a 50% discount for non-profits. Please contact us to learn more.`,
+    question: 'faq:question6',
+    answer: 'faq:answer6',
   },
 ];
 
@@ -61,9 +62,13 @@ const FAQPage = () => {
       <Container>
         <div className={'flex flex-col space-y-8 my-8'}>
           <div className={'flex flex-col items-center space-y-4'}>
-            <Heading type={1}>FAQ</Heading>
+            <Heading type={1}>
+              {/* <Trans i18nKey={'common:faq'} /> */}
+            </Heading>
 
-            <SubHeading>Frequently Asked Questions</SubHeading>
+            <SubHeading>
+              {/* <Trans i18nKey={'faq:faqDescription'} /> */}
+            </SubHeading>
           </div>
 
           <div

@@ -16,6 +16,7 @@ import Button from '~/core/ui/Button';
 import Divider from '~/core/ui/Divider';
 import Heading from '~/core/ui/Heading';
 import PricingTable from '~/components/PricingTable';
+import Trans from '~/core/ui/Trans';
 
 export default function Home() {
   return (
@@ -30,32 +31,42 @@ export default function Home() {
         >
           <div className={'flex w-full flex-1 flex-col items-center space-y-8'}>
             <Pill>
-              <span>The leading SaaS Starter Kit for ambitious developers</span>
+              <span>
+                <Trans i18nKey={'home:leadingSaasStarterKit'} />
+              </span>
             </Pill>
 
             <HeroTitle>
-              <span>The SaaS Solution for</span>
+              <span>
+                <Trans i18nKey={'home:SassSolutionFor'} />
+              </span>
               <span
                 className={
                   'bg-gradient-to-br bg-clip-text text-transparent' +
                   ' from-primary-400 to-primary-700 leading-[1.2]'
                 }
               >
-                developers and founders
+                <Trans i18nKey={'home:developersAndFounders'} />
               </span>
             </HeroTitle>
 
             <SubHeading className={'text-center'}>
-              <span>Here you can write a short description of your SaaS</span>
-              <span>This subheading is usually laid out on multiple lines</span>
-              <span>Impress your customers, straight to the point.</span>
+              <span>
+                <Trans i18nKey={'home:shortDescriptionForSaas'} />
+              </span>
+              <span>
+                <Trans i18nKey={'home:multipleSubheading'} />
+              </span>
+              <span>
+                <Trans i18nKey={'home:impressCustomer'} />
+              </span>
             </SubHeading>
 
             <div className={'flex flex-col items-center space-y-4'}>
               <MainCallToActionButton />
 
               <span className={'text-xs text-gray-500 dark:text-gray-400'}>
-                Free plan. No credit card required.
+                <Trans i18nKey={'home:noCreditCardRequired'} />
               </span>
             </div>
           </div>
@@ -93,13 +104,17 @@ export default function Home() {
               'flex max-w-3xl flex-col items-center space-y-8 text-center'
             }
           >
-            <Pill>A modern, scalable, and secure SaaS Starter Kit</Pill>
+            <Pill>
+              <Trans i18nKey={'home:modernStarterKit'} />
+            </Pill>
 
             <div className={'flex flex-col space-y-2.5'}>
-              <Heading type={2}>The best tool in the space</Heading>
+              <Heading type={2}>
+                <Trans i18nKey={'home:bestTool'} />
+              </Heading>
 
               <SubHeading as={'h3'}>
-                Unbeatable Features and Benefits for Your SaaS Business
+                <Trans i18nKey={'home:unbeatableFeatures'} />
               </SubHeading>
             </div>
           </div>
@@ -111,10 +126,12 @@ export default function Home() {
                   <UserIcon className={'h-5'} />
                 </FeatureIcon>
 
-                <h4 className={'text-lg font-semibold'}>Authentication</h4>
+                <h4 className={'text-lg font-semibold'}>
+                  <Trans i18nKey={'home:authentication'} />
+                </h4>
 
                 <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
-                  Secure and Easy-to-Use Authentication for Your SaaS Website
+                  <Trans i18nKey={'home:authenticationDescription'} />
                 </div>
               </div>
 
@@ -123,11 +140,12 @@ export default function Home() {
                   <BuildingLibraryIcon className={'h-5'} />
                 </FeatureIcon>
 
-                <h4 className={'text-lg font-semibold'}>Multi-Tenancy</h4>
+                <h4 className={'text-lg font-semibold'}>
+                  <Trans i18nKey={'home:multiTenancy'} />
+                </h4>
 
                 <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
-                  Powerful Multi-Tenancy Features for Maximum Flexibility and
-                  Efficiency
+                  <Trans i18nKey={'home:multiTenancyDescription'} />
                 </div>
               </div>
 
@@ -136,10 +154,12 @@ export default function Home() {
                   <UserGroupIcon className={'h-5'} />
                 </FeatureIcon>
 
-                <h4 className={'text-lg font-semibold'}>Team-Management</h4>
+                <h4 className={'text-lg font-semibold'}>
+                  <Trans i18nKey={'home:teamManagement'} />
+                </h4>
 
                 <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
-                  Effortlessly Manage and Organize Your Team Members
+                  <Trans i18nKey={'home:teamManagementDescription'} />
                 </div>
               </div>
 
@@ -148,10 +168,12 @@ export default function Home() {
                   <PaintBrushIcon className={'h-5'} />
                 </FeatureIcon>
 
-                <h4 className={'text-lg font-semibold'}>UI Themes</h4>
+                <h4 className={'text-lg font-semibold'}>
+                  <Trans i18nKey={'home:uiThemes'} />
+                </h4>
 
                 <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
-                  Customizable UI Themes to Match Your Brand and Style
+                  <Trans i18nKey={'home:uiThemesDescription'} />
                 </div>
               </div>
 
@@ -160,10 +182,12 @@ export default function Home() {
                   <CubeIcon className={'h-5'} />
                 </FeatureIcon>
 
-                <h4 className={'text-lg font-semibold'}>UI Components</h4>
+                <h4 className={'text-lg font-semibold'}>
+                  <Trans i18nKey={'home:uiComponents'} />
+                </h4>
 
                 <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
-                  Pre-built UI Components to Speed Up Your Development
+                  <Trans i18nKey={'home:uiComponentsDescription'} />
                 </div>
               </div>
 
@@ -173,11 +197,11 @@ export default function Home() {
                 </FeatureIcon>
 
                 <h4 className={'text-lg font-semibold'}>
-                  Blog and Documentation
+                  <Trans i18nKey={'home:blogAndDocumentation'} />
                 </h4>
 
                 <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
-                  Pre-built Blog and Documentation Pages to Help Your Users
+                  <Trans i18nKey={'home:blogAndDocumentationDescription'} />
                 </div>
               </div>
             </div>
@@ -190,25 +214,25 @@ export default function Home() {
           <FeatureShowcaseContainer>
             <LeftFeatureContainer>
               <div className={'flex flex-col space-y-4'}>
-                <Heading type={2}>Authentication</Heading>
+                <Heading type={2}>
+                  <Trans i18nKey={'home:authentication'} />
+                </Heading>
 
                 <SubHeading as={'h3'}>
-                  Secure and Easy-to-Use Authentication for Your SaaS Website
-                  and API
+                  <Trans i18nKey={'home:authenticationDescription'} />
                 </SubHeading>
               </div>
 
               <div>
-                Our authentication system is built on top of the
-                industry-leading PaaS such as Supabase and Firebase. It is
-                secure, easy-to-use, and fully customizable. It supports
-                email/password, social logins, and more.
+                <Trans i18nKey={'home:authenticationDetail'} />
               </div>
 
               <div>
                 <Button round variant={'outline'} href={'/auth/sign-up'}>
                   <span className={'flex space-x-2 items-center'}>
-                    <span>Get Started</span>
+                    <span>
+                      <Trans i18nKey={'common:getStarted'} />
+                    </span>
                     <ChevronRightIcon className={'h-3'} />
                   </span>
                 </Button>
@@ -239,22 +263,24 @@ export default function Home() {
 
             <RightFeatureContainer>
               <div className={'flex flex-col space-y-4'}>
-                <Heading type={1}>Dashboard</Heading>
+                <Heading type={1}>
+                  <Trans i18nKey={'home:dashboard'} />
+                </Heading>
 
                 <SubHeading>
-                  A fantastic dashboard to manage your SaaS business
+                  <Trans i18nKey={'home:dashboardDescription'} />
                 </SubHeading>
 
                 <div>
-                  Our dashboard offers an overview of your SaaS business. It
-                  shows at a glance all you need to know about your business. It
-                  is fully customizable and extendable.
+                  <Trans i18nKey={'home:dashboardDetail'} />
                 </div>
 
                 <div>
                   <Button round variant={'outline'} href={'/auth/sign-up'}>
                     <span className={'flex space-x-2 items-center'}>
-                      <span>Get Started</span>
+                      <span>
+                        <Trans i18nKey={'common:getStarted'} />
+                      </span>
                       <ChevronRightIcon className={'h-3'} />
                     </span>
                   </Button>
@@ -275,16 +301,16 @@ export default function Home() {
         >
           <div className={'flex flex-col items-center space-y-8 text-center'}>
             <Pill>
-              Get started for free. No credit card required. Cancel anytime.
+              <Trans i18nKey={'home:cancelAnytime'} />
             </Pill>
 
             <div className={'flex flex-col space-y-2.5'}>
               <Heading type={2}>
-                Ready to take your SaaS business to the next level?
+                <Trans i18nKey={'home:readyToTakeSaasBusiness'} />
               </Heading>
 
               <SubHeading>
-                Get started on our free plan and upgrade when you are ready.
+                <Trans i18nKey={'home:upgradeWhenYouAreReady'} />
               </SubHeading>
             </div>
           </div>
@@ -381,7 +407,9 @@ function MainCallToActionButton() {
       href={'/auth/sign-up'}
     >
       <span className={'flex items-center space-x-2'}>
-        <span>Get Started</span>
+        <span>
+          <Trans i18nKey={'common:getStarted'} />
+        </span>
         <ChevronRightIcon
           className={
             'h-4 animate-in fade-in slide-in-from-left-8' +

@@ -53,5 +53,22 @@
       "label": "Member",
       "description": "Cannot invite members or change settings"
     }
-  }
+  },
+  "blog": "Blog",
+  "pricing": "Pricing",
+  "faq": "FAQ",
+  "projectTagLine": "Add a short tagline about your product",
+  "allRightReserved": "All Rights Reserved.",
+  "about": "About",
+  "whoWeAre": "Who we are",
+  "product": "Product",
+  "helpCenter": "Help Center",
+  "changeLog": "Changelog",
+  "legal": "Legal",
+  "termsOfService": "Terms of Service",
+  "privacyPolicy": "Privacy Policy",
+  "cookiePolicy": "Cookie Policy",
+  "subscribeOurNewsletter": "Subscribe to our Newsletter",
+  "getUpdatesFromTeam": "Get the latest updates from our team.",
+  "subscribe": "Subscribe"
 }

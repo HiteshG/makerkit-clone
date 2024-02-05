@@ -161,7 +161,9 @@ const ProfileDropdown: React.FCC<{
               href={'/admin'}
             >
               <BuildingLibraryIcon className={'h-5'} />
-              <span>Admin</span>
+              <span>
+                <Trans i18nKey={'common:roles.admin.label'} />
+              </span>
             </Link>
           </DropdownMenuItem>
         </If>

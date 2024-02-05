@@ -1,6 +1,14 @@
 import type { Provider } from '@supabase/gotrue-js';
 import { StripeCheckoutDisplayMode } from '~/lib/stripe/types';
 
+import {
+  CreditCardIcon,
+  Squares2X2Icon,
+  UserGroupIcon,
+  UserIcon,
+  CircleStackIcon,
+} from '@heroicons/react/24/outline';
+
 const production = process.env.NODE_ENV === 'production';
 
 enum Themes {
@@ -20,6 +28,8 @@ const configuration = {
     githubHandle: '',
     convertKitFormId: '',
     locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
+    languages: ['en', 'es', 'fr'],
+    logoUrl: "/assets/images/logo.svg"
   },
   auth: {
     // ensure this is the same as your Supabase project. By default - it's true
@@ -136,7 +146,7 @@ const configuration = {
             name: '',
             price: 'Contact us',
             stripePriceId: '',
-            label: `Contact us`,
+            label: `common:contactUs`,
             href: `/contact`,
           },
         ],
@@ -166,4 +176,110 @@ function getBoolean(value: unknown, defaultValue: boolean) {
   }
 
   return defaultValue;
+}
+
+type NavigationLink = {
+  label: string;
+  path: string;
+};
+
+// SiteNavigation
+export const siteNavigationLinks: NavigationLink[] = [
+  {
+    label: 'common:blog',
+    path: '/blog',
+  },
+  {
+    label: 'common:documentation',
+    path: '/docs',
+  },
+  {
+    label: 'common:pricing',
+    path: '/pricing',
+  },
+  {
+    label: 'common:faq',
+    path: '/faq',
+  }
+];
+
+// Tab Navigation in logged in area
+type Divider = {
+  divider: true;
+};
+
+type NavigationItemLink = {
+  label: string;
+  path: string;
+  Icon: (props: { className: string }) => JSX.Element;
+  end?: boolean;
+};
+
+type NavigationGroup = {
+  label: string;
+  collapsible?: boolean;
+  collapsed?: boolean;
+  children: NavigationItemLink[];
+};
+
+type NavigationItem = NavigationItemLink | NavigationGroup | Divider;
+
+type NavigationConfig = {
+  items: NavigationItem[];
+};
+
+const paths = configuration.paths;
+
+export const NAVIGATION_CONFIG = (organization: string): NavigationConfig => ({
+  items: [
+    {
+      label: 'common:dashboardTabLabel',
+      path: getPath(organization, ''),
+      Icon: ({ className }: { className: string }) => {
+        return <Squares2X2Icon className={className} />;
+      },
+      end: true,
+    },
+    {
+      label: 'common:tasksTabLabel',
+      path: getPath(organization, 'tasks'),
+      Icon: ({ className }: { className: string }) => {
+        return <CircleStackIcon className={className} />;
+      },
+      end: true,
+    },
+    {
+      label: 'common:settingsTabLabel',
+      collapsible: false,
+      children: [
+        {
+          label: 'common:profileSettingsTabLabel',
+          path: getPath(organization, paths.settings.profile),
+          Icon: ({ className }: { className: string }) => {
+            return <UserIcon className={className} />;
+          },
+        },
+        {
+          label: 'common:organizationSettingsTabLabel',
+          path: getPath(organization, paths.settings.organization),
+          Icon: ({ className }: { className: string }) => {
+            return <UserGroupIcon className={className} />;
+          },
+        },
+        {
+          label: 'common:subscriptionSettingsTabLabel',
+          path: getPath(organization, paths.settings.subscription),
+          Icon: ({ className }: { className: string }) => {
+            return <CreditCardIcon className={className} />;
+          },
+        },
+      ],
+    },
+  ],
+});
+
+function getPath(organizationId: string, path: string) {
+  const appPrefix = configuration.paths.appPrefix;
+
+  return [appPrefix, organizationId, path].filter(Boolean).join('/');
 }

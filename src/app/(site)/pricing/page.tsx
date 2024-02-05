@@ -2,6 +2,7 @@ import Container from '~/core/ui/Container';
 import SubHeading from '~/core/ui/SubHeading';
 import Heading from '~/core/ui/Heading';
 import PricingTable from '~/components/PricingTable';
+import Trans from '~/core/ui/Trans';
 
 export const metadata = {
   title: 'Pricing',
@@ -12,10 +13,11 @@ function PricingPage() {
     <Container>
       <div className={'flex flex-col space-y-16 my-8'}>
         <div className={'flex flex-col items-center space-y-4'}>
-          <Heading type={1}>Pricing</Heading>
+          <Heading type={1}>
+            <Trans i18nKey={'common:pricing'} />
+          </Heading>
           <SubHeading>
-            Our pricing is designed to scale with your business. Get started for
-            free, then grow with us.
+            <Trans i18nKey={'pricing:pricingDescription'} />
           </SubHeading>
         </div>
 

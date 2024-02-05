@@ -87,5 +87,6 @@
   "transferOrganizationErrorHeading": "Sorry, we couldn't transfer ownership of your organization.",
   "transferOrganizationErrorMessage": "We encountered an error transferring ownership of your organization. Please try again.",
   "updateRoleErrorHeading": "Sorry, we couldn't update the role of the selected member.",
-  "updateRoleErrorMessage": "We encountered an error updating the role of the selected member. Please try again."
+  "updateRoleErrorMessage": "We encountered an error updating the role of the selected member. Please try again.",
+  "selectOrganization": "Select an organization below to switch to it"
 }

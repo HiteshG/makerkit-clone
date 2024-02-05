@@ -1,0 +1,28 @@
+{
+  "plans": {
+    "Monthly": "Mensuel",
+    "Yearly": "Annuel",
+    "features": {
+      "Basic Reporting": "Rapports de base",
+      "Up to 20 users": "Jusqu'à 20 utilisateurs",
+      "1GB for each user": "1 Go par utilisateur",
+      "Chat Support": "Support par chat",
+      "Advanced Reporting": "Rapports avancés",
+      "Up to 50 users": "Jusqu'à 50 utilisateurs",
+      "5GB for each user": "5 Go par utilisateur",
+      "Chat and Phone Support": "Support par chat et téléphone",
+      "Unlimited users": "Utilisateurs illimités",
+      "50GB for each user": "50 Go par utilisateur",
+      "Account Manager": "Gestionnaire de compte"
+    }    
+  },
+  "pricingDescription": "Notre tarification est conçue pour évoluer avec votre entreprise. Commencez gratuitement, puis évoluez avec nous.",
+  "Basic": "Basique",
+  "Description of your Basic plan": "Description de votre formule Basique",
+  "Up to 20 users": "Jusqu'à 20 utilisateurs",
+  "Pro": "Pro",
+  "Most Popular": "Le plus populaire",
+  "Description of your Pro plan": "Description de votre formule Pro",
+  "Premium": "Premium",
+  "Description of your Premium plan": "Description de votre formule Premium"
+}
