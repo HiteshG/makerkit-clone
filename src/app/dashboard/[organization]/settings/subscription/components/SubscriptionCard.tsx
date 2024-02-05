@@ -63,7 +63,7 @@ const SubscriptionCard: React.FC<{
 
       <div>
         <span className={'flex items-end'}>
-          <PricingTable.Price>{details.plan.price}</PricingTable.Price>
+          <PricingTable.Price name={details.plan.name}>{details.plan.price}</PricingTable.Price>
 
           <span className={'lowercase text-gray-500 dark:text-gray-400'}>
             /{details.plan.name}
