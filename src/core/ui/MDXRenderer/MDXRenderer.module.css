@@ -1,0 +1,167 @@
+.MDX h1 {
+  @apply font-bold text-4xl mt-14;
+}
+
+.MDX h2 {
+  @apply font-semibold text-2xl lg:text-3xl mt-12 mb-4;
+}
+
+.MDX h3 {
+  @apply font-bold text-2xl mt-10;
+}
+
+.MDX h4 {
+  @apply font-bold text-xl mt-8;
+}
+
+.MDX h5 {
+  @apply font-semibold text-lg mt-6;
+}
+
+.MDX h6 {
+  @apply font-medium text-base mt-2;
+}
+
+/**
+Tailwind "dark" variants do not work with CSS Modules
+We work it around using :global(.dark)
+For more info: https://github.com/tailwindlabs/tailwindcss/issues/3258#issuecomment-770215347
+*/
+:global(.dark) .MDX h1,
+:global(.dark) .MDX h2,
+:global(.dark) .MDX h3,
+:global(.dark) .MDX h4,
+:global(.dark) .MDX h5,
+:global(.dark) .MDX h6 {
+  @apply text-white;
+}
+
+.MDX p {
+  @apply text-base dark:text-gray-300 mt-2 mb-4 leading-7;
+}
+
+.MDX li {
+  @apply text-base my-1.5 leading-7 dark:text-gray-300 relative;
+}
+
+.MDX ul > li:before {
+  content: '-';
+
+  @apply mr-2;
+}
+
+.MDX ol > li:before {
+  @apply font-medium inline-flex;
+
+  content: counters(counts,".") ". ";
+  font-feature-settings: "tnum";
+}
+
+.MDX b,
+.MDX strong {
+  @apply font-bold;
+}
+
+:global(.dark) .MDX b,
+:global(.dark) .MDX strong {
+  @apply text-white;
+}
+
+.MDX img,
+.MDX video {
+  @apply rounded-md;
+}
+
+.MDX ul,
+.MDX ol {
+  @apply pl-1;
+}
+
+.MDX ol > li {
+  counter-increment: counts;
+}
+
+.MDX ol > li:before {
+  @apply font-semibold mr-2 inline-flex;
+
+  content: counters(counts,".") ". ";
+  font-feature-settings: "tnum";
+}
+
+.MDX blockquote {
+  @apply my-4 py-4 px-6 font-medium text-lg text-gray-600 border-l-4 border-primary bg-primary/5;
+}
+
+:global(.dark) .MDX blockquote {
+  @apply text-white;
+}
+
+.MDX pre {
+  @apply my-6 text-sm text-current;
+}
+
+.MDX pre[filename]:before {
+  font-family: Monospace;
+  display: inline-block;
+  content: attr(filename);
+  padding: 0.5rem 1rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-left-radius: 0.35rem;
+  border-top-right-radius: 0.35rem;
+
+  @apply bg-dark-900 relative left-3 text-[0.55rem] md:text-sm font-bold;
+}
+
+.MDX pre[filename] {
+  @apply bg-dark-700 pt-3 rounded-md;
+}
+
+.MDX pre[filename] code {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+:global(.dark) .MDX pre {
+  @apply shadow-none my-8;
+}
+
+.MDX code {
+  @apply rounded-md bg-gray-100;
+
+  word-break: break-word;
+}
+
+.MDX pre > code {
+  @apply p-3 md:p-6 text-xs md:text-sm font-medium font-monospace block bg-gray-100 dark:bg-dark-900;
+
+  white-space: pre-wrap;
+}
+
+:global(.dark) .MDX code {
+  @apply bg-dark-900;
+}
+
+.MDX p > code,
+.MDX li > code {
+  @apply px-1 py-0.5 border border-gray-200 rounded mx-0.5 font-semibold text-sm;
+}
+
+:global(.dark) .MDX p > code,
+:global(.dark) .MDX li > code {
+  @apply bg-dark-900;
+}
+
+.MDX hr {
+  @apply mt-8 mb-6;
+}
+
+.MDX p > a,
+:global(.dark) .MDX li > a {
+  @apply font-medium underline;
+}
+
+:global(.dark) .MDX p > a,
+:global(.dark) .MDX li > a {
+  @apply font-semibold underline hover:text-white;
+}
