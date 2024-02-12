@@ -242,7 +242,7 @@ export default function Home() {
             <RightFeatureContainer>
               <Image
                 className="rounded-2xl shadow-[0_0_1000px_0] shadow-primary/40 animate-in fade-in zoom-in-50 delay-300 duration-1000 ease-out fill-mode-both"
-                src={'/assets/images/dashboard.webp'}
+                src={'/assets/images/auth.jpg'}
                 width={'887'}
                 height={'743'}
                 alt={'Sign In'}
@@ -254,7 +254,7 @@ export default function Home() {
             <LeftFeatureContainer>
               <Image
                 className="rounded-2xl shadow-[0_0_1000px_0] shadow-primary/40 animate-in fade-in zoom-in-50 delay-300 duration-1000 ease-out fill-mode-both"
-                src={'/assets/images/dashboard.webp'}
+                src={'/assets/images/admin.jpg'}
                 width={'887'}
                 height={'743'}
                 alt={'Dashboard'}
