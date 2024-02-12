@@ -37,7 +37,7 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
-          ...colors.slate,
+          ...colors.fuchsia,
         },
         secondary: {
           DEFAULT: 'hsl(var(--secondary))',
@@ -54,6 +54,7 @@ module.exports = {
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
+          ...colors.pink,
         },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
@@ -68,6 +69,7 @@ module.exports = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        ...colors.fuchsia,
       },
       padding: {
         container: 'var(--container-padding)',

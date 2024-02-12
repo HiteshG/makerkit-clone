@@ -87,7 +87,7 @@ export default function Home() {
             }
             width={3688}
             height={2824}
-            src={`/assets/images/dashboard-dark.jpg`}
+            src={`/assets/images/walkthru.gif`}
             alt={`App Image`}
           />
         </div>
@@ -101,17 +101,29 @@ export default function Home() {
         >
           <div
             className={
-              'flex max-w-3xl flex-col items-center space-y-8 text-center'
+              'flex max-w-4xl flex-col items-center space-y-8 text-center'
             }
           >
             <Pill>
               <Trans i18nKey={'home:modernStarterKit'} />
             </Pill>
 
-            <div className={'flex flex-col space-y-2.5'}>
+            <div className={'flex flex-col space-y-5'}>
               <Heading type={2}>
                 <Trans i18nKey={'home:bestTool'} />
               </Heading>
+              <Image
+            priority
+            className={
+              'shadow-[0_0_1000px_0] rounded-2xl' +
+              ' shadow-primary/40 animate-in fade-in' +
+              ' zoom-in-50 delay-300 duration-1000 ease-out fill-mode-both'
+            }
+            width={3688}
+            height={2824}
+            src={`/assets/images/chatgpt.gif`}
+            alt={`App Image`}
+          />
 
               <SubHeading as={'h3'}>
                 <Trans i18nKey={'home:unbeatableFeatures'} />
@@ -249,12 +261,12 @@ export default function Home() {
               />
             </RightFeatureContainer>
           </FeatureShowcaseContainer>
-
+          <br/>
           <FeatureShowcaseContainer>
             <LeftFeatureContainer>
               <Image
                 className="rounded-2xl shadow-[0_0_1000px_0] shadow-primary/40 animate-in fade-in zoom-in-50 delay-300 duration-1000 ease-out fill-mode-both"
-                src={'/assets/images/admin.jpg'}
+                src={'/assets/images/dashboard-dark.jpg'}
                 width={'887'}
                 height={'743'}
                 alt={'Dashboard'}
@@ -397,9 +409,9 @@ function MainCallToActionButton() {
   return (
     <Button
       className={
-        'bg-transparent bg-gradient-to-r shadow-2xl' +
+        'bg-violet bg-gradient-to-r shadow-2xl' +
         ' hover:shadow-primary/60 from-primary' +
-        ' to-primary-600 hover:to-indigo-600 text-white'
+        ' to-violet-900 hover:to-indigo-600 text-white'
       }
       variant={'custom'}
       size={'lg'}
