@@ -35,12 +35,12 @@ const CompleteOnboardingStep: React.FC<{
     }
   }, [data, trigger]);
 
-  if (error) {
-    return <ErrorState />;
-  }
-
   if (response && response.success) {
     return <SuccessState returnUrl={response.returnUrl} />;
+  }
+
+  if (error) {
+    return <ErrorState />;
   }
 
   return (

@@ -42,7 +42,7 @@ export default function Home() {
               </span>
               <span
                 className={
-                  'bg-gradient-to-br bg-clip-text text-transparent' +
+                  'bg-gradient-to-br bg-clip-text text-transparent px-8' +
                   ' from-primary-400 to-primary-700 leading-[1.2]'
                 }
               >
@@ -74,8 +74,8 @@ export default function Home() {
 
         <div
           className={
-            'flex justify-center py-12 max-w-5xl mx-auto animate-in fade-in ' +
-            ' duration-1000 slide-in-from-top-16 fill-mode-both delay-300'
+            'flex justify-center py-6 max-w-7xl mx-auto animate-in fade-in ' +
+            ' duration-3000 slide-in-from-top-16 fill-mode-both delay-300'
           }
         >
           <Image
@@ -85,9 +85,9 @@ export default function Home() {
               ' shadow-primary/40 animate-in fade-in' +
               ' zoom-in-50 delay-300 duration-1000 ease-out fill-mode-both'
             }
-            width={2688}
-            height={1824}
-            src={`/assets/images/dashboard-dark.webp`}
+            width={3688}
+            height={2824}
+            src={`/assets/images/dashboard-dark.jpg`}
             alt={`App Image`}
           />
         </div>
@@ -120,7 +120,7 @@ export default function Home() {
           </div>
 
           <div>
-            <div className={'grid gap-12 lg:grid-cols-3'}>
+            <div className={'grid gap-12 lg:grid-cols-3 sm:px-24'}>
               <div className={'flex flex-col space-y-2'}>
                 <FeatureIcon>
                   <UserIcon className={'h-5'} />
@@ -130,7 +130,7 @@ export default function Home() {
                   <Trans i18nKey={'home:authentication'} />
                 </h4>
 
-                <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
+                <div className={'text-gray-500 dark:text-gray-400 text-lg'}>
                   <Trans i18nKey={'home:authenticationDescription'} />
                 </div>
               </div>
@@ -144,7 +144,7 @@ export default function Home() {
                   <Trans i18nKey={'home:multiTenancy'} />
                 </h4>
 
-                <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
+                <div className={'text-gray-500 dark:text-gray-400 text-lg'}>
                   <Trans i18nKey={'home:multiTenancyDescription'} />
                 </div>
               </div>
@@ -158,7 +158,7 @@ export default function Home() {
                   <Trans i18nKey={'home:teamManagement'} />
                 </h4>
 
-                <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
+                <div className={'text-gray-500 dark:text-gray-400 text-lg'}>
                   <Trans i18nKey={'home:teamManagementDescription'} />
                 </div>
               </div>
@@ -172,7 +172,7 @@ export default function Home() {
                   <Trans i18nKey={'home:uiThemes'} />
                 </h4>
 
-                <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
+                <div className={'text-gray-500 dark:text-gray-400 text-lg'}>
                   <Trans i18nKey={'home:uiThemesDescription'} />
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function Home() {
                   <Trans i18nKey={'home:uiComponents'} />
                 </h4>
 
-                <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
+                <div className={'text-gray-500 dark:text-gray-400 text-lg'}>
                   <Trans i18nKey={'home:uiComponentsDescription'} />
                 </div>
               </div>
@@ -200,7 +200,7 @@ export default function Home() {
                   <Trans i18nKey={'home:blogAndDocumentation'} />
                 </h4>
 
-                <div className={'text-gray-500 dark:text-gray-400 text-sm'}>
+                <div className={'text-gray-500 dark:text-gray-400 text-lg'}>
                   <Trans i18nKey={'home:blogAndDocumentationDescription'} />
                 </div>
               </div>
@@ -241,10 +241,10 @@ export default function Home() {
 
             <RightFeatureContainer>
               <Image
-                className="rounded-2xl"
-                src={'/assets/images/sign-in.webp'}
-                width={'626'}
-                height={'683'}
+                className="rounded-2xl shadow-[0_0_1000px_0] shadow-primary/40 animate-in fade-in zoom-in-50 delay-300 duration-1000 ease-out fill-mode-both"
+                src={'/assets/images/dashboard.webp'}
+                width={'887'}
+                height={'743'}
                 alt={'Sign In'}
               />
             </RightFeatureContainer>
@@ -253,7 +253,7 @@ export default function Home() {
           <FeatureShowcaseContainer>
             <LeftFeatureContainer>
               <Image
-                className="rounded-2xl"
+                className="rounded-2xl shadow-[0_0_1000px_0] shadow-primary/40 animate-in fade-in zoom-in-50 delay-300 duration-1000 ease-out fill-mode-both"
                 src={'/assets/images/dashboard.webp'}
                 width={'887'}
                 height={'743'}
@@ -263,7 +263,7 @@ export default function Home() {
 
             <RightFeatureContainer>
               <div className={'flex flex-col space-y-4'}>
-                <Heading type={1}>
+                <Heading type={2}>
                   <Trans i18nKey={'home:dashboard'} />
                 </Heading>
 
@@ -328,7 +328,7 @@ function HeroTitle({ children }: React.PropsWithChildren) {
   return (
     <h1
       className={
-        'text-center text-4xl text-gray-600 dark:text-white md:text-5xl' +
+        'text-center px-6 text-4xl text-gray-600 dark:text-white md:text-5xl' +
         ' flex flex-col font-heading font-medium xl:text-7xl 2xl:text-[5.2rem]'
       }
     >
@@ -373,7 +373,7 @@ function FeatureShowcaseContainer(props: React.PropsWithChildren) {
     <div
       className={
         'flex flex-col lg:flex-row items-center justify-between' +
-        ' lg:space-x-24'
+        ' lg:space-x-24 sm:px-24'
       }
     >
       {props.children}
@@ -390,7 +390,7 @@ function LeftFeatureContainer(props: React.PropsWithChildren) {
 }
 
 function RightFeatureContainer(props: React.PropsWithChildren) {
-  return <div className={'flex w-full lg:w-6/12'}>{props.children}</div>;
+  return <div className={'flex flex-col space-y-8 w-full lg:w-6/12'}>{props.children}</div>;
 }
 
 function MainCallToActionButton() {
@@ -408,7 +408,7 @@ function MainCallToActionButton() {
     >
       <span className={'flex items-center space-x-2'}>
         <span>
-          <Trans i18nKey={'common:getStarted'} />
+          <Trans i18nKey={'common:buildWchatGPT'} />
         </span>
         <ChevronRightIcon
           className={
