@@ -18,16 +18,17 @@ enum Themes {
 
 const configuration = {
   site: {
-    name: 'Ira-saas-kit',
-    description: 'Ira-saas-kit',
+    name: 'LRA SaaS Starter Kit',
+    description: 'Launch your saas business in minutes with this all-in-one starter kit for Nextjs.',
     themeColor: '#ffffff',
     themeColorDark: '#0a0a0a',
     siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
-    siteName: 'Ira',
+    siteName: 'All-in-One SaaS Kit by Launch Ready Apps',
     twitterHandle: '',
-    githubHandle: '',
+    githubHandle: 'cameronking4',
     convertKitFormId: '',
     locale: process.env.NEXT_PUBLIC_DEFAULT_LOCALE,
+    // Supported languages: add more and create folder in public/locales
     languages: ['en', 'es', 'fr'],
     logoUrl: "/assets/images/logo.svg"
   },
@@ -47,7 +48,7 @@ const configuration = {
   },
   production,
   environment: process.env.NEXT_PUBLIC_ENVIRONMENT,
-  theme: Themes.Light,
+  theme: Themes.Dark,
   features: {
     enableThemeSwitcher: true,
     enableAccountDeletion: getBoolean(
@@ -185,9 +186,14 @@ type NavigationLink = {
 
 // SiteNavigation
 export const siteNavigationLinks: NavigationLink[] = [
+  // uncomment if you want to support blog
+  // {
+  //   label: 'common:blog',
+  //   path: '/blog',
+  // },
   {
-    label: 'common:blog',
-    path: '/blog',
+    label: 'common:buyNow',
+    path: 'https://buy.stripe.com/7sIg2X2Qgbrt7KM000',
   },
   {
     label: 'common:documentation',

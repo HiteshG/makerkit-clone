@@ -32,6 +32,9 @@
   "collapseSidebar": "Collapse Sidebar",
   "documentation": "Documentation",
   "getStarted": "Get Started",
+  "demo": "Demo",
+  "tryItOut": "Try it out",
+  "buildWchatGPT": "Customize using ChatGPT",
   "retry": "Retry",
   "contactUs": "Contact Us",
   "loading": "Loading. Please wait...",
@@ -55,6 +58,7 @@
     }
   },
   "blog": "Blog",
+  "buyNow": "Buy Template",
   "pricing": "Pricing",
   "faq": "FAQ",
   "projectTagLine": "Add a short tagline about your product",
