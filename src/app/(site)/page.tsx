@@ -404,7 +404,7 @@ function MainCallToActionButton() {
       variant={'custom'}
       size={'lg'}
       round
-      href={'/auth/sign-up'}
+      href={'https://chat.openai.com/g/g-PZRmqyRFG-saas-studio-launch-your-app-in-minutes'}
     >
       <span className={'flex items-center space-x-2'}>
         <span>
