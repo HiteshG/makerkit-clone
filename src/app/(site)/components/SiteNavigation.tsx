@@ -12,6 +12,7 @@ import {
 } from '~/core/ui/Dropdown';
 
 import { siteNavigationLinks } from '~/configuration';
+import Trans from '~/core/ui/Trans';
 
 const SiteNavigation = () => {
   const className = 'font-semibold';
@@ -52,7 +53,7 @@ function MobileDropdown() {
           return (
             <DropdownMenuItem key={item.path}>
               <Link className={className} href={item.path}>
-                {item.label}
+                <Trans i18nKey={item.label} />
               </Link>
             </DropdownMenuItem>
           );
