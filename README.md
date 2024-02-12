@@ -37,4 +37,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Quick link to [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### Instant deploy
+Click below to clone and deploy instantly. Enjoy your new SaaS.
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/import?s=https%3A%2F%2Fgithub.com%2Fcameronking4%2Flra-saas-kit&demo-title=Launch%20Ready%20SaaS&demo-description=The%20ultimate%20startboard%20for%20multi%20organization%20SaaS%20business%20with%20Admin%20Panel%2C%20Auth%2C%20Supabase%2C%20Resend%2C%20Stripe%2C%20Animations%20and%20more.&demo-url=https%3A%2F%2Flra-saas.vercel.app%2F&demo-image=https%3A%2F%2Flra-saas.vercel.app%2F_next%2Fimage%3Furl%3D%252Fassets%252Fimages%252Fdashboard-dark.jpg%26w%3D3840%26q%3D75&showOptionalTeamCreation=false&project-name=lra-saas-kit&framework=nextjs&totalProjects=1&remainingProjects=1)
+
+
