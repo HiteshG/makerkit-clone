@@ -289,3 +289,26 @@ function getPath(organizationId: string, path: string) {
 
   return [appPrefix, organizationId, path].filter(Boolean).join('/');
 }
+
+export const SOURCES = [
+  {
+    value: 'Web/Search',
+    label: 'Web/Search',
+  },
+  {
+    value: 'Friend',
+    label: 'Friend',
+  },
+  {
+    value: 'Youtube',
+    label: 'Youtube',
+  },
+  {
+    value: 'Article',
+    label: 'Article',
+  },
+  {
+    value: 'Other',
+    label: 'Other',
+  },
+];

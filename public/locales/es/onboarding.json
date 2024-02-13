@@ -8,8 +8,16 @@
   "info": "Detalles",
   "invites": "Invitaciones",
   "complete": "Completar",
+  "question": "Pregunta",
+  "whereDidYouFindUs": "¿Dónde nos encontraste?",
+  "whereDidYouFindUsDescription": "Elige una de estas opciones.",
   "successStepHeading": "¡Todo listo! Ahora puedes empezar a usar la aplicación.",
   "continue": "Continuar a tu Tablero",
   "settingAccount": "Estamos configurando tu cuenta. Por favor espera...",
-  "organizationNamePlaceholder": "Ej. Acme Inc."
+  "organizationNamePlaceholder": "Ej. Acme Inc.",
+  "Web/Search": "Web/Búsqueda",
+  "Friend": "Amigo",
+  "Youtube": "Youtube",
+  "Article": "Artículo",
+  "Other": "Otro"
 }

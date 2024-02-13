@@ -10,6 +10,9 @@ import Stepper from '~/core/ui/Stepper';
 import OrganizationInfoStep, {
   OrganizationInfoStepData,
 } from './OrganizationInfoStep';
+import OrganizationQuestionStep, {
+  OrganizationQuestionStepData
+} from './OrganizationQuestionStep';
 
 import CompleteOnboardingStep from './CompleteOnboardingStep';
 import OrganizationInvitesStep from '~/app/onboarding/components/OrganizationInvitesStep';
@@ -23,6 +26,7 @@ type Invite = {
 const STEPS: Array<string> = [
   'onboarding:info',
   'onboarding:invites',
+  'onboarding:question',
   'onboarding:complete',
 ];
 
@@ -36,6 +40,7 @@ function OnboardingContainer(
       data: {
         organization: '',
         invites: [] as Invite[],
+        source: '',
       },
       currentStep: 0,
     },
@@ -56,9 +61,17 @@ function OnboardingContainer(
   const onInvitesStepSubmitted = useCallback(
     (invites: Invite[]) => {
       form.setValue('data.invites', invites);
-      form.setValue('currentStep', form.getValues('currentStep') + 1);
+      nextStep();
     },
-    [form],
+    [form, nextStep],
+  );
+
+  const onQuestionStepSubmitted = useCallback(
+    (questionInfo: OrganizationQuestionStepData) => {
+      form.setValue('data.source', questionInfo.source);
+      nextStep();
+    },
+    [form, nextStep]
   );
 
   const currentStep = form.watch('currentStep');
@@ -81,7 +94,11 @@ function OnboardingContainer(
         <OrganizationInvitesStep onSubmit={onInvitesStepSubmitted} />
       </If>
 
-      <If condition={isStep(2) && formData}>
+      <If condition={isStep(2)}>
+        <OrganizationQuestionStep onSubmit={onQuestionStepSubmitted} />
+      </If>
+
+      <If condition={isStep(3) && formData}>
         {(formData) => <CompleteOnboardingStep data={formData} />}
       </If>
     </CsrfTokenContext.Provider>

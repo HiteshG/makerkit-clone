@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { cva } from 'cva';
 import classNames from 'clsx';
 import If from '~/core/ui/If';
+import Trans from './Trans';
 
 type Variant = 'numbers' | 'default';
 
@@ -34,8 +35,8 @@ function Stepper(props: {
       const { label, number } = getStepLabel(labelOrKey, index);
 
       return (
-        <>
-          <div aria-selected={selected} key={index} className={className}>
+        <div key={index} className={className}>
+          <div aria-selected={selected}>
             <span className={labelClassName}>
               {number}
               <If condition={!isNumberVariant}>. {label}</If>
@@ -45,7 +46,7 @@ function Stepper(props: {
           <If condition={isNumberVariant}>
             <StepDivider selected={selected}>{label}</StepDivider>
           </If>
-        </>
+        </div>
       );
     });
   }, [props.steps, props.currentStep, variant]);
@@ -152,6 +153,6 @@ function getStepLabel(labelOrKey: string, index: number) {
 
   return {
     number,
-    label: labelOrKey,
+    label: <Trans i18nKey={labelOrKey} defaults={labelOrKey} />,
   };
 }

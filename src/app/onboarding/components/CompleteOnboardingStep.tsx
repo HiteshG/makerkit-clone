@@ -19,6 +19,7 @@ interface CompleteOnboardingStepData {
     email: string;
     role: number;
   }>;
+  source: string;
 }
 
 const CompleteOnboardingStep: React.FC<{

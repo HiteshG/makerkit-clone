@@ -8,8 +8,16 @@
   "info": "Détails",
   "invites": "Invitations",
   "complete": "Terminé",
+  "question": "Question",
+  "whereDidYouFindUs": "Où nous avez-vous trouvés ?",
+  "whereDidYouFindUsDescription": "Choisissez l'une de ces options.",
   "successStepHeading": "C'est fait ! Vous pouvez maintenant commencer à utiliser l'application.",
   "continue": "Accéder à votre tableau de bord",
   "settingAccount": "Nous configurons votre compte. Veuillez patienter...",
-  "organizationNamePlaceholder": "Ex. Acme Inc."
+  "organizationNamePlaceholder": "Ex. Acme Inc.",
+  "Web/Search": "Web/Recherche",
+  "Friend": "Ami",
+  "Youtube": "Youtube",
+  "Article": "Article",
+  "Other": "Autre"
 }

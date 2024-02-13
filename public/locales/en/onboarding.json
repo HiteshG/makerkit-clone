@@ -8,8 +8,16 @@
   "info": "Details",
   "invites": "Invites",
   "complete": "Complete",
+  "question": "Question",
+  "whereDidYouFindUs": "Where did you find us?",
+  "whereDidYouFindUsDescription": "Choose one of these.",
   "successStepHeading": "You're all set! You can now start using the app.",
   "continue": "Continue to your Dashboard",
   "settingAccount": "We're setting up your account. Please wait...",
-  "organizationNamePlaceholder": "Ex. Acme Inc."
+  "organizationNamePlaceholder": "Ex. Acme Inc.",
+  "Web/Search": "Web/Search",
+  "Friend": "Friend",
+  "Youtube": "Youtube",
+  "Article": "Article",
+  "Other": "Other"
 }

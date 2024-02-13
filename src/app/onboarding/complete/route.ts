@@ -27,9 +27,11 @@ export const POST = async (req: NextRequest) => {
   const body = await getOnboardingBodySchema().parseAsync(await req.json());
   const organizationName = body.organization;
   const invites = body.invites;
+  const source = body.source;
 
   const payload = {
     userId,
+    source,
     organizationName,
     client,
   };
@@ -100,5 +102,6 @@ function getOnboardingBodySchema() {
         role: z.nativeEnum(MembershipRole),
       }),
     ),
+    source: z.string().trim()
   });
 }
