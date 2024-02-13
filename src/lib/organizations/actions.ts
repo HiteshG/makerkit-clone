@@ -50,6 +50,7 @@ export const createNewOrganizationAction = withSession(
         org_name: organization,
         user_id: userId,
         create_user: false,
+        ref_src: ''
       })
       .throwOnError()
       .single();

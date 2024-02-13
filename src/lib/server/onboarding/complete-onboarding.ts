@@ -17,7 +17,8 @@ async function completeOnboarding({
     .rpc('create_new_organization', {
       user_id: userId,
       org_name: organizationName,
-      source: source,
+      create_user: true,
+      ref_src: source,
     })
     .single<string>();
 }

@@ -223,6 +223,7 @@ export interface Database {
           id: string
           onboarded: boolean
           photo_url: string | null
+          source: string | null
         }
         Insert: {
           created_at?: string
@@ -230,6 +231,7 @@ export interface Database {
           id: string
           onboarded: boolean
           photo_url?: string | null
+          source?: string | null
         }
         Update: {
           created_at?: string
@@ -237,6 +239,7 @@ export interface Database {
           id?: string
           onboarded?: boolean
           photo_url?: string | null
+          source?: string | null
         }
         Relationships: [
           {
@@ -282,7 +285,8 @@ export interface Database {
         Args: {
           org_name: string
           user_id: string
-          create_user?: boolean
+          create_user: boolean
+          ref_src: string
         }
         Returns: string
       }
