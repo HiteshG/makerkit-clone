@@ -41,24 +41,6 @@ interface UserData {
   onboarded: boolean;
 }
 
-interface OrganizationData {
-  id: number;
-  uuid: string;
-  name: string;
-}
-
-interface MembershipData {
-  id: number;
-  role: MembershipRole;
-  organization: OrganizationData;
-}
-
-interface Data {
-  auth: any;
-  user: UserData;
-  organizations: MembershipData[];
-}
-
 export const metadata = {
   title: `Manage User | ${configuration.site.siteName}`,
 };
@@ -204,8 +186,7 @@ async function loadData(uid: string) {
   `,
     )
     .eq('id', uid)
-    .returns<UserData>()
-    .single();
+    .single().then((data) => { return data.data as UserData });
 
   const organizationsQuery = client
     .from('memberships')
@@ -241,7 +222,7 @@ async function loadData(uid: string) {
 
   return {
     auth: auth.data,
-    user: user.data,
+    user: user,
     organizations: organizations.data,
   };
 }
