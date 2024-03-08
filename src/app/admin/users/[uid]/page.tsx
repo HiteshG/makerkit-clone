@@ -42,8 +42,8 @@ async function AdminUserPage({ params }: Params) {
   const uid = params.uid;
 
   const data = await loadData(uid);
-  const { auth, user } = data;
-  const displayName = user?.displayName;
+  const auth = data.auth;
+  const displayName = data.user?.display_name;
   const authUser = auth?.user;
   const email = authUser?.email;
   const phone = authUser?.phone;
@@ -173,8 +173,8 @@ async function loadData(uid: string) {
     .select(
       `
       id,
-      displayName: display_name,
-      photoURL: photo_url,
+      display_name,
+      photo_url,
       onboarded
   `,
     )
