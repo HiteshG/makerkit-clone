@@ -43,7 +43,7 @@ async function AdminUserPage({ params }: Params) {
 
   const data = await loadData(uid);
   const { auth, user } = data;
-  const displayName = user?.displayName ?? 'LRA User';
+  const displayName = user?.displayName ?? 'Default Name';
   const authUser = auth?.user;
   const email = authUser?.email;
   const phone = authUser?.phone;
@@ -220,11 +220,7 @@ async function loadData(uid: string) {
   };
 }
 
-function Breadcrumbs(
-  props: React.PropsWithChildren<{
-    displayName: string;
-  }>,
-) {
+function Breadcrumbs(props: { displayName: string }) {
   return (
     <div className={'flex space-x-1 items-center text-xs p-2'}>
       <Link href={'/admin'}>Admin</Link>
