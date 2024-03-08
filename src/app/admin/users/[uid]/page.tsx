@@ -43,7 +43,7 @@ async function AdminUserPage({ params }: Params) {
 
   const data = await loadData(uid);
   const { auth, user } = data;
-  const displayName = user?.displayName;
+  const displayName = user?.displayName ?? 'LRA User';
   const authUser = auth?.user;
   const email = authUser?.email;
   const phone = authUser?.phone;
