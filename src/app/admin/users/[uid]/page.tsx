@@ -34,13 +34,6 @@ interface Params {
   };
 }
 
-interface UserData {
-  id: string;
-  display_name: string;
-  photo_url: string;
-  onboarded: boolean;
-}
-
 export const metadata = {
   title: `Manage User | ${configuration.site.siteName}`,
 };
@@ -50,7 +43,6 @@ async function AdminUserPage({ params }: Params) {
 
   const data = await loadData(uid);
   const auth = data.auth;
-  const displayName = (data.user as unknown as UserData)?.display_name || '';
   const authUser = auth?.user;
   const email = authUser?.email;
   const phone = authUser?.phone;
@@ -67,7 +59,7 @@ async function AdminUserPage({ params }: Params) {
       <PageBody>
         <div className={'flex flex-col space-y-6'}>
           <div className={'flex justify-between'}>
-            <Breadcrumbs displayName={displayName ?? email ?? ''} />
+            <Breadcrumbs displayName={email ?? ''} />
 
             <div>
               <UserActionsDropdown uid={uid} isBanned={isBanned} />
@@ -95,14 +87,14 @@ async function AdminUserPage({ params }: Params) {
               </div>
             </div>
 
-            <TextFieldLabel>
+            {/* <TextFieldLabel>
               Display name
               <TextFieldInput
                 className={'max-w-sm'}
                 defaultValue={displayName ?? ''}
                 disabled
               />
-            </TextFieldLabel>
+            </TextFieldLabel> */}
 
             <TextFieldLabel>
               Email
