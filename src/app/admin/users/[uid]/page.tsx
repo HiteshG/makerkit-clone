@@ -186,7 +186,7 @@ async function loadData(uid: string) {
   `,
     )
     .eq('id', uid)
-    .single().then((data) => { return data.data as UserData });
+    .single();
 
   const organizationsQuery = client
     .from('memberships')
