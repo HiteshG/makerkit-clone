@@ -34,6 +34,31 @@ interface Params {
   };
 }
 
+interface UserData {
+  id: string;
+  display_name: string;
+  photo_url: string;
+  onboarded: boolean;
+}
+
+interface OrganizationData {
+  id: number;
+  uuid: string;
+  name: string;
+}
+
+interface MembershipData {
+  id: number;
+  role: MembershipRole;
+  organization: OrganizationData;
+}
+
+interface Data {
+  auth: any;
+  user: UserData;
+  organizations: MembershipData[];
+}
+
 export const metadata = {
   title: `Manage User | ${configuration.site.siteName}`,
 };
@@ -43,7 +68,7 @@ async function AdminUserPage({ params }: Params) {
 
   const data = await loadData(uid);
   const auth = data.auth;
-  const displayName = data.user?.display_name;
+  const displayName = (data.user as unknown as UserData)?.display_name || '';
   const authUser = auth?.user;
   const email = authUser?.email;
   const phone = authUser?.phone;
@@ -179,6 +204,7 @@ async function loadData(uid: string) {
   `,
     )
     .eq('id', uid)
+    .returns<UserData>()
     .single();
 
   const organizationsQuery = client
