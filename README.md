@@ -1,3 +1,4 @@
+# Makerkit Clone (Supabase Next14 Stripe Tailwindcss Multi-Organization starter template)
 This is a [Next.js](https://nextjs.org/) starter template for a premier multi-tenant SaaS business. Use this All in One launchpad to jumpstart development. This code includes Admin Panel for business management, pre-built user authentication, Supabase integration, Resend, Stripe, UX Animations and more. 
 
 🚀 Launch your saas in 5 minutes, instead of days!
