@@ -1,7 +1,16 @@
 # Makerkit Clone (Supabase Next14 Stripe Tailwindcss Multi-Organization starter template)
-This is a [Next.js](https://nextjs.org/) starter template for a premier multi-tenant SaaS business. Use this All in One launchpad to jumpstart development. This code includes Admin Panel for business management, pre-built user authentication, Supabase integration, Resend, Stripe, UX Animations and more. 
+This is a [Next.js](https://nextjs.org/) starter template for a premier multi-tenant SaaS business. Use this All in One launchpad to jumpstart development. This code includes Admin Panel for business management, pre-built user authentication, Supabase integration, Resend, Stripe, UX Animations and more. [Customize in ChatGPT](https://chatgpt.com/g/g-PZRmqyRFG-saas-studio-launch-your-app-in-minutes)
 
 🚀 Launch your saas in 5 minutes, instead of days!
+
+![image](https://github.com/user-attachments/assets/f87cdc27-76f1-4de7-860a-bbb3392466c2)
+![image](https://github.com/user-attachments/assets/504c6b7c-710a-44dc-a18f-2630a16a758c)
+![image](https://github.com/user-attachments/assets/83ce7a7c-50eb-4df4-9869-16ffc2241576)
+![image](https://github.com/user-attachments/assets/9976f03c-3ab3-49ee-b1a8-600449cd6057)
+![image](https://github.com/user-attachments/assets/cb9948aa-ab42-4a44-b9cf-868747e2e38b)
+![image](https://github.com/user-attachments/assets/7072c01e-05e8-4a6e-b8c1-0f472c20ca6f)
+![image](https://github.com/user-attachments/assets/5eb24d33-2fd0-4e8d-82eb-6bb0ebeebb81)
+![image](https://github.com/user-attachments/assets/f9437010-0742-4336-b84e-5ba22c22cf1b)
 
 
 ## Getting Started
